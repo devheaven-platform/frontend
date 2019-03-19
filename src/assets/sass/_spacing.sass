@@ -1,0 +1,36 @@
+/* ---------------------- Spacing --------------------- */
+$spacings: 0rem 0.25rem 0.5rem 1rem 1.5rem 3rem
+
+@each $margin in $spacings
+    $i: index($spacings, $margin) - 1;
+    .is-margin-top-#{$i}
+        margin-top: $margin
+    .is-margin-bottom-#{$i}
+        margin-bottom: $margin
+    .is-margin-left-#{$i}
+        margin-left: $margin
+    .is-margin-right-#{$i}
+        margin-right: $margin
+    .is-margin-x-#{$i}
+        margin-left: $margin
+        margin-right: $margin
+    .is-margin-y-#{$i}
+        margin-top: $margin
+        margin-bottom: $margin
+
+@each $padding in $spacings
+    $i: index($spacings, $padding) - 1;
+    .is-padding-top-#{$i}
+        padding-top: $padding
+    .is-padding-bottom-#{$i}
+        padding-bottom: $padding
+    .is-padding-left-#{$i}
+        padding-left: $padding
+    .is-padding-right-#{$i}
+        padding-right: $padding
+    .is-padding-x-#{$i}
+        padding-left: $padding
+        padding-right: $padding
+    .is-padding-y-#{$i}
+        padding-top: $padding
+        padding-bottom: $padding
