@@ -1,7 +1,7 @@
 import React from "react";
 
 const HeaderCenter = () => (
-    <div />
+    <div className="navbar-center" />
 );
 
 export default HeaderCenter;

@@ -14,10 +14,12 @@ const Header = ( {
     isAuthenticated,
     LogOut,
 } ) => (
-    <nav className="navbar is-light">
-        <HeaderLeft />
-        <HeaderCenter />
-        <HeaderRight isAuthenticated={ isAuthenticated } logout={ LogOut } />
+    <nav className="navbar is-light is-fixed-top">
+        <div className="navbar-menu">
+            <HeaderLeft />
+            <HeaderCenter />
+            <HeaderRight isAuthenticated={ isAuthenticated } logout={ LogOut } />
+        </div>
     </nav>
 );
 

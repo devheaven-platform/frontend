@@ -28,12 +28,12 @@ class App extends React.Component {
         }
 
         return (
-            <React.Fragment>
+            <div>
                 <Router isAuthenticated={ isAuthenticated }>
                     <Header />
                     <Loading isActive={ isConnected === null } />
                 </Router>
-            </React.Fragment>
+            </div>
         );
     }
 }
