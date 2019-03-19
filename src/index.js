@@ -5,6 +5,9 @@ import App from "./app";
 import store from "./store";
 import * as serviceWorker from "./serviceWorker";
 
+// CSS
+import "assets/sass/style.sass";
+
 ReactDOM.render(
     <Provider store={ store }>
         <App />

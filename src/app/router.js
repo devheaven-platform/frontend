@@ -3,14 +3,31 @@ import PropTypes from "prop-types";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 // Imported routes
-import Home from "../pages/home";
+import {
+    Home,
+    Error,
+} from "pages";
 
 const Router = ( { children, ...rest } ) => (
     <BrowserRouter>
         <React.Fragment>
             { children }
             <Switch>
-                <Route exact path="/" { ...rest } component={ props => <Home { ...rest } { ...props } /> } />
+                <Route exact path="/" { ...rest } component={ Home } />
+                <Route
+                    { ...rest }
+                    path="*"
+                    component={ props => (
+                        <Error
+                            code={ 404 }
+                            title="We couldn't find the page"
+                            message={ "Sorry, but the page you are looking for was either not found or does not exist.\nTry refreshing the page or click the button below to go back to the Homepage." }
+                            enableBackButton
+                            { ...rest }
+                            { ...props }
+                        />
+                    ) }
+                />
             </Switch>
         </React.Fragment>
     </BrowserRouter>

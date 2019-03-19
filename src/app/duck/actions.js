@@ -1,13 +1,13 @@
 import types from "./types";
 
-const authenticate = payload => ( { type: types.AUTHENTICATE, payload } );
-
 const init = payload => ( { type: types.INIT, payload } );
 
-const setToken = payload => ( { type: types.SET_TOKEN, payload } );
+const login = payload => ( { type: types.LOGIN, payload } );
+
+const logout = () => ( { type: types.LOGOUT } );
 
 export default {
-    setToken,
-    authenticate,
     init,
+    login,
+    logout,
 };

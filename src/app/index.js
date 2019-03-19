@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
+import { Header } from "components";
+import { Loading, Error } from "pages";
 import Router from "./router";
 import { actions } from "./duck";
 
@@ -11,21 +14,40 @@ class App extends React.Component {
     }
 
     render() {
-        const { isAuthenticated } = this.props;
+        const { isAuthenticated, isConnected } = this.props;
+
+        if ( isConnected === false ) {
+            return (
+                <Error
+                    code={ 503 }
+                    title="Could not connect to the service"
+                    message="Sorry, but the service is currently unavailable. Please try again later."
+                />
+            );
+        }
+
         return (
-            <div>
-                <Router isAuthenticated={ isAuthenticated } />
-            </div>
+            <React.Fragment>
+                <Router isAuthenticated={ isAuthenticated }>
+                    <Header />
+                    <Loading isActive={ isConnected === null } />
+                </Router>
+            </React.Fragment>
         );
     }
 }
 
+App.defaultProps = {
+    isConnected: false,
+};
+
 App.propTypes = {
+    isConnected: PropTypes.bool,
     isAuthenticated: PropTypes.bool.isRequired,
     Init: PropTypes.func.isRequired,
 };
 
-const mSTP = ( { app: { isAuthenticated } } ) => ( { isAuthenticated } );
+const mSTP = ( { app: { isConnected, isAuthenticated } } ) => ( { isConnected, isAuthenticated } );
 
 const mDTP = dispatch => ( {
     Init: args => dispatch( actions.init( args ) ),

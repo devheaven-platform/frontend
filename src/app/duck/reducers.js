@@ -3,27 +3,42 @@ import { Axios } from "common/helpers";
 import types from "./types";
 
 const defaultState = {
+    isConnected: null,
     isAuthenticated: false,
-    token: localStorage.getItem( "token" ),
+    roles: [],
 };
 
-const isAuthenticated = ( state = defaultState.isAuthenticated, { type, payload } ) => {
-    if ( type === types.AUTHENTICATE_SUCCESS ) {
-        Axios.defaults.headers.common.Authorization = `Bearer ${ payload.token }`;
-        return payload.isAuthenticated;
+const isConnected = ( state = defaultState.isConnected, { type } ) => {
+    if ( type === types.VALIDATE_CONNECTION_SUCCESS ) {
+        return true;
+    }
+    if ( type === types.VALIDATE_CONNECTION_ERROR ) {
+        return false;
     }
     return state;
 };
 
-const token = ( state = defaultState.token, { type, payload } ) => {
-    if ( type === types.SET_TOKEN ) {
-        Axios.defaults.headers.common.Authorization = `Bearer ${ payload }`;
-        return payload;
+const isAuthenticated = ( state = defaultState.isAuthenticated, { type, payload } ) => {
+    if ( type === types.LOGIN_SUCCESS ) {
+        Axios.defaults.headers.common.Authorization = `Bearer ${ payload.token }`;
+        return payload.isAuthenticated;
+    }
+    if ( type === types.LOGOUT ) {
+        Axios.defaults.headers.common.Authorization = null;
+        return false;
+    }
+    return state;
+};
+
+const roles = ( state = defaultState.roles, { type, payload } ) => {
+    if ( type === types.LOGIN_SUCCESS ) {
+        return payload.roles;
     }
     return state;
 };
 
 export default combineReducers( {
+    isConnected,
     isAuthenticated,
-    token,
+    roles,
 } );

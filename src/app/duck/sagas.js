@@ -1,22 +1,24 @@
-import { put, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery } from "redux-saga/effects";
 import { Axios } from "common/helpers";
 import types from "./types";
-import actions from "./actions";
-
-function* authenticate( { payload } ) {
-    yield put( { type: types.AUTHENTICATE_SUCCESS, payload: { isAuthenticated: !!payload } } );
-    yield put( actions.setToken( payload ) );
-}
 
 function* init() {
-    Axios.defaults.baseURL = process.env.REACT_APP_API_ENDPOINT;
+    // Config axios
+    if ( process.env.NODE_ENV !== "development" ) {
+        Axios.defaults.baseURL = process.env.REACT_APP_API_ENDPOINT;
 
-    yield setTimeout( () => {
-        // TODO: call health check
-    }, 3000 );
+        // Do health check
+        try {
+            yield call( Axios.get, "/api/v1/health/" );
+            yield put( { type: types.VALIDATE_CONNECTION_SUCCESS } );
+        } catch ( error ) {
+            yield put( { type: types.VALIDATE_CONNECTION_ERROR, error } );
+        }
+    } else {
+        // yield put( { type: types.VALIDATE_CONNECTION_SUCCESS } );
+    }
 }
 
 export default function* main() {
-    yield takeEvery( types.AUTHENTICATE, authenticate );
     yield takeEvery( types.INIT, init );
 }
