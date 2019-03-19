@@ -1,0 +1,18 @@
+# VS Code
+.vscode/
+
+# Node
+node_modules/
+package-lock.json
+
+# Docker
+.dockerignore
+docker-compose.yml
+Dockerfile
+
+# Git
+README.md
+
+# Custom
+.env
+.env.example
