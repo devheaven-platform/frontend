@@ -3,7 +3,9 @@ import React from "react";
 const HeaderLeft = () => (
     <div className="navbar-start">
         <div className="navbar-item">
-            Dropdown
+            <button type="button" className="button is-light">
+                <i className="fas fa-bars" />
+            </button>
         </div>
     </div>
 );
