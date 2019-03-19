@@ -23,7 +23,7 @@ const Error = ( {
                     <p className="has-text-white multiline">
                         { message }
                     </p>
-                    { enableBackButton && <button type="button" className="button is-white is-margin-top-3" onClick={ () => history.goBack() }>Go Back</button> }
+                    { enableBackButton && <button type="button" className="button is-white has-margin-top-3" onClick={ () => history.goBack() }>Go Back</button> }
                 </div>
             </div>
         );
@@ -36,7 +36,7 @@ const Error = ( {
                 <p className="multiline">
                     { message }
                 </p>
-                { enableBackButton && <button type="button" className="button is-primary is-margin-top-3" onClick={ () => history.goBack() }>Go Back</button> }
+                { enableBackButton && <button type="button" className="button is-primary has-margin-top-3" onClick={ () => history.goBack() }>Go Back</button> }
             </div>
         </div>
     );
