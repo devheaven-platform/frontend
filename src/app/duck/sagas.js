@@ -15,7 +15,7 @@ function* init() {
             yield put( { type: types.VALIDATE_CONNECTION_ERROR, error } );
         }
     } else {
-        yield put( { type: types.VALIDATE_CONNECTION_SUCCESS } );
+        yield put( { type: types.VALIDATE_CONNECTION_ERROR } );
     }
 }
 
