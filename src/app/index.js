@@ -10,7 +10,7 @@ import { actions } from "./duck";
 class App extends React.Component {
     componentDidMount() {
         const { Init } = this.props;
-        Init();
+        setTimeout( Init, 3000 );
     }
 
     render() {
