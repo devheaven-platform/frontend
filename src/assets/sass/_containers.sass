@@ -1,7 +1,24 @@
 /* -------------------- Containers -------------------- */
+.content
+    margin-top: 3.25rem
+    margin-left: 250px
+    padding: 10px 10px 0 10px
+    transition: all 0.3s
+
+.content.collapsed
+    margin-left: 80px
+
 .error-container
     display: flex
-    height: 100vh
+    height: 90vh
     align-items: center
     justify-content: center
     padding: 0 15px
+
+/* ----------- Containers (Media Querries) ------------ */
+@media (max-width: $tablet)
+    .content
+        margin-left: 0px
+
+    .content.collapsed
+        margin-left: 80px

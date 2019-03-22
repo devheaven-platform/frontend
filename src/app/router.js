@@ -8,27 +8,29 @@ import {
     Error,
 } from "pages";
 
-const Router = ( { children, ...rest } ) => (
+const Router = ( { children, isCollapsed, ...rest } ) => (
     <BrowserRouter>
         <React.Fragment>
             { children }
-            <Switch>
-                <Route exact path="/" { ...rest } component={ Home } />
-                <Route
-                    { ...rest }
-                    path="*"
-                    component={ props => (
-                        <Error
-                            code={ 404 }
-                            title="We couldn't find the page"
-                            message={ "Sorry, but the page you are looking for was either not found or does not exist.\nTry refreshing the page or click the button below to go back to the Homepage." }
-                            enableBackButton
-                            { ...rest }
-                            { ...props }
-                        />
-                    ) }
-                />
-            </Switch>
+            <div className={ isCollapsed ? "content collapsed" : "content" }>
+                <Switch>
+                    <Route exact path="/" { ...rest } component={ Home } />
+                    <Route
+                        { ...rest }
+                        path="*"
+                        component={ props => (
+                            <Error
+                                code={ 404 }
+                                title="We couldn't find the page"
+                                message={ "Sorry, but the page you are looking for was either not found or does not exist.\nTry refreshing the page or click the button below to go back to the Homepage." }
+                                enableBackButton
+                                { ...rest }
+                                { ...props }
+                            />
+                        ) }
+                    />
+                </Switch>
+            </div>
         </React.Fragment>
     </BrowserRouter>
 );
@@ -36,6 +38,7 @@ const Router = ( { children, ...rest } ) => (
 Router.propTypes = {
     children: PropTypes.node,
     isAuthenticated: PropTypes.bool,
+    isCollapsed: PropTypes.bool.isRequired,
 };
 
 Router.defaultProps = {
