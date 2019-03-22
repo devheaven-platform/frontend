@@ -5,7 +5,7 @@ import types from "./types";
 const defaultState = {
     isCollapsed: false,
     isConnected: null,
-    isAuthenticated: false,
+    isAuthenticated: true,
     roles: [],
 };
 
