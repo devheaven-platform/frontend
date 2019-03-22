@@ -22,7 +22,7 @@ class App extends React.Component {
                     code={ 503 }
                     title="Could not connect to the service"
                     message="Sorry, but the service is currently unavailable. Please try again later."
-                    enablePrimaryBg
+                    enableFullSize
                 />
             );
         }
