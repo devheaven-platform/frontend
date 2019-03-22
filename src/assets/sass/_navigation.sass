@@ -4,7 +4,7 @@
     flex-grow: 1
     box-shadow: $box-shadow
 
-    div
+    .navbar-items, .navbar-start, .navbar-center, .navbar-end
         display: flex
         flex-grow: 1
         flex-shrink: 0
@@ -26,3 +26,20 @@
     
     .navbar-logo
         height: 30px
+
+    .navbar-item.is-hoverable:hover .navbar-dropdown
+        display: block
+
+    .navbar-dropdown
+        background-color: $navbar-dropdown-background-color
+        border-bottom-left-radius: $navbar-dropdown-radius
+        border-bottom-right-radius: $navbar-dropdown-radius
+        border-top: $navbar-dropdown-border-top
+        box-shadow: $navbar-dropdown-boxed-radius
+        display: none
+        font-size: 0.875rem
+        left: 0
+        min-width: 100%
+        position: absolute
+        top: 100%
+        z-index: $navbar-dropdown-z
