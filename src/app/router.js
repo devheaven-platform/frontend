@@ -15,6 +15,9 @@ import {
     Hours,
     Personnel,
     Person,
+    Profile,
+    Help,
+    Settings,
     Error,
 } from "pages";
 
@@ -35,6 +38,9 @@ const Router = ( { children, isCollapsed, ...rest } ) => (
                     <Route exact path="/hours" { ...rest } component={ Hours } />
                     <Route exact path="/personnel" { ...rest } component={ Personnel } />
                     <Route exact path="/person/:id" { ...rest } component={ Person } />
+                    <Route exact path="/profile" { ...rest } component={ Profile } />
+                    <Route exact path="/help" { ...rest } component={ Help } />
+                    <Route exact path="/settings" { ...rest } component={ Settings } />
                     <Route
                         { ...rest }
                         path="*"
