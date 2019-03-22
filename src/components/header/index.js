@@ -14,7 +14,7 @@ const Header = ( {
     LogOut,
 } ) => (
     <nav className="navbar is-light is-fixed-top">
-        <div className="navbar-menu">
+        <div>
             <HeaderLeft toggleSidebar={ ToggleSidebar } />
             <HeaderCenter />
             <HeaderRight isAuthenticated={ isAuthenticated } logout={ LogOut } />
