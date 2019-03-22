@@ -10,13 +10,13 @@ const Error = ( {
     code,
     title,
     message,
-    enablePrimaryBg,
+    enableFullSize,
     enableBackButton,
     history,
 } ) => {
-    if ( enablePrimaryBg ) {
+    if ( enableFullSize ) {
         return (
-            <div className="error-container has-background-primary">
+            <div className="error-container has-background-primary is-full-size">
                 <div className="has-text-centered">
                     <h1 className="title has-text-white">{ code }</h1>
                     <h4 className="subtitle has-text-white">{ title }</h4>
@@ -43,7 +43,7 @@ const Error = ( {
 };
 
 Error.defaultProps = {
-    enablePrimaryBg: false,
+    enableFullSize: false,
     enableBackButton: false,
     history: {},
 };
@@ -52,7 +52,7 @@ Error.propTypes = {
     code: number.isRequired,
     title: string.isRequired,
     message: string.isRequired,
-    enablePrimaryBg: bool,
+    enableFullSize: bool,
     enableBackButton: bool,
     history: shape( {} ),
 };
