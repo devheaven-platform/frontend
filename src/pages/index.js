@@ -9,5 +9,8 @@ export { default as Email } from "./email";
 export { default as Hours } from "./hours";
 export { default as Personnel } from "./personnel";
 export { default as Person } from "./person";
+export { default as Profile } from "./profile";
+export { default as Help } from "./help";
+export { default as Settings } from "./settings";
 export { default as Error } from "./error";
 export { default as Loading } from "./loading";
