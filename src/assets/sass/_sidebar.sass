@@ -12,7 +12,7 @@
     .sidebar-content
         list-style: none
 
-    li a
+    li .sidebar-item
         display: flex
         align-items: center
         padding: 9px 1.35rem
@@ -28,7 +28,7 @@
             font-size: 0.75rem
             color: $sidebar-text-color
     
-    a:hover, a.active
+    li .sidebar-item:hover, li .sidebar-item.active
         background-color: $sidebar-item-active-bg
         transition: background-color 0.3s
       
@@ -37,6 +37,22 @@
 
         span
             color: $sidebar-text-active-color
+    
+    li button.sidebar-item
+        border: 0
+        display: flex
+        align-items: center
+        padding: 9px 1.35rem
+        height: 44px
+        text-decoration: none
+
+    li .sidebar-item-list .sidebar-item
+        display: none
+        padding: 9px 2rem
+        transition: max-height 0.3s ease-out
+    
+    li .sidebar-item-list.active .sidebar-item
+        display: flex
 
 /* ----------------- Sidebar (Active) ----------------- */        
 .sidebar.collapsed
@@ -44,13 +60,16 @@
     max-width: 80px
     text-align: center
 
-    .sidebar-content li a
+    .sidebar-content li .sidebar-item
         i
             flex: 0 0 35px
             font-size: 1.3rem
 
         span
             display: none
+
+    .sidebar-content li .sidebar-item-list .sidebar-item
+        padding: 9px 1.35rem
 
 /* ------------- Sidebar (Media Querries) ------------- */
 @media (max-width: $tablet)
@@ -60,7 +79,7 @@
       text-align: center
       margin-left: -80px !important
     
-      .sidebar-content li a span
+      .sidebar-content li .sidebar-item span
         display: none
 
   .sidebar.collapsed
