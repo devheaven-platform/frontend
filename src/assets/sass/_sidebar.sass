@@ -1,0 +1,67 @@
+/* ---------------------- Sidebar --------------------- */
+.sidebar
+    position: fixed
+    top: 3.25rem
+    height: 100vh
+    min-width: 250px
+    max-width: 250px
+    background: $sidebar-bg
+    transition: all 0.3s
+    box-shadow: $box-shadow
+
+    .sidebar-content
+        list-style: none
+
+    li a
+        display: flex
+        align-items: center
+        padding: 9px 1.35rem
+        height: 44px
+        text-decoration: none
+
+        i
+            flex: 0 0 35px
+            color: $sidebar-icon-color
+
+        span
+            font-weight: 500
+            font-size: 0.75rem
+            color: $sidebar-text-color
+    
+    a:hover, a.active
+        background-color: $sidebar-item-active-bg
+        transition: background-color 0.3s
+      
+        i
+            color: $sidebar-icon-active-color
+
+        span
+            color: $sidebar-text-active-color
+
+/* ----------------- Sidebar (Active) ----------------- */        
+.sidebar.collapsed
+    min-width: 80px
+    max-width: 80px
+    text-align: center
+
+    .sidebar-content li a
+        i
+            flex: 0 0 35px
+            font-size: 1.3rem
+
+        span
+            display: none
+
+/* ------------- Sidebar (Media Querries) ------------- */
+@media (max-width: $tablet)
+  .sidebar
+      min-width: 80px
+      max-width: 80px
+      text-align: center
+      margin-left: -80px !important
+    
+      .sidebar-content li a span
+        display: none
+
+  .sidebar.collapsed
+      margin-left: 0 !important

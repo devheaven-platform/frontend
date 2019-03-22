@@ -6,17 +6,16 @@ import {
 } from "prop-types";
 
 import { actions } from "app/duck";
-import HeaderLeft from "./HeaderLeft";
-import HeaderCenter from "./HeaderCenter";
-import HeaderRight from "./HeaderRight";
+import { HeaderLeft, HeaderCenter, HeaderRight } from "./components";
 
 const Header = ( {
     isAuthenticated,
+    ToggleSidebar,
     LogOut,
 } ) => (
     <nav className="navbar is-light is-fixed-top">
         <div className="navbar-menu">
-            <HeaderLeft />
+            <HeaderLeft toggleSidebar={ ToggleSidebar } />
             <HeaderCenter />
             <HeaderRight isAuthenticated={ isAuthenticated } logout={ LogOut } />
         </div>
@@ -25,12 +24,14 @@ const Header = ( {
 
 Header.propTypes = {
     isAuthenticated: bool.isRequired,
+    ToggleSidebar: func.isRequired,
     LogOut: func.isRequired,
 };
 
 const mSTP = ( { app: { isAuthenticated } } ) => ( { isAuthenticated } );
 
 const mDTP = dispatch => ( {
+    ToggleSidebar: () => dispatch( actions.toggleSidebar() ),
     LogOut: () => dispatch( actions.logout() ),
 } );
 
