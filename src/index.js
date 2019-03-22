@@ -6,6 +6,7 @@ import store from "./store";
 import * as serviceWorker from "./serviceWorker";
 
 // CSS
+import "@fortawesome/fontawesome-free/css/all.css";
 import "assets/sass/style.sass";
 
 ReactDOM.render(
