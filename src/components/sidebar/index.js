@@ -10,9 +10,9 @@ const Sidebar = ( { isCollapsed } ) => (
         <ul className="sidebar-content">
             <Item to="/" icon="home" label="Home" />
             <ItemList icon="boxes" label="Projects">
-                <Item to="/projects/1" icon="box-open" label="Project 1" />
-                <Item to="/projects/2" icon="box-open" label="Project 2" />
-                <Item to="/projects/3" icon="box-open" label="Project 3" />
+                <Item to="/project/1" icon="box-open" label="Project 1" />
+                <Item to="/project/2" icon="box-open" label="Project 2" />
+                <Item to="/project/3" icon="box-open" label="Project 3" />
                 <Item to="/projects" icon="ellipsis-h" label="All" />
             </ItemList>
             <Item to="/invoices" icon="file-invoice-dollar" label="Invoices" />
