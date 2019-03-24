@@ -37,7 +37,9 @@ const FormField = ( {
         );
     case "radio":
         return (
-            <Field name={ name } type={ type } label={ label } component={ RadioField } { ...rest } />
+            <Field name={ name } type={ type } label={ label } component={ RadioField } { ...rest }>
+                { children }
+            </Field>
         );
     default:
         return (

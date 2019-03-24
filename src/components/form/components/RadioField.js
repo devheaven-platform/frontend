@@ -3,19 +3,19 @@ import React from "react";
 import {
     shape,
     string,
+    node,
 } from "prop-types";
 
 const RadioField = ( {
     input,
     label,
-    type,
     meta: { touched, error },
-    ...rest
+    children,
 } ) => (
     <div className="field">
         <label htmlFor={ input.name } className="label">{ label }</label>
         <div className="control">
-            <input type={ type } name={ input.name } className={ touched && error ? "input is-danger" : "input" } { ...input } { ...rest } />
+            { React.Children.map( children, child => React.cloneElement( child, { input } ) ) }
         </div>
         { touched && error && (
             <p className="help is-danger">{ error }</p>
@@ -26,8 +26,8 @@ const RadioField = ( {
 RadioField.propTypes = {
     input: shape( {} ).isRequired,
     label: string.isRequired,
-    type: string.isRequired,
     meta: shape( {} ).isRequired,
+    children: node.isRequired,
 };
 
 export default RadioField;

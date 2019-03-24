@@ -5,7 +5,10 @@ import {
     Form,
     FormField,
     SubmitButton,
+    RadioButton,
+    SelectOption,
 } from "components";
+import { actions } from "./duck";
 
 const Home = () => (
     <div>
@@ -16,12 +19,13 @@ const Home = () => (
             body={ (
                 <Form
                     form="exampleForm"
-                    onSubmit={ () => console.log( "Test" ) }
+                    onSubmit={ actions.submit }
                     initialValues={ {
                         name: "Tom de Wildt",
                         email: "tomdewildt@ziggo.nl",
                         password: "Test1234",
                         message: "Lorem Ipsum...",
+                        type: "3",
                         gender: "male",
                         terms: true,
                     } }
@@ -33,12 +37,13 @@ const Home = () => (
                     <FormField name="password" type="password" label="Password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" />
                     <FormField name="message" type="textarea" label="Message" placeholder="This is a request for ..." />
                     <FormField name="type" type="select" label="Type">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
+                        <SelectOption name="Option 1" value="1" />
+                        <SelectOption name="Option 2" value="2" />
+                        <SelectOption name="Option 3" value="3" />
                     </FormField>
                     <FormField name="gender" type="radio" label="Gender">
-                        <div>Test</div>
+                        <RadioButton name="gender" value="male" />
+                        <RadioButton name="gender" value="female" />
                     </FormField>
                     <FormField name="terms" type="checkbox" label="Accept terms?" />
                 </Form>
