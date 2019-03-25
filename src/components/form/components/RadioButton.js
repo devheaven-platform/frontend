@@ -10,7 +10,6 @@ const RadioButton = ( {
 } ) => input && (
     <label htmlFor={ name } className="radio">
         <Field
-            id={ `${ name }` }
             component="input"
             name={ name }
             type="radio"

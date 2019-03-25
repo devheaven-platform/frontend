@@ -1,6 +1,17 @@
 import React from "react";
 
 import {
+    required,
+    minLength,
+    maxLength,
+    number,
+    minValue,
+    maxValue,
+    email,
+    password,
+    phone,
+} from "common/validators";
+import {
     Modal,
     Form,
     FormField,
@@ -30,7 +41,7 @@ const Home = () => (
                         terms: true,
                     } }
                 >
-                    <FormField name="name" type="text" label="Name" placeholder="John Doe" />
+                    <FormField name="name" type="text" label="Name" placeholder="John Doe" validate={ [ required, phone ] } />
                     <FormField name="email" type="email" label="Email" placeholder="john@email.com" />
                     <FormField name="password" type="password" label="Password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;" />
                     <FormField name="message" type="textarea" label="Message" placeholder="This is a request for ..." />
