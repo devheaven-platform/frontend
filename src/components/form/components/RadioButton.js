@@ -1,20 +1,24 @@
+/* eslint-disable jsx-a11y/label-has-for */
 import React from "react";
+import { Field } from "redux-form";
 import { string, shape } from "prop-types";
 
-// Check out: https://codeburst.io/forms-with-redux-form-v7-part-2-of-2-f44ffee4a34d
 const RadioButton = ( {
     name,
     value,
     input,
-} ) => {
-    debugger;
-    return input && (
-        <label htmlFor={ name } className="radio">
-            <input type="radio" name={ name } value={ value } checked={ input.value === value } onChange={ () => input.onChange( value ) } />
-            { ` ${ value }` }
-        </label>
-    );
-};
+} ) => input && (
+    <label htmlFor={ name } className="radio">
+        <Field
+            id={ `${ name }` }
+            component="input"
+            name={ name }
+            type="radio"
+            value={ value }
+        />
+        { ` ${ value }` }
+    </label>
+);
 
 RadioButton.defaultProps = {
     input: null,
@@ -27,3 +31,4 @@ RadioButton.propTypes = {
 };
 
 export default RadioButton;
+/* eslint-enable jsx-a11y/label-has-for */

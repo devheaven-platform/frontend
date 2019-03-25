@@ -29,8 +29,6 @@ const Home = () => (
                         gender: "male",
                         terms: true,
                     } }
-                    enableSubmitButton
-                    enableResetButton
                 >
                     <FormField name="name" type="text" label="Name" placeholder="John Doe" />
                     <FormField name="email" type="email" label="Email" placeholder="john@email.com" />
