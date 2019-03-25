@@ -3,12 +3,10 @@ import { formActionSaga as form } from "redux-form-saga";
 
 // Imported sagas
 import { sagas as app } from "./app/duck";
-import { sagas as home } from "./pages/home/duck";
 
 const sagas = [
     // Combined sagas
     app(),
-    home(),
     form(),
 ];
 
