@@ -7,6 +7,7 @@ import {
 
 import {
     InputField,
+    HiddenField,
     TextAreaField,
     SelectField,
     CheckBoxField,
@@ -21,6 +22,9 @@ const FormField = ( {
     ...rest
 } ) => {
     switch ( type ) {
+    case "hidden":
+        return (
+            <Field name={ name } type={ type } component={ HiddenField } { ...rest } /> );
     case "textarea":
         return (
             <Field name={ name } type={ type } label={ label } component={ TextAreaField } { ...rest } />
@@ -41,6 +45,7 @@ const FormField = ( {
                 { children }
             </Field>
         );
+
     default:
         return (
             <Field name={ name } type={ type } label={ label } component={ InputField } { ...rest } />
