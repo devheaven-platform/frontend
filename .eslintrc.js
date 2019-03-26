@@ -37,6 +37,9 @@ module.exports = {
       
       // keep it simple
       "complexity": [ 1, 5 ],
+
+      // line length
+      "max-len": [ 1, { code: 200 } ],
       
       // react
       "react/prefer-es6-class": 0,

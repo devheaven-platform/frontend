@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { Header } from "components";
+import { Header, Sidebar } from "components";
 import { Loading, Error } from "pages";
 import Router from "./router";
 import { actions } from "./duck";
@@ -14,7 +14,7 @@ class App extends React.Component {
     }
 
     render() {
-        const { isAuthenticated, isConnected } = this.props;
+        const { isAuthenticated, isCollapsed, isConnected } = this.props;
 
         if ( isConnected === false ) {
             return (
@@ -22,17 +22,19 @@ class App extends React.Component {
                     code={ 503 }
                     title="Could not connect to the service"
                     message="Sorry, but the service is currently unavailable. Please try again later."
+                    enableFullSize
                 />
             );
         }
 
         return (
-            <React.Fragment>
-                <Router isAuthenticated={ isAuthenticated }>
+            <div>
+                <Router isAuthenticated={ isAuthenticated } isCollapsed={ isCollapsed }>
                     <Header />
+                    <Sidebar />
                     <Loading isActive={ isConnected === null } />
                 </Router>
-            </React.Fragment>
+            </div>
         );
     }
 }
@@ -43,11 +45,12 @@ App.defaultProps = {
 
 App.propTypes = {
     isConnected: PropTypes.bool,
+    isCollapsed: PropTypes.bool.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
     Init: PropTypes.func.isRequired,
 };
 
-const mSTP = ( { app: { isConnected, isAuthenticated } } ) => ( { isConnected, isAuthenticated } );
+const mSTP = ( { app: { isConnected, isAuthenticated, isCollapsed } } ) => ( { isConnected, isAuthenticated, isCollapsed } );
 
 const mDTP = dispatch => ( {
     Init: args => dispatch( actions.init( args ) ),

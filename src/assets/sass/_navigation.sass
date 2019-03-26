@@ -1,0 +1,45 @@
+/* -------------------- Navigation -------------------- */
+.navbar
+    display: flex
+    flex-grow: 1
+    box-shadow: $box-shadow
+
+    .navbar-items, .navbar-start, .navbar-center, .navbar-end
+        display: flex
+        flex-grow: 1
+        flex-shrink: 0
+        align-items: center
+
+    .navbar-start
+        flex: 1
+        justify-content: flex-start
+        margin-right: auto
+
+    .navbar-center
+        flex: 1
+        justify-content: center
+
+    .navbar-end
+        flex: 1
+        justify-content: flex-end
+        margin-left: auto
+    
+    .navbar-logo
+        height: 30px
+
+    .navbar-item.is-hoverable:hover .navbar-dropdown
+        display: block
+
+    .navbar-dropdown
+        background-color: $navbar-dropdown-background-color
+        border-bottom-left-radius: $navbar-dropdown-radius
+        border-bottom-right-radius: $navbar-dropdown-radius
+        border-top: $navbar-dropdown-border-top
+        box-shadow: $navbar-dropdown-boxed-radius
+        display: none
+        font-size: 0.875rem
+        left: 0
+        min-width: 100%
+        position: absolute
+        top: 100%
+        z-index: $navbar-dropdown-z

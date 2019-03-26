@@ -3,9 +3,17 @@ import { Axios } from "common/helpers";
 import types from "./types";
 
 const defaultState = {
+    isCollapsed: false,
     isConnected: null,
     isAuthenticated: false,
     roles: [],
+};
+
+const isCollapsed = ( state = defaultState.isCollapsed, { type } ) => {
+    if ( type === types.TOGGLE_SIDEBAR ) {
+        return !state;
+    }
+    return state;
 };
 
 const isConnected = ( state = defaultState.isConnected, { type } ) => {
@@ -38,6 +46,7 @@ const roles = ( state = defaultState.roles, { type, payload } ) => {
 };
 
 export default combineReducers( {
+    isCollapsed,
     isConnected,
     isAuthenticated,
     roles,

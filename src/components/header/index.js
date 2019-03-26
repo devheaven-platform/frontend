@@ -2,34 +2,36 @@ import React from "react";
 import { connect } from "react-redux";
 import {
     bool,
-    arrayOf,
-    shape,
     func,
 } from "prop-types";
 
 import { actions } from "app/duck";
+import { HeaderLeft, HeaderCenter, HeaderRight } from "./components";
 
 const Header = ( {
     isAuthenticated,
-    roles,
+    ToggleSidebar,
     LogOut,
 } ) => (
-    <div />
+    <nav className="navbar is-light is-fixed-top">
+        <div className="navbar-items">
+            <HeaderLeft toggleSidebar={ ToggleSidebar } />
+            <HeaderCenter />
+            <HeaderRight isAuthenticated={ isAuthenticated } logout={ LogOut } />
+        </div>
+    </nav>
 );
 
-Header.defaultProps = {
-    roles: [],
-};
-
 Header.propTypes = {
-    roles: arrayOf( shape( {} ) ),
     isAuthenticated: bool.isRequired,
+    ToggleSidebar: func.isRequired,
     LogOut: func.isRequired,
 };
 
-const mSTP = ( { app: { isAuthenticated, roles } } ) => ( { isAuthenticated, roles } );
+const mSTP = ( { app: { isAuthenticated } } ) => ( { isAuthenticated } );
 
 const mDTP = dispatch => ( {
+    ToggleSidebar: () => dispatch( actions.toggleSidebar() ),
     LogOut: () => dispatch( actions.logout() ),
 } );
 
