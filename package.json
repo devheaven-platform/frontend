@@ -28,7 +28,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint . --fix"
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:8080",
   "eslintConfig": {
     "extends": "react-app"
   },
