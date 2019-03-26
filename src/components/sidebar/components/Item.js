@@ -2,8 +2,11 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const Item = ( { to, icon, label } ) => (
+const Item = ( {
+    to, icon, label,
+} ) => (
     <li>
+
         <NavLink exact to={ to } className="sidebar-item" activeClassName="active">
             <i className={ `fas fa-${ icon }` } />
             <span>{ label }</span>

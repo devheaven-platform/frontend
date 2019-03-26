@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { PropTypes } from "prop-types";
 
-const ItemList = ( { icon, label, children } ) => {
+const ItemList = ( {
+    icon, label, children,
+} ) => {
     const [ isOpen, setIsOpen ] = useState( false );
     return (
         <li>
