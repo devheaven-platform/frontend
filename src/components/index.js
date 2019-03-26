@@ -9,3 +9,4 @@ export {
     RadioButton,
     SelectOption,
 } from "./form";
+export { default as ErrorHandler } from "./error";

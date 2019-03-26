@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { Header, Sidebar } from "components";
+import { Header, Sidebar, ErrorHandler } from "components";
 import { Loading, Error } from "pages";
 import Router from "./router";
 import { actions } from "./duck";
@@ -32,6 +32,7 @@ class App extends React.Component {
                 <Router isAuthenticated={ isAuthenticated } isCollapsed={ isCollapsed }>
                     <Header />
                     <Sidebar />
+                    <ErrorHandler />
                     <Loading isActive={ isConnected === null } />
                 </Router>
             </div>
