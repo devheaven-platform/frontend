@@ -7,3 +7,4 @@ export { default as RadioField } from "./RadioField";
 export { default as RadioButton } from "./RadioButton";
 export { default as SubmitButton } from "./SubmitButton";
 export { default as ResetButton } from "./ResetButton";
+export { default as HiddenField } from "./HiddenField";
