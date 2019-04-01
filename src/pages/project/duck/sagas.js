@@ -8,7 +8,7 @@ import actions from "./actions";
 
 function* getBoards( action ) {
     try {
-        const { data } = yield call( Axios.get, `/board/getAll?projectId=${ action.payload }` );
+        const { data } = yield call( Axios.get, `/board/getAll/${ action.payload }` );
         yield put( { type: types.GET_BOARDS_SUCCESS, payload: { boards: data.boards } } );
     } catch ( error ) {
         yield put( { type: types.GET_BOARDS_ERROR } );

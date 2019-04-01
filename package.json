@@ -12,6 +12,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-kanban-dnd": "^0.3.0",
     "react-notifications": "^1.4.3",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
