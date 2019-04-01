@@ -1,14 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
     string,
 } from "prop-types";
 
 const BoardItem = ( {
-    name,
+    name, projectId, boardId,
 } ) => (
     <li className="board level">
         <div className="level-left">
-            <p className="is-size-4 has-text-light">{name}</p>
+            <Link to={ `/project/${ projectId }/board/${ boardId }` }>
+                <p className="is-size-4 has-text-light">{name}</p>
+            </Link>
         </div>
         <div className="level-right">
             <div className="level-item icon favorite-btn">
@@ -25,5 +28,7 @@ BoardItem.defaultProps = {
 
 BoardItem.propTypes = {
     name: string.isRequired,
+    projectId: string.isRequired,
+    boardId: string.isRequired,
 };
 export default BoardItem;

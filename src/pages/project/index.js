@@ -18,18 +18,19 @@ class Project extends React.Component {
         boards: arrayOf( shape( { id: string, name: string } ) ),
         getBoards: func.isRequired,
         projectId: string,
+        match: shape( {} ).isRequired,
     };
 
     componentDidMount() {
         const { getBoards } = this.props;
-        const { id } = this.props.match.params;
-        getBoards( id );
+        const { match } = this.props;
+        getBoards( match.params.projectId );
     }
 
     render() {
-        const { boards } = this.props;
+        const { boards, projectId } = this.props;
         const boardItems = boards.map( b => (
-            <BoardItem key={ b.id } name={ b.name } />
+            <BoardItem key={ b.id } name={ b.name } boardId={ b.id } projectId={ projectId } />
         ) );
         return (
             <div className="container">
