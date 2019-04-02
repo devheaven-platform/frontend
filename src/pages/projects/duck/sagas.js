@@ -5,7 +5,6 @@ import types from "./types";
 
 function* getProjects() {
     try {
-        yield put({ type: types.GET_PROJECTS_SUCCESS, payload: data });
         const { data } = yield call( Axios.get, "/project/getall" );
         yield put( { type: types.GET_PROJECTS_SUCCESS, payload: data } );
     } catch ( error ) {
