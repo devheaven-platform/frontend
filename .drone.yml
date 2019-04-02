@@ -21,3 +21,5 @@ pipeline:
     when:
       branch: [ master ]
       event: [ push, pull_request ]
+
+branches: master
