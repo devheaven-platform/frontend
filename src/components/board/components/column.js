@@ -9,6 +9,8 @@ const Column = ( {
     <div>
         <h2>
             {name}
+            {" "}
+            {boardId}
         </h2>
     </div>
 );

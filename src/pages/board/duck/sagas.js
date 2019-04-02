@@ -4,24 +4,15 @@ import {
 import { Axios } from "common/helpers";
 import types from "./types";
 
-function* getBoardColumns( action ) {
+function* getBoard( action ) {
     try {
-        const { data } = yield call( Axios.get, `/column/getColumns/${ action.payload }` );
-        yield put( { type: types.GET_COLUMNS_SUCCESS, payload: { columns: data.columns } } );
+        const { data } = yield call( Axios.get, `/board/${ action.payload }` );
+        yield put( { type: types.GET_BOARD_SUCCESS, payload: { columns: data.columns } } );
     } catch ( error ) {
-        yield put( { type: types.GET_COLUMNS_ERROR } );
+        yield put( { type: types.GET_BOARD_ERROR } );
     }
 }
 
-function* getColumnTasks( action ) {
-    try {
-        const { data } = yield call( Axios.get, `/task/getTasks/${ action.payload }` );
-        yield put( { type: types.GET_TASKS_SUCCESS, payload: { columns: data.tasks } } );
-    } catch ( error ) {
-        yield put( { type: types.GET_TASKS_ERROR } );
-    }
-}
 export default function* main() {
-    yield takeEvery( types.GET_COLUMNS, getBoardColumns );
-    yield takeEvery( types.GET_TASKS, getColumnTasks );
+    yield takeEvery( types.GET_BOARD, getBoard );
 }
