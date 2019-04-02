@@ -4,7 +4,7 @@ pipeline:
     environment:
       NODE_PATH: src
     commands:
-      - npm install
+      - npm install --quiet
       - npm run build
     when:
       branch: [ master ]

@@ -1,4 +1,6 @@
 # Frontend
+[![Build Status](http://drone.devheaven.nl/api/badges/devheaven-platform/frontend/status.svg)](http://drone.devheaven.nl/devheaven-platform/frontend)
+
 This repository contains the frontend for the DevHeaven platform.
 
 # Contribution
