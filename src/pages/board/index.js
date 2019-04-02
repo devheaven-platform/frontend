@@ -8,13 +8,11 @@ import { actions } from "./duck";
 class Board extends React.Component {
     static defaultProps = {
         columns: [],
-        boardId: "",
     };
 
     static propTypes = {
         columns: arrayOf( shape( { id: string, name: string } ) ),
         GetColumns: func.isRequired,
-        boardId: string,
         match: shape( {} ).isRequired,
     };
 
@@ -43,7 +41,7 @@ class Board extends React.Component {
 const mSTP = ( { board: { columns, boardId } } ) => ( { columns, boardId } );
 
 const mDTP = dispatch => ( {
-    GetColumns: args => dispatch( actions.getBoardColumns( args ) ),
+    GetBoard: args => dispatch( actions.getBoard( args ) ),
 } );
 
 export default connect( mSTP, mDTP )( Board );
