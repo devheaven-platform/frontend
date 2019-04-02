@@ -8,6 +8,7 @@
     "bulma": "^0.7.4",
     "bulma-pageloader": "^2.1.0",
     "bulma-tooltip": "^2.0.2",
+    "eslint": "^5.12.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
@@ -28,7 +29,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint . --fix"
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:8080",
   "eslintConfig": {
     "extends": "react-app"
   },
