@@ -1,4 +1,5 @@
 import {
+    takeLatest,
     call, put, takeEvery, select,
 } from "redux-saga/effects";
 import { Axios } from "common/helpers";
@@ -36,7 +37,17 @@ function* createBoard( action ) {
     }
 }
 
+function* archiveProject( action ) {
+    try {
+        yield call( Axios.patch, `/project/${ action.payload }` );
+        yield put( { type: types.ARCHIVE_PROJECT_SUCCESS } );
+    } catch ( error ) {
+        yield put( { type: types.ARCHIVE_PROJECT_ERROR, payload: error } );
+    }
+}
+
 export default function* main() {
     yield takeEvery( types.GET_BOARDS, getBoards );
     yield takeEvery( actions.createBoard.REQUEST, createBoard );
+    yield takeLatest( types.ARCHIVE_PROJECT, archiveProject );
 }

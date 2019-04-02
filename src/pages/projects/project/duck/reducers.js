@@ -4,6 +4,7 @@ import types from "./types";
 const defaultState = {
     boards: [],
     projectId: "",
+    isArchived: false,
 };
 const boards = ( state = defaultState.boards, { type, payload } ) => {
     if ( type === types.GET_BOARDS_SUCCESS ) {
@@ -18,6 +19,13 @@ const projectId = ( state = defaultState.projectId, { type, payload } ) => {
     return state;
 };
 
+const isArchived = ( state = defaultState.isArchived, { type } ) => {
+    if ( type === types.ARCHIVE_PROJECT_SUCCESS ) {
+        return true;
+    }
+    return state;
+};
+
 export default combineReducers( {
-    boards, projectId,
+    boards, projectId, isArchived,
 } );
