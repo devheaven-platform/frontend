@@ -1,5 +1,5 @@
 # Builder
-FROM node:8.9.0-alpine as builder
+FROM node:9.6.1 as builder
 
 # Set working directory
 WORKDIR /app
