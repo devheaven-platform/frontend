@@ -11,10 +11,10 @@ const defaultState = {
 };
 
 const projects = ( state = defaultState.projects, { type , payload } ) => {
-    if ( type === types.CREATEPROJECT_SUCCESS ) {
+    if ( type === types.CREATE_PROJECT_SUCCESS ) {
         return [...state, payload];
     }
-    if ( type === types.ARCHIVEPROJECT_SUCCESS ) {
+    if ( type === types.ARCHIVE_PROJECT_SUCCESS ) {
         return state.filter( p => p.id !== payload);
     }
 
