@@ -14,7 +14,7 @@ const projects = ( state = defaultState.projects, { type , payload } ) => {
     if ( type === types.CREATEPROJECT_SUCCESS ) {
         return [...state, payload];
     }
-    if ( type === types.DELETEPROJECT_SUCCESS ) {
+    if ( type === types.ARCHIVEPROJECT_SUCCESS ) {
         return state.filter( p => p.id !== payload);
     }
 

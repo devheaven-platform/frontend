@@ -25,7 +25,6 @@ function* createProject(action) {
 export default function* main() {
     yield takeLatest(types.GETPROJECTS, getProjects);
     yield takeLatest(types.CREATEPROJECT, createProject);
-    yield takeLaterst(types.W)
 
 }
 

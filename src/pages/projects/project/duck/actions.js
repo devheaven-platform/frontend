@@ -2,16 +2,16 @@ import types from "./types";
 
 const init = payload => ( { type: types.INIT, payload } );
 
-const create = payload => ( { type: types.CREATE, payload } );
+const createProject = payload => ( { type: types.CREATE, payload } );
 
-const edit = payload => ( { type: types.EDIT, payload } );
+const editProject = payload => ( { type: types.EDIT, payload } );
 
-const deleteProject = payload => ( { type: types.DELETE, payload } );
+const archiveProject = payload => ( { type: types.ARCHIVE, payload } );
 
 
 export default {
     init,
-    create,
-    edit,
-    deleteProject,
+    createProject,
+    editProject,
+    archiveProject,
 };
