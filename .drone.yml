@@ -20,4 +20,4 @@ pipeline:
     file: Dockerfile
     when:
       branch: [ master ]
-      event: [ push ]
+      event: [ push, pull_request ]
