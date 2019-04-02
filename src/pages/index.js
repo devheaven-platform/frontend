@@ -1,6 +1,6 @@
 export { default as Home } from "./home";
 export { default as Projects } from "./projects";
-export { default as Project } from "./project";
+export { default as Project } from "./projects/project";
 export { default as Invoices } from "./invoices";
 export { default as Clients } from "./clients";
 export { default as Client } from "./client";
