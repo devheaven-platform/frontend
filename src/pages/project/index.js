@@ -17,6 +17,7 @@ class Project extends React.Component {
     static propTypes = {
         boards: arrayOf( shape( { id: string, name: string } ) ),
         getBoards: func.isRequired,
+        deleteBoard: func.isRequired,
         projectId: string,
     };
 
@@ -27,9 +28,9 @@ class Project extends React.Component {
     }
 
     render() {
-        const { boards } = this.props;
+        const { boards, deleteBoard } = this.props;
         const boardItems = boards.map( b => (
-            <BoardItem key={ b.id } name={ b.name } />
+            <BoardItem key={ b.id } id={ b.id } name={ b.name } onDelete={ deleteBoard } />
         ) );
         return (
             <div className="container">
@@ -63,6 +64,7 @@ const mSTP = ( { project: { boards, projectId } } ) => ( { boards, projectId } )
 
 const mDTP = dispatch => ( {
     getBoards: args => dispatch( actions.getBoards( args ) ),
+    deleteBoard: args => dispatch( actions.deleteBoard( args ) ),
 } );
 
 export default connect( mSTP, mDTP )( Project );

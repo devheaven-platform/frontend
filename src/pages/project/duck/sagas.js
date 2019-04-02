@@ -8,7 +8,7 @@ import actions from "./actions";
 
 function* getBoards( action ) {
     try {
-        const { data } = yield call( Axios.get, `/board/getAll?projectId=${ action.payload }` );
+        const { data } = yield call( Axios.get, `/board/getAll/${ action.payload }` );
         yield put( { type: types.GET_BOARDS_SUCCESS, payload: { boards: data.boards } } );
     } catch ( error ) {
         yield put( { type: types.GET_BOARDS_ERROR } );
@@ -35,8 +35,16 @@ function* createBoard( action ) {
         yield put( actions.createBoard.failure( formError ) );
     }
 }
-
+function* deleteBoard( action ) {
+    try {
+        yield call( Axios.delete, `/board/delete/${ action.payload }` );
+        yield put( { type: types.DELETE_BOARD_SUCCESS, payload: action.payload } );
+    } catch ( error ) {
+        yield put( { type: types.DELETE_BOARD_ERROR } );
+    }
+}
 export default function* main() {
     yield takeEvery( types.GET_BOARDS, getBoards );
     yield takeEvery( actions.createBoard.REQUEST, createBoard );
+    yield takeEvery( types.DELETE_BOARD, deleteBoard );
 }
