@@ -12,12 +12,9 @@ pipeline:
 
   publish:
     image: plugins/docker
-    username: ${DOCKER_USERNAME}
-    password: ${DOCKER_PASSWORD}
-    email: ${DOCKER_EMAIL}
     repo: tomdewildt/devheaven-frontend
     auto_tag: true
-    file: Dockerfile
+    secrets: [ docker_username, docker_password ]
     when:
       branch: [ master ]
       event: [ push ]
