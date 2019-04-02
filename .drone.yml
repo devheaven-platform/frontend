@@ -1,15 +1,23 @@
-kind: pipeline
-name: build
+pipeline:
+  test:
+    image: node
+    environment:
+      NODE_PATH: src
+    commands:
+      - npm install
+      - npm run build
+    when:
+      branch: [ master ]
+      event: [ push, pull_request ]
 
-steps:
-- name: build
-  image: node
-  commands:
-  - npm install
-  - npm run build
-  when:
-    branch:
-    - master
-    event:
-    - push
-    - pull_request
+  publish:
+    image: plugins/docker
+    username: ${DOCKER_USERNAME}
+    password: ${DOCKER_PASSWORD}
+    email: ${DOCKER_EMAIL}
+    repo: tomdewildt/devheaven-frontend
+    auto_tag: true
+    file: Dockerfile
+    when:
+      branch: [ master ]
+      event: [ push ]
