@@ -1,21 +1,46 @@
-pipeline:
-  test:
-    image: node
-    commands:
-      - npm install
-      - npm run build
-    when:
-      branch: [ master ]
-      event: [ push, pull_request ]
+---
+kind: pipeline
+name: build
 
-  publish:
-    image: plugins/docker
-    username: ${DOCKER_USERNAME}
-    password: ${DOCKER_PASSWORD}
-    email: devheavenplatform@gmail.com
-    repo: devheaven/frontend
-    tag: ${DRONE_BUILD_NUMBER}
-    file: Dockerfile
+steps:
+- name: build
+  image: node
+  commands:
+  - npm install
+  - npm run build
+  when:
+    branch:
+    - master
+    event:
+    - push
+    - pull_request
+---
+kind: pipeline
+name: deploy
+
+steps:
+- name: publish
+  image: plugins/docker
+  settings:
+    repo: tomdewildt/devheaven-frontend
+    auto_tag: true
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
     when:
-      branch: [ master ]
-      event: [ push ]
+      branch:
+      - master
+      event:
+      - tag
+      - push
+
+# TODO: when push build to k8s staging environment
+# TODO: when tag build to k8s prod environment
+
+trigger:
+  status:
+  - success
+
+depends_on:
+- build
