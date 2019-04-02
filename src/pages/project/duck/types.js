@@ -4,5 +4,7 @@ export default Generator.actionType( [
     "GETPROJECTS",
     "CREATEPROJECT",
     "EDITPROJECT",
-    "DELETEPROJECT",
+    "ARCHIVEPROJECT",
+    "GET_BOARDS", 
+    "CREATE_BOARD",
 ] );

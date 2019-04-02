@@ -7,6 +7,7 @@ import * as serviceWorker from "./serviceWorker";
 
 // CSS
 import "@fortawesome/fontawesome-free/css/all.css";
+import "react-notifications/lib/notifications.css";
 import "assets/sass/style.sass";
 
 ReactDOM.render(
