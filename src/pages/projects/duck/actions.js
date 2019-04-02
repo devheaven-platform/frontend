@@ -8,7 +8,6 @@ const editProject = payload => ( { type: types.EDIT_PROJECT, payload } );
 
 const archiveProject = payload => ( { type: types.ARCHIVE_PROJECT, payload } );
 
-
 export default {
     init,
     createProject,
