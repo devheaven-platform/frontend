@@ -1,44 +1,52 @@
 import React from "react";
 import {
-    func, shape, string, arrayOf,
+    func, shape,
 } from "prop-types";
 import { connect } from "react-redux";
+import { Board as KanbanBoard } from "react-trello";
 import { actions } from "./duck";
 
 class Board extends React.Component {
     static defaultProps = {
-        columns: [],
+        board: null,
     };
 
     static propTypes = {
-        columns: arrayOf( shape( { id: string, name: string } ) ),
-        GetColumns: func.isRequired,
+        board: shape( {} ),
+        GetBoard: func.isRequired,
         match: shape( {} ).isRequired,
     };
 
     componentDidMount() {
-        const { GetColumns } = this.props;
+        const { GetBoard } = this.props;
         const { match } = this.props;
-        GetColumns( match.params.boardId );
+        GetBoard( match.params.boardId );
     }
 
     render() {
-        const { columns } = this.props;
-        const columnItems = columns.map( c => (
-            <h2>{c.name}</h2>
-        ) );
+        const { board } = this.props;
+        const data = { lanes: [] };
+        if ( board ) {
+            board.columns.map( ( column ) => {
+                const { id, name } = column;
+                const cards = [ ];
+                if ( column.tasks.length > 0 ) {
+                    column.tasks.map( ( task ) => {
+                        cards.push( { key: task.id, id: task.id, title: task.name, description: task.description } );
+                        return task;
+                    } );
+                }
+                data.lanes.push( { id, title: name, cards } );
+                return column;
+            } );
+        }
         return (
-            <div>
-                Board
-                <div>
-                    {columnItems}
-                </div>
-            </div>
+            <KanbanBoard data={ data } draggable editable />
         );
     }
 }
 
-const mSTP = ( { board: { columns, boardId } } ) => ( { columns, boardId } );
+const mSTP = ( { board: { board, boardId } } ) => ( { board, boardId } );
 
 const mDTP = dispatch => ( {
     GetBoard: args => dispatch( actions.getBoard( args ) ),

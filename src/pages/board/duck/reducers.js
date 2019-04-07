@@ -5,9 +5,9 @@ const defaultState = {
     board: null,
     boardId: "",
 };
-const board = ( state = defaultState.columns, { type, payload } ) => {
-    if ( type === types.GET_COLUMNS_SUCCESS ) {
-        return payload.columns;
+const board = ( state = defaultState.board, { type, payload } ) => {
+    if ( type === types.GET_BOARD_SUCCESS ) {
+        return payload.board;
     }
     return state;
 };
