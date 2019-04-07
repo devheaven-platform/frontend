@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-    string,
+    string, func,
 } from "prop-types";
 
 const BoardItem = ( {
     name, projectId, boardId,
+    name,
+    id,
+    onDelete,
 } ) => (
     <li className="board level">
         <div className="level-left">
@@ -18,7 +21,12 @@ const BoardItem = ( {
                 <i className="not-fav far fa-star fa-lg" />
                 <i className="fav fas fa-star fa-lg " />
             </div>
-            <button className="level-item delete-btn delete" type="button" />
+            <div className="level-item icon archive-btn">
+                <i className="fas fa-archive" />
+            </div>
+            <div className="level-item icon delete-btn" onClick={ () => { console.log( `deleting: ${ id }` ); onDelete( id ); } }>
+                <i className="fas fa-trash-alt" />
+            </div>
         </div>
     </li>
 );
@@ -27,6 +35,8 @@ BoardItem.defaultProps = {
 };
 
 BoardItem.propTypes = {
+    onDelete: func.isRequired,
+    id: string.isRequired,
     name: string.isRequired,
     projectId: string.isRequired,
     boardId: string.isRequired,

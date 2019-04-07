@@ -1,8 +1,9 @@
 import React from "react";
 import {
-    func, shape, string, arrayOf,
+    func, shape, string, arrayOf, bool,
 } from "prop-types";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import {
     Modal, Form, FormField, BoardItem, SubmitButton,
 } from "components";
@@ -15,22 +16,29 @@ class Project extends React.Component {
     };
 
     static propTypes = {
-        boards: arrayOf( shape( { id: string, name: string } ) ),
-        getBoards: func.isRequired,
-        projectId: string,
         match: shape( {} ).isRequired,
+        boards: arrayOf( shape( { id: string, name: string } ) ),
+        GetBoards: func.isRequired,
+        DeleteBoard: func.isRequired,
+        projectId: string,
+        ArchiveProject: func.isRequired,
+        isArchived: bool.isRequired,
     };
 
     componentDidMount() {
-        const { getBoards } = this.props;
-        const { match } = this.props;
-        getBoards( match.params.projectId );
+        const { GetBoards, match } = this.props;
+        GetBoards( match.params.id );
     }
 
     render() {
-        const { boards, projectId } = this.props;
+        const {
+            boards, DeleteBoard, ArchiveProject, projectId, isArchived,
+        } = this.props;
+        if ( isArchived ) {
+            return <Redirect to="/projects" />;
+        }
         const boardItems = boards.map( b => (
-            <BoardItem key={ b.id } name={ b.name } boardId={ b.id } projectId={ projectId } />
+            <BoardItem key={ b.id } id={ b.id } name={ b.name } onDelete={ DeleteBoard } />
         ) );
         return (
             <div className="container">
@@ -55,15 +63,20 @@ class Project extends React.Component {
                 <ul>
                     {boardItems}
                 </ul>
+                <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>
+                    Archive
+                </button>
             </div>
         );
     }
 }
 
-const mSTP = ( { project: { boards, projectId } } ) => ( { boards, projectId } );
+const mSTP = ( { project: { boards, projectId, isArchived } } ) => ( { boards, projectId, isArchived } );
 
 const mDTP = dispatch => ( {
-    getBoards: args => dispatch( actions.getBoards( args ) ),
+    GetBoards: args => dispatch( actions.getBoards( args ) ),
+    DeleteBoard: args => dispatch( actions.deleteBoard( args ) ),
+    ArchiveProject: args => dispatch( actions.archiveProject( args ) ),
 } );
 
 export default connect( mSTP, mDTP )( Project );
