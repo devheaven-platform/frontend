@@ -21,10 +21,10 @@ export const getState = state => state;
 function* createBoard( action ) {
     try {
         const state = yield select( getState );
-        const { projectId } = state.project;
+        const { id } = state.project;
         const { data } = yield call( Axios.post, "/board/create", {
             ...action.payload,
-            projectId,
+            id,
         } );
         yield put( { type: actions.createBoard.SUCCESS, payload: data } );
     } catch ( error ) {

@@ -3,7 +3,7 @@ import types from "./types";
 
 const defaultState = {
     boards: [],
-    projectId: "",
+    id: "",
     isArchived: false,
 };
 const boards = ( state = defaultState.boards, { type, payload } ) => {
@@ -12,7 +12,7 @@ const boards = ( state = defaultState.boards, { type, payload } ) => {
     }
     return state;
 };
-const projectId = ( state = defaultState.projectId, { type, payload } ) => {
+const id = ( state = defaultState.id, { type, payload } ) => {
     if ( type === types.GET_BOARDS ) {
         return payload;
     }
@@ -27,5 +27,5 @@ const isArchived = ( state = defaultState.isArchived, { type } ) => {
 };
 
 export default combineReducers( {
-    boards, projectId, isArchived,
+    boards, id, isArchived,
 } );

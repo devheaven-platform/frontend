@@ -18,8 +18,7 @@ class Board extends React.Component {
     };
 
     componentDidMount() {
-        const { GetBoard } = this.props;
-        const { match } = this.props;
+        const { GetBoard, match } = this.props;
         GetBoard( match.params.boardId );
     }
 
