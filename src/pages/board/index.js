@@ -32,7 +32,9 @@ class Board extends React.Component {
                 const cards = [ ];
                 if ( column.tasks.length > 0 ) {
                     column.tasks.map( ( task ) => {
-                        cards.push( { key: task.id, id: task.id, title: task.name, description: task.description } );
+                        cards.push( {
+                            key: task.id, id: task.id, title: task.name, description: task.description,
+                        } );
                         return task;
                     } );
                 }
