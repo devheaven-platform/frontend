@@ -12,6 +12,7 @@ const boards = ( state = defaultState.boards, { type, payload } ) => {
     }
     return state;
 };
+
 const id = ( state = defaultState.id, { type, payload } ) => {
     if ( type === types.GET_BOARDS ) {
         return payload;
