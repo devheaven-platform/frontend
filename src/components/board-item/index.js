@@ -5,14 +5,14 @@ import {
 } from "prop-types";
 
 const BoardItem = ( {
-    name, projectId, boardId,
     name,
+    boardId,
     id,
     onDelete,
 } ) => (
     <li className="board level">
         <div className="level-left">
-            <Link to={ `/project/${ projectId }/board/${ boardId }` }>
+            <Link to={ `/project/${ id }/board/${ boardId }` }>
                 <p className="is-size-4 has-text-light">{name}</p>
             </Link>
         </div>
@@ -38,7 +38,6 @@ BoardItem.propTypes = {
     onDelete: func.isRequired,
     id: string.isRequired,
     name: string.isRequired,
-    projectId: string.isRequired,
     boardId: string.isRequired,
 };
 export default BoardItem;
