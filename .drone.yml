@@ -8,7 +8,7 @@ pipeline:
       - npm run build
     when:
       branch: [ master ]
-      event: [ push, pull_request ]
+      event: [ pull_request ]
 
   publish-staging:
     image: plugins/docker
@@ -26,7 +26,7 @@ pipeline:
     secrets: [ docker_username, docker_password ]
     when:
       branch: [ master ]
-      event: [ push ]
+      event: [ tag ]
 
   deploy-staging:
     image: quay.io/honestbee/drone-kubernetes
