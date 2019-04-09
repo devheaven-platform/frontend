@@ -1,16 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
     string, func,
 } from "prop-types";
 
 const BoardItem = ( {
     name,
+    boardId,
     id,
     onDelete,
 } ) => (
     <li className="board level">
         <div className="level-left">
-            <p className="is-size-4 has-text-light">{name}</p>
+            <Link to={ `/project/${ id }/board/${ boardId }` }>
+                <p className="is-size-4 has-text-light">{name}</p>
+            </Link>
         </div>
         <div className="level-right">
             <div className="level-item icon favorite-btn">
@@ -34,5 +38,6 @@ BoardItem.propTypes = {
     onDelete: func.isRequired,
     id: string.isRequired,
     name: string.isRequired,
+    boardId: string.isRequired,
 };
 export default BoardItem;
