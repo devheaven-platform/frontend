@@ -35,7 +35,7 @@ pipeline:
     repo: devheavenci/frontend
     container: frontend
     tag: "${DRONE_COMMIT_SHA:0:8}"
-    secrets: [ kubernetes_server, kubernetes_token ]
+    secrets: [ kubernetes_server, kubernetes_token, kubernetes_cert ]
     when:
       branch: [ master ]
       event: [ push ]
@@ -47,7 +47,7 @@ pipeline:
     repo: devheavenci/frontend
     container: frontend
     tag: "${DRONE_TAG##v}"
-    secrets: [ kubernetes_server, kubernetes_token ]
+    secrets: [ kubernetes_server, kubernetes_token, kubernetes_cert ]
     when:
       branch: [ master ]
       event: [ tag ]
