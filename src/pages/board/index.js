@@ -42,7 +42,7 @@ class Board extends React.Component {
             } );
         }
         return (
-            <KanbanBoard data={ data } draggable editable />
+            <KanbanBoard data={ data } style={ { "background-color": "transparent" } } draggable editable />
         );
     }
 }
