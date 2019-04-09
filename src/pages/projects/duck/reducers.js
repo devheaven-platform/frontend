@@ -10,17 +10,16 @@ const defaultState = {
     projects: []
 };
 
-const projects = ( state = defaultState.projects, { type , payload } ) => {
+const projects = ( state = defaultState.projects, { type, payload } ) => {
     if ( type === types.CREATE_PROJECT_SUCCESS ) {
-        return [...state, payload];
+        return [ ...state, payload ];
     }
     if ( type === types.ARCHIVE_PROJECT_SUCCESS ) {
-        return state.filter( p => p.id !== payload);
+        return state.filter( p => p.id !== payload );
     }
-
     return state;
 };
 
 export default combineReducers( {
-    projects
+    projects,
 } );

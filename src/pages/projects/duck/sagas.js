@@ -14,16 +14,13 @@ function* getProjects() {
 
 function* createProject(action) {
     try {
-        const { data } = yield call(Axios.post, "/project/createproject", action.payload);
-        yield put({ type: types.CREATE_PROJECT_SUCCESS, payload: data });
-    }
-    catch (error) {
-        yield put({type: types.CREATE_PROJECT_ERROR, payload: error});
+        const { data } = yield call( Axios.post, "/project/createproject", action.payload );
+        yield put( { type: types.CREATE_PROJECT_SUCCESS, payload: data } );
+    } catch ( error ) {
+        yield put( { type: types.CREATE_PROJECT_ERROR, payload: error } );
     }
 }
-
 export default function* main() {
     yield takeLatest(types.GET_PROJECTS, getProjects);
     yield takeLatest(types.CREATE_PROJECT, createProject);
 }
-

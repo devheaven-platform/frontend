@@ -1,8 +1,10 @@
 pipeline:
   test:
     image: node
+    environment:
+      NODE_PATH: src
     commands:
-      - npm install
+      - npm install --quiet
       - npm run build
     when:
       branch: [ master ]
@@ -10,12 +12,11 @@ pipeline:
 
   publish:
     image: plugins/docker
-    username: ${DOCKER_USERNAME}
-    password: ${DOCKER_PASSWORD}
-    email: devheavenplatform@gmail.com
-    repo: devheaven/frontend
-    tag: ${DRONE_BUILD_NUMBER}
-    file: Dockerfile
+    repo: tomdewildt/devheaven-frontend
+    auto_tag: true
+    secrets: [ docker_username, docker_password ]
     when:
       branch: [ master ]
       event: [ push ]
+
+branches: master
