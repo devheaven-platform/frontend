@@ -9,7 +9,7 @@ import actions from "./actions";
 
 function* getBoards( action ) {
     try {
-        const { data } = yield call( Axios.get, `/board/getAll?projectId=${ action.payload }` );
+        const { data } = yield call( Axios.get, `/board/getAll/${ action.payload }` );
         yield put( { type: types.GET_BOARDS_SUCCESS, payload: { boards: data.boards } } );
     } catch ( error ) {
         yield put( { type: types.GET_BOARDS_ERROR } );
@@ -21,10 +21,10 @@ export const getState = state => state;
 function* createBoard( action ) {
     try {
         const state = yield select( getState );
-        const { projectId } = state.project;
+        const { id } = state.project;
         const { data } = yield call( Axios.post, "/board/create", {
             ...action.payload,
-            projectId,
+            id,
         } );
         yield put( { type: actions.createBoard.SUCCESS, payload: data } );
     } catch ( error ) {

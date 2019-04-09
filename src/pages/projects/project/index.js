@@ -12,7 +12,7 @@ import { actions } from "./duck";
 class Project extends React.Component {
     static defaultProps = {
         boards: [],
-        projectId: "",
+        id: "",
     };
 
     static propTypes = {
@@ -20,7 +20,7 @@ class Project extends React.Component {
         boards: arrayOf( shape( { id: string, name: string } ) ),
         GetBoards: func.isRequired,
         DeleteBoard: func.isRequired,
-        projectId: string,
+        id: string,
         ArchiveProject: func.isRequired,
         isArchived: bool.isRequired,
     };
@@ -32,13 +32,13 @@ class Project extends React.Component {
 
     render() {
         const {
-            boards, DeleteBoard, ArchiveProject, projectId, isArchived,
+            boards, DeleteBoard, ArchiveProject, id, isArchived,
         } = this.props;
         if ( isArchived ) {
             return <Redirect to="/projects" />;
         }
         const boardItems = boards.map( b => (
-            <BoardItem key={ b.id } id={ b.id } name={ b.name } onDelete={ DeleteBoard } />
+            <BoardItem key={ b.id } boardId={ b.id } name={ b.name } onDelete={ DeleteBoard } />
         ) );
         return (
             <div className="container">
@@ -63,7 +63,7 @@ class Project extends React.Component {
                 <ul>
                     {boardItems}
                 </ul>
-                <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>
+                <button className="button is-danger" type="button" onClick={ () => ArchiveProject( id ) }>
                     Archive
                 </button>
             </div>
@@ -71,7 +71,7 @@ class Project extends React.Component {
     }
 }
 
-const mSTP = ( { project: { boards, projectId, isArchived } } ) => ( { boards, projectId, isArchived } );
+const mSTP = ( { project: { boards, id, isArchived } } ) => ( { boards, id, isArchived } );
 
 const mDTP = dispatch => ( {
     GetBoards: args => dispatch( actions.getBoards( args ) ),
