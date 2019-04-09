@@ -49,5 +49,3 @@ pipeline:
     secrets: [ kubernetes_server, kubernetes_token, kubernetes_cert ]
     when:
       event: tag
-
-branches: master
