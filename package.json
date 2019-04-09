@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.7.2",
-    "@types/styled-components": "^4.1.12",
     "axios": "^0.18.0",
     "bulma": "^0.7.4",
     "bulma-pageloader": "^2.1.0",
@@ -21,8 +20,7 @@
     "redux": "^4.0.1",
     "redux-form": "^8.1.0",
     "redux-form-saga": "^0.2.0",
-    "redux-saga": "^1.0.2",
-    "styled-components": "^4.2.0"
+    "redux-saga": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
