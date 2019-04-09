@@ -13,7 +13,9 @@ RUN npm install react-scripts@1.1.5 -g --silent
 
 # Set environment variables
 ENV NODE_PATH=src/
-ENV REACT_APP_ENV_NAME=production
+ENV NODE_ENV=production
+ENV REACT_APP_NAME=DevHeaven
+ENV REACT_APP_API_ENDPOINT=http://localhost:8080/api
 
 # Create build
 COPY . /app
