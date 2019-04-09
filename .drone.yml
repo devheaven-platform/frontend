@@ -7,8 +7,8 @@ pipeline:
       - npm install --quiet
       - npm run build
     when:
-      branch: [ master ]
-      event: [ pull_request ]
+      branch: master
+      event: pull_request
 
   publish-staging:
     image: plugins/docker
@@ -16,8 +16,8 @@ pipeline:
     tags: "${DRONE_COMMIT_SHA:0:8}"
     secrets: [ docker_username, docker_password ]
     when:
-      branch: [ master ]
-      event: [ push ]
+      branch: master
+      event: push
 
   publish-production:
     image: plugins/docker
@@ -25,8 +25,7 @@ pipeline:
     tags: "${DRONE_TAG##v}"
     secrets: [ docker_username, docker_password ]
     when:
-      branch: [ master ]
-      event: [ tag ]
+      event: tag
 
   deploy-staging:
     image: quay.io/honestbee/drone-kubernetes
@@ -37,8 +36,8 @@ pipeline:
     tag: "${DRONE_COMMIT_SHA:0:8}"
     secrets: [ kubernetes_server, kubernetes_token, kubernetes_cert ]
     when:
-      branch: [ master ]
-      event: [ push ]
+      branch: master
+      event: push
 
   deploy-production:
     image: quay.io/honestbee/drone-kubernetes
@@ -49,7 +48,6 @@ pipeline:
     tag: "${DRONE_TAG##v}"
     secrets: [ kubernetes_server, kubernetes_token, kubernetes_cert ]
     when:
-      branch: [ master ]
-      event: [ tag ]
+      event: tag
 
 branches: master
