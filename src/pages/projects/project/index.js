@@ -17,11 +17,13 @@ class Project extends React.Component {
 
     static propTypes = {
         match: shape( {} ).isRequired,
-        boards: arrayOf( shape( { id: string, name: string } ) ),
+        boards: arrayOf( shape( { id: string, name: string, archived: bool } ) ),
         GetBoards: func.isRequired,
         DeleteBoard: func.isRequired,
         projectId: string,
         ArchiveProject: func.isRequired,
+        ArchiveBoard: func.isRequired,
+        UpdateBoard: func.isRequired,
         isArchived: bool.isRequired,
     };
 
@@ -32,13 +34,13 @@ class Project extends React.Component {
 
     render() {
         const {
-            boards, DeleteBoard, ArchiveProject, projectId, isArchived,
+            boards, DeleteBoard, UpdateBoard, ArchiveProject, ArchiveBoard, projectId, isArchived,
         } = this.props;
         if ( isArchived ) {
             return <Redirect to="/projects" />;
         }
         const boardItems = boards.map( b => (
-            <BoardItem key={ b.id } id={ b.id } name={ b.name } onDelete={ DeleteBoard } />
+            <BoardItem key={ b.id } projectId={ projectId } boardId={ b.id } name={ b.name } onUpdate={ UpdateBoard } onArchive={ ArchiveBoard } onDelete={ DeleteBoard } />
         ) );
         return (
             <div className="container">
@@ -71,11 +73,19 @@ class Project extends React.Component {
     }
 }
 
-const mSTP = ( { project: { boards, projectId, isArchived } } ) => ( { boards, projectId, isArchived } );
+const mSTP = ( {
+    project: {
+        boards, projectId, isArchived,
+    },
+} ) => ( {
+    boards, projectId, isArchived,
+} );
 
 const mDTP = dispatch => ( {
     GetBoards: args => dispatch( actions.getBoards( args ) ),
     DeleteBoard: args => dispatch( actions.deleteBoard( args ) ),
+    UpdateBoard: args => dispatch( actions.updateBoard( args ) ),
+    ArchiveBoard: args => dispatch( actions.archiveBoard( args ) ),
     ArchiveProject: args => dispatch( actions.archiveProject( args ) ),
 } );
 
