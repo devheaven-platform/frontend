@@ -7,7 +7,7 @@ const defaultState = {
 };
 const board = ( state = defaultState.board, { type, payload } ) => {
     if ( type === types.GET_BOARD_SUCCESS ) {
-        return payload;
+        return payload.board;
     }
 
     if ( type === types.CREATE_COLUMN_SUCCESS ) {
