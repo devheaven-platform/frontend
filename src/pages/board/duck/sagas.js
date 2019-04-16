@@ -13,6 +13,16 @@ function* getBoard( action ) {
     }
 }
 
+function* createColumn( action ) {
+    try {
+        const { data } = yield call( Axios.post, "/columns/", action.payload );
+        yield put( { type: types.CREATE_COLUMN_SUCCESS, payload: data } );
+    } catch ( error ) {
+        yield put( { type: types.CREATE_COLUMN_ERROR } );
+    }
+}
+
 export default function* main() {
     yield takeEvery( types.GET_BOARD, getBoard );
+    yield takeEvery( types.CREATE_COLUMN, createColumn );
 }
