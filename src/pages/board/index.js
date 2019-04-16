@@ -44,6 +44,7 @@ class Board extends React.Component {
         }
         return (
             <KanbanBoard data={ data } style={ { backgroundColor: "transparent" } } draggable editable canAddLanes onLaneAdd={ args => CreateColumn( { board: match.params.boardId, name: args.title } ) } />
+
         );
     }
 }

@@ -1,6 +1,7 @@
-import { call, put } from "redux-saga/effects";
+import {
+    call, put, takeLatest,
+} from "redux-saga/effects";
 import { Axios } from "common/helpers";
-import takeLatest from "redux-saga";
 import types from "./types";
 
 function* getProjects() {
