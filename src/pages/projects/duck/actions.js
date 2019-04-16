@@ -1,6 +1,7 @@
+import { createFormAction } from "redux-form-saga";
 import types from "./types";
 
-const createProject = payload => ( { type: types.CREATE_PROJECT, payload } );
+const createProject = createFormAction( types.CREATE_PROJECT );
 
 const archiveProject = payload => ( { type: types.ARCHIVE_PROJECT, payload } );
 
