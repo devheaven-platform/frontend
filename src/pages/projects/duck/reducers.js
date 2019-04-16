@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-import { Axios } from "common/helpers";
 import types from "./types";
 
 const defaultState = {
@@ -7,7 +6,7 @@ const defaultState = {
     isConnected: null,
     isAuthenticated: false,
     roles: [],
-    projects: []
+    projects: [],
 };
 
 const projects = ( state = defaultState.projects, { type, payload } ) => {

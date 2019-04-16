@@ -7,16 +7,47 @@ pipeline:
       - npm install --quiet
       - npm run build
     when:
-      branch: [ master ]
-      event: [ push, pull_request ]
+      branch: master
+      event: pull_request
 
-  publish:
+  publish-staging:
     image: plugins/docker
-    repo: tomdewildt/devheaven-frontend
-    auto_tag: true
+    repo: devheavenci/frontend
+    tags: "${DRONE_COMMIT_SHA:0:8}"
     secrets: [ docker_username, docker_password ]
     when:
-      branch: [ master ]
-      event: [ push ]
+      branch: master
+      event: push
+
+  publish-production:
+    image: plugins/docker
+    repo: devheavenci/frontend
+    tags: "${DRONE_TAG##v}"
+    secrets: [ docker_username, docker_password ]
+    when:
+      event: tag
+
+  deploy-staging:
+    image: quay.io/honestbee/drone-kubernetes
+    namespace: staging
+    deployment: frontend-deployment
+    repo: devheavenci/frontend
+    container: frontend
+    tag: "${DRONE_COMMIT_SHA:0:8}"
+    secrets: [ kubernetes_server, kubernetes_token, kubernetes_cert ]
+    when:
+      branch: master
+      event: push
+
+  deploy-production:
+    image: quay.io/honestbee/drone-kubernetes
+    namespace: production
+    deployment: frontend-deployment
+    repo: devheavenci/frontend
+    container: frontend
+    tag: "${DRONE_TAG##v}"
+    secrets: [ kubernetes_server, kubernetes_token, kubernetes_cert ]
+    when:
+      event: tag
 
 branches: master

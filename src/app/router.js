@@ -7,6 +7,7 @@ import {
     Home,
     Projects,
     Project,
+    Board,
     Invoices,
     Clients,
     Client,
@@ -30,6 +31,7 @@ const Router = ( { children, isCollapsed, ...rest } ) => (
                     <Route exact path="/" { ...rest } component={ Home } />
                     <Route exact path="/projects" { ...rest } component={ Projects } />
                     <Route exact path="/project/:id" { ...rest } component={ Project } />
+                    <Route exact path="/project/:id/board/:boardId" { ...rest } component={ Board } />
                     <Route exact path="/invoices" { ...rest } component={ Invoices } />
                     <Route exact path="/clients" { ...rest } component={ Clients } />
                     <Route exact path="/client/:id" { ...rest } component={ Client } />

@@ -21,10 +21,10 @@ export const getState = state => state;
 function* createBoard( action ) {
     try {
         const state = yield select( getState );
-        const { projectId } = state.project;
+        const { id } = state.project;
         const { data } = yield call( Axios.post, "/board/create", {
             ...action.payload,
-            projectId,
+            id,
         } );
         yield put( { type: actions.createBoard.SUCCESS, payload: data } );
     } catch ( error ) {
@@ -45,6 +45,7 @@ function* deleteBoard( action ) {
         yield put( { type: types.DELETE_BOARD_ERROR, payload: error } );
     }
 }
+
 function* archiveProject( action ) {
     try {
         yield call( Axios.patch, `/project/${ action.payload }` );
@@ -62,6 +63,7 @@ function* archiveBoard( action ) {
         yield put( { type: types.ARCHIVE_BOARD_ERROR, payload: error } );
     }
 }
+
 function* updateBoard( action ) {
     try {
         const { data } = yield call( Axios.patch, "/board/update", action.payload );
