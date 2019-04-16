@@ -20,7 +20,6 @@ function* getProjects( action ) {
 
 function* createProject( action ) {
     try {
-        console.log( action.payload );
         const { data } = yield call( Axios.post, "/project/", action.payload );
         yield put( { type: actions.createProject.SUCCESS, payload: data } );
     } catch ( error ) {
