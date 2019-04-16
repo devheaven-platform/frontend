@@ -5,7 +5,7 @@ import {
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import {
-    Modal, Form, FormField, BoardItem, SubmitButton,
+    Modal, Form, FormField, BoardItem, SubmitButton, Search,
 } from "components";
 import { actions } from "./duck";
 
@@ -27,6 +27,14 @@ class Project extends React.Component {
         isArchived: bool.isRequired,
     };
 
+    constructor( props ) {
+        super( props );
+
+        this.state = {
+            searchBoardName: "",
+        };
+    }
+
     componentDidMount() {
         const { GetBoards, match } = this.props;
         GetBoards( match.params.id );
@@ -36,12 +44,16 @@ class Project extends React.Component {
         const {
             boards, DeleteBoard, UpdateBoard, ArchiveProject, ArchiveBoard, projectId, isArchived,
         } = this.props;
+        const { searchBoardName } = this.state;
+
         if ( isArchived ) {
             return <Redirect to="/projects" />;
         }
-        const boardItems = boards.map( b => (
+        const filteredBoards = boards.filter( b => b.name.toLowerCase().startsWith( searchBoardName.toLowerCase() ) );
+        const boardItems = filteredBoards.map( b => (
             <BoardItem key={ b.id } projectId={ projectId } boardId={ b.id } name={ b.name } onUpdate={ UpdateBoard } onArchive={ ArchiveBoard } onDelete={ DeleteBoard } />
         ) );
+
         return (
             <div className="container">
                 <div className="level">
@@ -62,7 +74,15 @@ class Project extends React.Component {
                         enableCancelButton
                     />
                 </div>
-                <ul>
+                <div className="boards-filter">
+                    <Search
+                        onSearch={ ( name ) => {
+                            this.setState( { searchBoardName: name } );
+                        } }
+                        placeholder="Boardname"
+                    />
+                </div>
+                <ul className="boards-list">
                     {boardItems}
                 </ul>
                 <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>

@@ -1,4 +1,3 @@
-
 /* eslint-disable complexity */
 import { combineReducers } from "redux";
 import types from "./types";
@@ -27,7 +26,7 @@ const boards = ( state = defaultState.boards, { type, payload } ) => {
         return [ ...stateWithoutBoard, payload.board ];
     }
     if ( type === actions.createBoard.SUCCESS ) {
-        return [ ...state, payload.board ];
+        return [ ...state, payload ];
     }
     return state;
 };
