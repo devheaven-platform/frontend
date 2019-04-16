@@ -32,10 +32,10 @@ const BoardItem = ( {
                 <i className="not-fav far fa-star fa-lg" />
                 <i className="fav fas fa-star fa-lg " />
             </div>
-            <div role="presentation" className="level-item icon archive-btn" onClick={ () => { onArchive( { id: boardId, archived: true } ); } }>
+            <div className="level-item icon archive-btn" onClick={ ( e ) => { e.stopPropagation(); onArchive( { id: boardId, archived: true } ); } }>
                 <i className="fas fa-archive" />
             </div>
-            <div role="presentation" className="level-item icon delete-btn" onClick={ () => { onDelete( { id: boardId } ); } }>
+            <div className="level-item icon delete-btn" onClick={ ( e ) => { e.stopPropagation(); onDelete( { id: boardId } ); } }>
 
                 <i className="fas fa-trash-alt" />
             </div>
