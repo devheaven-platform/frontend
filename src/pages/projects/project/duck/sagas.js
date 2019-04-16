@@ -45,7 +45,7 @@ function* createBoard( action ) {
 
 function* deleteBoard( action ) {
     try {
-        yield call( Axios.delete, `/boards/${ action.payload }` );
+        yield call( Axios.delete, `/boards/${ action.payload.id }` );
         yield put( { type: types.DELETE_BOARD_SUCCESS, payload: action.payload } );
     } catch ( error ) {
         yield put( { type: types.DELETE_BOARD_ERROR, payload: error } );
@@ -54,7 +54,7 @@ function* deleteBoard( action ) {
 
 function* archiveProject( action ) {
     try {
-        yield call( Axios.patch, `/project/${ action.payload }` );
+        yield call( Axios.patch, `/project/${ action.payload.id }` );
         yield put( { type: types.ARCHIVE_PROJECT_SUCCESS } );
     } catch ( error ) {
         yield put( { type: types.ARCHIVE_PROJECT_ERROR, payload: error } );
