@@ -16,7 +16,6 @@ const Modal = ( {
     enableCancelButton,
 } ) => {
     const [ isOpen, setIsOpen ] = useState( false );
-
     return (
         <React.Fragment>
             <button type="button" className="button is-primary" onClick={ () => setIsOpen( !isOpen ) }>{ title }</button>
