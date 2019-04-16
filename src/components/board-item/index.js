@@ -3,28 +3,36 @@ import { Link } from "react-router-dom";
 import {
     string, func,
 } from "prop-types";
+import EditableLabel from "react-editable-label";
 
 const BoardItem = ( {
     name,
     boardId,
     id,
+    onArchive,
     onDelete,
+    onUpdate,
 } ) => (
     <li className="board level">
-        <div className="level-left">
-            <Link to={ `/project/${ id }/board/${ boardId }` }>
-                <p className="is-size-4 has-text-light">{name}</p>
-            </Link>
+        <div className="level-left"
+          <a href={ `/project/${ id }/board/${ boardId }`>
+            <EditableLabel
+                className="is-size-4 has-text-light"
+                initialValue={ name }
+                save={ value => onUpdate( { id, name: value } ) }
+            />
+          </a>
         </div>
         <div className="level-right">
             <div className="level-item icon favorite-btn">
                 <i className="not-fav far fa-star fa-lg" />
                 <i className="fav fas fa-star fa-lg " />
             </div>
-            <div className="level-item icon archive-btn">
+            <div className="level-item icon archive-btn" onClick={ () => { onArchive( { id, archived: true } ); } }>
                 <i className="fas fa-archive" />
             </div>
-            <div className="level-item icon delete-btn" onClick={ () => { console.log( `deleting: ${ id }` ); onDelete( id ); } }>
+            <div className="level-item icon delete-btn" onClick={ () => { onDelete( id ); } }>
+
                 <i className="fas fa-trash-alt" />
             </div>
         </div>
@@ -36,8 +44,10 @@ BoardItem.defaultProps = {
 
 BoardItem.propTypes = {
     onDelete: func.isRequired,
-    id: string.isRequired,
+    onArchive: func.isRequired,
+    onUpdate: string.isRequired,
     name: string.isRequired,
+    id: string.isRequired,
     boardId: string.isRequired,
 };
 export default BoardItem;

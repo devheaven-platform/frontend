@@ -12,16 +12,18 @@ import { actions } from "./duck";
 class Project extends React.Component {
     static defaultProps = {
         boards: [],
-        id: "",
+        projectId: "",
     };
 
     static propTypes = {
         match: shape( {} ).isRequired,
-        boards: arrayOf( shape( { id: string, name: string } ) ),
+        boards: arrayOf( shape( { id: string, name: string, archived: bool } ) ),
         GetBoards: func.isRequired,
         DeleteBoard: func.isRequired,
-        id: string,
+        projectId: string,
         ArchiveProject: func.isRequired,
+        ArchiveBoard: func.isRequired,
+        UpdateBoard: func.isRequired,
         isArchived: bool.isRequired,
     };
 
@@ -32,13 +34,13 @@ class Project extends React.Component {
 
     render() {
         const {
-            boards, DeleteBoard, ArchiveProject, id, isArchived,
+            boards, DeleteBoard, UpdateBoard, ArchiveProject, ArchiveBoard, projectId, isArchived,
         } = this.props;
         if ( isArchived ) {
             return <Redirect to="/projects" />;
         }
         const boardItems = boards.map( b => (
-            <BoardItem key={ b.id } boardId={ b.id } name={ b.name } onDelete={ DeleteBoard } />
+            <BoardItem key={ b.id } id={ b.id } name={ b.name } onUpdate={ UpdateBoard } onArchive={ ArchiveBoard } onDelete={ DeleteBoard } />
         ) );
         return (
             <div className="container">
@@ -63,7 +65,7 @@ class Project extends React.Component {
                 <ul>
                     {boardItems}
                 </ul>
-                <button className="button is-danger" type="button" onClick={ () => ArchiveProject( id ) }>
+                <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>
                     Archive
                 </button>
             </div>
@@ -71,11 +73,19 @@ class Project extends React.Component {
     }
 }
 
-const mSTP = ( { project: { boards, id, isArchived } } ) => ( { boards, id, isArchived } );
+const mSTP = ( {
+    project: {
+        boards, projectId, isArchived,
+    },
+} ) => ( {
+    boards, projectId, isArchived,
+} );
 
 const mDTP = dispatch => ( {
     GetBoards: args => dispatch( actions.getBoards( args ) ),
     DeleteBoard: args => dispatch( actions.deleteBoard( args ) ),
+    UpdateBoard: args => dispatch( actions.updateBoard( args ) ),
+    ArchiveBoard: args => dispatch( actions.archiveBoard( args ) ),
     ArchiveProject: args => dispatch( actions.archiveProject( args ) ),
 } );
 
