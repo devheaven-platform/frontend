@@ -47,3 +47,4 @@ const isArchived = ( state = defaultState.isArchived, { type } ) => {
 export default combineReducers( {
     boards, projectId, isArchived,
 } );
+/* eslint-enable complexity */
