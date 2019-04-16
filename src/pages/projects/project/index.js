@@ -40,7 +40,7 @@ class Project extends React.Component {
             return <Redirect to="/projects" />;
         }
         const boardItems = boards.map( b => (
-            <BoardItem key={ b.id } id={ b.id } name={ b.name } onUpdate={ UpdateBoard } onArchive={ ArchiveBoard } onDelete={ DeleteBoard } />
+            <BoardItem key={ b.id } projectId={ projectId } boardId={ b.id } name={ b.name } onUpdate={ UpdateBoard } onArchive={ ArchiveBoard } onDelete={ DeleteBoard } />
         ) );
         return (
             <div className="container">
