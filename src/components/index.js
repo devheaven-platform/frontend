@@ -11,3 +11,4 @@ export {
     SelectOption,
 } from "./form";
 export { default as ErrorHandler } from "./error";
+export { default as Search } from "./search";
