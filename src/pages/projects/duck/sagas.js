@@ -14,9 +14,18 @@ function* getProjects( action ) {
     }
 }
 
+function* getAllClients( action ) {
+    try {
+        // todo replace with api call
+        const clients = [ { id: "f6916493-ef9f-4e5b-b1fb-5816f8a89f58", name: "DevHeaven" }, { id: "f6916493-ef9f-4e5b-b1fb-5816f8a8df58", name: "Mario's business" } ];
+        yield put( { type: types.GET_ALL_CLIENTS_SUCCESS, payload: clients } );
+    } catch ( error ) {
+        yield put( { type: errorTypes.ERROR, payload: error } );
+    }
+}
+
 function* createProject( action ) {
     try {
-        console.log( action.payload );
         const { data } = yield call( Axios.post, "/projects/", action.payload );
         yield put( { type: actions.createProject.SUCCESS, payload: data } );
     } catch ( error ) {
@@ -42,4 +51,5 @@ export default function* main() {
     yield takeLatest( types.GET_ALL_PROJECTS, getProjects );
     yield takeLatest( actions.createProject.REQUEST, createProject );
     yield takeLatest( types.ARCHIVE_PROJECT, archiveProject );
+    yield takeLatest( types.GET_ALL_CLIENTS, getAllClients );
 }

@@ -4,6 +4,7 @@ import types from "./types";
 
 const defaultState = {
     projects: [],
+    clients: [],
 };
 
 const projects = ( state = defaultState.projects, { type, payload } ) => {
@@ -19,6 +20,14 @@ const projects = ( state = defaultState.projects, { type, payload } ) => {
     return state;
 };
 
+const clients = ( state = defaultState.clients, { type, payload } ) => {
+    if ( type === types.GET_ALL_CLIENTS_SUCCESS ) {
+        return payload;
+    }
+    return state;
+};
+
 export default combineReducers( {
     projects,
+    clients,
 } );

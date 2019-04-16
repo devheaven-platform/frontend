@@ -13,29 +13,31 @@ import { actions } from "./duck";
 class Projects extends React.Component {
     static defaultProps = {
         projects: [],
+        clients: [],
     }
 
     static propTypes = {
         projects: arrayOf( shape( { id: string, name: string, description: string } ) ),
+        clients: arrayOf( shape( { id: string, name: string } ) ),
         GetAllProjects: func.isRequired,
+        GetAllClients: func.isRequired,
         ArchiveProject: func.isRequired,
     }
 
     componentDidMount() {
-        const { GetAllProjects } = this.props;
+        const { GetAllProjects, GetAllClients } = this.props;
         GetAllProjects( "3b8fc595-afb7-47a2-83ff-662746c66eee" ); // Todo : Inject user id here rather than hardcoded value
-        console.log( this.props );
+        GetAllClients( "" ); // Todo: inject some value to get clients of
     }
 
     render() {
         const {
             projects,
-        } = this.props;
-        const {
             ArchiveProject,
+            clients,
         } = this.props;
         const projectItems = projects.map( p => <ProjectItem key={ p.id } name={ p.name } description={ p.description } id={ p.id } onArchive={ ArchiveProject } /> );
-
+        const clientItems = clients.map( c => <SelectOption key={ c.id } name={ c.name } value={ c.id } /> );
         return (
             <>
                 <div className="level">
@@ -52,9 +54,12 @@ class Projects extends React.Component {
                                 <FormField validate={ [ number ] } name="budget" type="number" label="Budget" placeholder="Budget" />
                                 <FormField validate={ [ required ] } name="start" type="date" label="Start Date" />
                                 <FormField validate={ [ required ] } name="client" type="select" label="Client" placeholder="Client">
-                                    <SelectOption name="DevHeaven" value="3b8fc595-afb7-47a2-83ff-662746c66eee" />
+                                    {/* <SelectOption name="DevHeaven" value="3b8fc595-afb7-47a2-83ff-662746c66eee" />
                                     <SelectOption name="Mario business student" value="3b8fc595-afb7-47a2-83ff-662746c66fff" />
-                                    <SelectOption name="Progressively Harder" value="3b8fc595-afb7-47a2-83ff-662746c66ggg" />
+                                    <SelectOption name="Progressively Harder" value="3b8fc595-afb7-47a2-83ff-662746c66ggg" /> */}
+
+                                    {/* add clientitems instead of those other thigns */}
+                                    {clientItems}
                                 </FormField>
                             </Form>
                         ) }
@@ -78,15 +83,18 @@ class Projects extends React.Component {
 const mSTP = ( {
     projects: {
         projects,
+        clients,
     },
 } ) => ( {
     projects,
+    clients,
 } );
 
 const mDTP = dispatch => ( {
     GetAllProjects: args => dispatch( actions.getAllProjects( args ) ),
     CreateProject: actions.createProject,
     ArchiveProject: args => dispatch( actions.archiveProject( args ) ),
+    GetAllClients: args => dispatch( actions.getAllClients( args ) ),
 } );
 
 export default connect( mSTP, mDTP )( Projects );
