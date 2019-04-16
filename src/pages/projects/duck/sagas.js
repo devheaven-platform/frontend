@@ -7,12 +7,8 @@ import types from "./types";
 
 function* getProjects( action ) {
     try {
-        const { data } = yield call( Axios.get, `/project/${ action.payload }` );
+        const { data } = yield call( Axios.get, `/projects/for/${ action.payload }` );
         yield put( { type: types.GET_ALL_PROJECTS_SUCCESS, payload: data } );
-        // const { projects } = {
-        //     projects: [ { id: "3b8fc595-afb7-47a2-83ff-662746c66dee", name: "test", description: "mooi project" }, { id: "3b8fc595-afb7-47a2-83ff-662746c66eee", name: "project2", description: "mooi project2" } ],
-        // };
-        // yield put( { type: types.GET_ALL_PROJECTS_SUCCESS, payload: projects } );
     } catch ( error ) {
         yield put( { type: errorTypes.ERROR, payload: error } );
     }
@@ -20,7 +16,8 @@ function* getProjects( action ) {
 
 function* createProject( action ) {
     try {
-        const { data } = yield call( Axios.post, "/project/", action.payload );
+        console.log( action.payload );
+        const { data } = yield call( Axios.post, "/projects/", action.payload );
         yield put( { type: actions.createProject.SUCCESS, payload: data } );
     } catch ( error ) {
         const formError = error.response && error.response.status === 400 ? new SubmissionError( {
@@ -34,7 +31,7 @@ function* createProject( action ) {
 
 function* archiveProject( action ) {
     try {
-        yield call( Axios.patch, `/project/${ action.payload }` );
+        yield call( Axios.patch, `/projects/${ action.payload }`, { archived: true } );
         yield put( { type: types.ARCHIVE_PROJECT_SUCCESS, payload: action.payload } );
     } catch ( error ) {
         yield put( { type: types.ARCHIVE_PROJECT_ERROR, payload: error } );

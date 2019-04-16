@@ -50,6 +50,7 @@ class Projects extends React.Component {
                                 <FormField validate={ [ required ] } name="name" type="text" label="Name" placeholder="Name" />
                                 <FormField validate={ [ required ] } name="description" type="text" label="Description" placeholder="Description" />
                                 <FormField validate={ [ number ] } name="budget" type="number" label="Budget" placeholder="Budget" />
+                                <FormField validate={ [ required ] } name="start" type="date" label="Start Date" />
                                 <FormField validate={ [ required ] } name="client" type="select" label="Client" placeholder="Client">
                                     <SelectOption name="DevHeaven" value="3b8fc595-afb7-47a2-83ff-662746c66eee" />
                                     <SelectOption name="Mario business student" value="3b8fc595-afb7-47a2-83ff-662746c66fff" />
