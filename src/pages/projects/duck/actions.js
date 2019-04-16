@@ -1,18 +1,17 @@
+import { createFormAction } from "redux-form-saga";
 import types from "./types";
 
-const init = payload => ( { type: types.INIT, payload } );
-
-const createProject = payload => ( { type: types.CREATE_PROJECT, payload } );
-
-const editProject = payload => ( { type: types.EDIT_PROJECT, payload } );
+const createProject = createFormAction( types.CREATE_PROJECT );
 
 const archiveProject = payload => ( { type: types.ARCHIVE_PROJECT, payload } );
-const updateBoard = payload => ( { type: types.UPDATE_BOARD, payload } );
+
+const getAllProjects = payload => ( { type: types.GET_ALL_PROJECTS, payload } );
+
+const getAllClients = payload => ( { type: types.GET_ALL_CLIENTS, payload } );
 
 export default {
-    init,
+    getAllProjects,
     createProject,
-    editProject,
-    updateBoard,
     archiveProject,
+    getAllClients,
 };
