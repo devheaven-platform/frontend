@@ -15,6 +15,7 @@ class Board extends React.Component {
         board: shape( {} ),
         GetBoard: func.isRequired,
         match: shape( {} ).isRequired,
+        CreateColumn: func.isRequired,
     };
 
     componentDidMount() {
@@ -23,13 +24,13 @@ class Board extends React.Component {
     }
 
     render() {
-        const { board } = this.props;
+        const { CreateColumn, board, match } = this.props;
         const data = { lanes: [] };
-        if ( board ) {
+        if ( board && board.columns ) {
             board.columns.map( ( column ) => {
                 const { id, name } = column;
                 const cards = [ ];
-                if ( column.tasks.length > 0 ) {
+                if ( column.tasks && column.tasks.length > 0 ) {
                     column.tasks.map( ( task ) => {
                         cards.push( {
                             key: task.id, id: task.id, title: task.name, description: task.description,
@@ -42,7 +43,7 @@ class Board extends React.Component {
             } );
         }
         return (
-            <KanbanBoard data={ data } style={ { "background-color": "transparent" } } draggable editable />
+            <KanbanBoard data={ data } style={ { backgroundColor: "transparent" } } draggable editable canAddLanes onLaneAdd={ args => CreateColumn( { board: match.params.boardId, name: args.title } ) } />
         );
     }
 }
@@ -51,6 +52,7 @@ const mSTP = ( { board: { board, boardId } } ) => ( { board, boardId } );
 
 const mDTP = dispatch => ( {
     GetBoard: args => dispatch( actions.getBoard( args ) ),
+    CreateColumn: args => dispatch( actions.createColumn( args ) ),
 } );
 
 export default connect( mSTP, mDTP )( Board );

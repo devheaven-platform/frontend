@@ -6,13 +6,23 @@ import types from "./types";
 
 function* getBoard( action ) {
     try {
-        const { data } = yield call( Axios.get, `/board/${ action.payload }` );
-        yield put( { type: types.GET_BOARD_SUCCESS, payload: { board: data.board } } );
+        const { data } = yield call( Axios.get, `/boards/${ action.payload }` );
+        yield put( { type: types.GET_BOARD_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( { type: types.GET_BOARD_ERROR } );
     }
 }
 
+function* createColumn( action ) {
+    try {
+        const { data } = yield call( Axios.post, "/columns/", action.payload );
+        yield put( { type: types.CREATE_COLUMN_SUCCESS, payload: data } );
+    } catch ( error ) {
+        yield put( { type: types.CREATE_COLUMN_ERROR } );
+    }
+}
+
 export default function* main() {
     yield takeEvery( types.GET_BOARD, getBoard );
+    yield takeEvery( types.CREATE_COLUMN, createColumn );
 }
