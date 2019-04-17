@@ -158,3 +158,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Package-lock
+package-lock.json
