@@ -16,6 +16,16 @@ const board = ( state = defaultState.board, { type, payload } ) => {
             columns: [ ...state.columns, payload ],
         };
     }
+
+    if ( type === types.CREATE_TASK_SUCCESS ) {
+        return {
+            ...state,
+            columns: [ ...state.columns.map( item => ( item.id !== payload.columnId ? item : {
+                ...item,
+                tasks: [ ...item.tasks, payload ],
+            } ) ) ],
+        };
+    }
     return state;
 };
 const boardId = ( state = defaultState.boardId, { type, payload } ) => {
