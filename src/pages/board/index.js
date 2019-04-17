@@ -13,9 +13,10 @@ class Board extends React.Component {
 
     static propTypes = {
         board: shape( {} ),
-        GetBoard: func.isRequired,
         match: shape( {} ).isRequired,
+        GetBoard: func.isRequired,
         CreateColumn: func.isRequired,
+        CreateTask: func.isRequired,
     };
 
     componentDidMount() {
@@ -24,7 +25,9 @@ class Board extends React.Component {
     }
 
     render() {
-        const { CreateColumn, board, match } = this.props;
+        const {
+            CreateColumn, CreateTask, board, match,
+        } = this.props;
         const data = { lanes: [] };
         if ( board && board.columns ) {
             board.columns.map( ( column ) => {
@@ -43,7 +46,15 @@ class Board extends React.Component {
             } );
         }
         return (
-            <KanbanBoard data={ data } style={ { backgroundColor: "transparent" } } draggable editable canAddLanes onLaneAdd={ args => CreateColumn( { board: match.params.boardId, name: args.title } ) } />
+            <KanbanBoard
+                data={ data }
+                style={ { backgroundColor: "transparent" } }
+                canAddLanes
+                draggable
+                editable
+                onCardAdd={ ( args, laneId ) => CreateTask( { name: args.title, column: laneId, description: args.description } ) }
+                onLaneAdd={ args => CreateColumn( { board: match.params.boardId, name: args.title } ) }
+            />
         );
     }
 }
@@ -53,6 +64,7 @@ const mSTP = ( { board: { board, boardId } } ) => ( { board, boardId } );
 const mDTP = dispatch => ( {
     GetBoard: args => dispatch( actions.getBoard( args ) ),
     CreateColumn: args => dispatch( actions.createColumn( args ) ),
+    CreateTask: args => dispatch( actions.createTask( args ) ),
 } );
 
 export default connect( mSTP, mDTP )( Board );
