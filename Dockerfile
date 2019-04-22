@@ -5,8 +5,7 @@ FROM node:9.6.1 as builder
 WORKDIR /app
 
 # Get build arguments
-ARG API_ENDPOINT=https://devheaven.nl/api
-ARG HEALTH_ENDPOINT=https://svc.devheaven.nl
+ARG ENV_NAME=staging
 
 # Install dependencies
 ENV PATH /app/node_modules/.bin:$PATH
@@ -16,11 +15,7 @@ RUN npm install --silent
 RUN npm install react-scripts@1.1.5 -g --silent
 
 # Set environment variables
-ENV NODE_PATH=src/
-ENV NODE_ENV=production
-ENV REACT_APP_NAME=DevHeaven
-ENV REACT_APP_API_ENDPOINT=$API_ENDPOINT
-ENV REACT_APP_HEALTH_ENDPOINT=$HEALTH_ENDPOINT
+ENV REACT_APP_ENV_NAME=$ENV_NAME
 
 # Create build
 COPY . /app

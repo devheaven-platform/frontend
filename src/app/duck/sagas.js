@@ -8,19 +8,15 @@ import { Axios } from "common/helpers";
 import types from "./types";
 
 function* init() {
-    // Config axios
-    if ( process.env.NODE_ENV === "development" ) {
-        const { REACT_APP_HEALTH_ENDPOINT, REACT_APP_API_ENDPOINT } = process.env;
+    const env = process.env.REACT_APP_ENV_NAME;
+    const health = process.env[ `REACT_APP_HEALTH_URL_${ env }` ];
 
-        // Do health check
+    if ( env !== "development" ) {
         try {
             yield all( [
-                call( Axios.get, `${ REACT_APP_HEALTH_ENDPOINT }/task-management/health/` ),
-                call( Axios.get, `${ REACT_APP_HEALTH_ENDPOINT }/project-management/health/` ),
+                call( Axios.get, `${ health }/task-management/health/` ),
+                call( Axios.get, `${ health }/project-management/health/` ),
             ] );
-
-            // Set default endpoint
-            Axios.defaults.baseURL = REACT_APP_API_ENDPOINT;
 
             yield put( { type: types.VALIDATE_CONNECTION_SUCCESS } );
         } catch ( error ) {

@@ -15,8 +15,7 @@ pipeline:
     repo: devheavenci/frontend
     tags: "${DRONE_COMMIT_SHA:0:8}"
     build_args:
-      - API_ENDPOINT=https://staging.devheaven.nl/api
-      - HEALTH_ENDPOINT=https://svc.staging.devheaven.nl
+      - ENV_NAME=staging
     secrets: [ docker_username, docker_password ]
     when:
       branch: master
@@ -27,8 +26,7 @@ pipeline:
     repo: devheavenci/frontend
     tags: "${DRONE_TAG##v}"
     build_args:
-      - API_ENDPOINT=https://devheaven.nl/api
-      - HEALTH_ENDPOINT=https://svc.devheaven.nl
+      - ENV_NAME=production
     secrets: [ docker_username, docker_password ]
     when:
       event: tag
