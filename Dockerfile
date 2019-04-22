@@ -4,15 +4,15 @@ FROM node:9.6.1 as builder
 # Set working directory
 WORKDIR /app
 
-# Get build arguments
-ARG ENV_NAME=staging
-
 # Install dependencies
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json /app/package.json
 RUN npm config set unsafe-perm true
 RUN npm install --silent
 RUN npm install react-scripts@1.1.5 -g --silent
+
+# Get build arguments
+ARG ENV_NAME=staging
 
 # Set environment variables
 ENV REACT_APP_ENV_NAME=$ENV_NAME

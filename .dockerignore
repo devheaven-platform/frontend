@@ -12,7 +12,3 @@ Dockerfile
 
 # Git
 README.md
-
-# Custom
-.env
-.env.example
