@@ -15,7 +15,7 @@ module.exports = {
   "parser": "babel-eslint",
   "rules": {
       // indentation
-      "indent": [ 2, 4 ],
+      "indent": [ 2, 4, { "SwitchCase": 1 }],
       "react/jsx-indent-props": [2, 4],
 
       // spacing

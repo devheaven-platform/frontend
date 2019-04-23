@@ -8,6 +8,7 @@
     "bulma": "^0.7.4",
     "bulma-pageloader": "^2.1.0",
     "bulma-tooltip": "^2.0.2",
+    "http-proxy-middleware": "^0.19.1",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
@@ -24,13 +25,14 @@
     "styled-components": "^4.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "REACT_APP_ENV_NAME=development react-scripts start",
+    "start:remote:staging": "REACT_APP_ENV_NAME=staging react-scripts start",
+    "start:remote:production": "REACT_APP_ENV_NAME=production react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint . --fix"
   },
-  "proxy": "http://localhost:8080",
   "eslintConfig": {
     "extends": "react-app"
   },
