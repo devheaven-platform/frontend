@@ -45,11 +45,15 @@ class Project extends React.Component {
             boards, DeleteBoard, UpdateBoard, ArchiveProject, ArchiveBoard, projectId, isArchived,
         } = this.props;
         const { searchBoardName } = this.state;
+        const showArchived = false;
 
         if ( isArchived ) {
             return <Redirect to="/projects" />;
         }
-        const filteredBoards = boards.filter( b => b.name.toLowerCase().startsWith( searchBoardName.toLowerCase() ) );
+        let filteredBoards = boards.filter( b => b.name.toLowerCase().startsWith( searchBoardName.toLowerCase() ) );
+        if ( !showArchived ) {
+            filteredBoards = filteredBoards.filter( b => !b.archived );
+        }
         const boardItems = filteredBoards.map( b => (
             <BoardItem key={ b.id } projectId={ projectId } boardId={ b.id } name={ b.name } onUpdate={ UpdateBoard } onArchive={ ArchiveBoard } onDelete={ DeleteBoard } />
         ) );
