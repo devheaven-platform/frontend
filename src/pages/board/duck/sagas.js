@@ -22,6 +22,15 @@ function* createColumn( action ) {
     }
 }
 
+function* deleteColumn( action ) {
+    try {
+        const { data } = yield call( Axios.delete, `/columns/${ action.payload }` );
+        yield put( { type: types.DELETE_COLUMN_SUCCESS, payload: data } );
+    } catch ( error ) {
+        yield put( { type: types.DELETE_COLUMN_ERROR } );
+    }
+}
+
 function* createTask( action ) {
     try {
         const { data } = yield call( Axios.post, "/tasks/", action.payload );
@@ -31,8 +40,19 @@ function* createTask( action ) {
     }
 }
 
+function* deleteTask( action ) {
+    try {
+        const { data } = yield call( Axios.delete, `/tasks/${ action.payload }` );
+        yield put( { type: types.DELETE_TASK_SUCCESS, payload: data } );
+    } catch ( error ) {
+        yield put( { type: types.DELETE_TASK_ERROR } );
+    }
+}
+
 export default function* main() {
     yield takeEvery( types.GET_BOARD, getBoard );
     yield takeEvery( types.CREATE_COLUMN, createColumn );
     yield takeEvery( types.CREATE_TASK, createTask );
+    yield takeEvery( types.DELETE_COLUMN, deleteColumn );
+    yield takeEvery( types.DELETE_TASK, deleteTask );
 }
