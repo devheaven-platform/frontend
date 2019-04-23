@@ -3,6 +3,7 @@ import {
     func, shape,
 } from "prop-types";
 import { connect } from "react-redux";
+// eslint-disable-next-line import/no-unresolved
 import { Board as KanbanBoard } from "react-trello";
 import { actions } from "./duck";
 
@@ -17,6 +18,7 @@ class Board extends React.Component {
         GetBoard: func.isRequired,
         CreateColumn: func.isRequired,
         CreateTask: func.isRequired,
+        DeleteTask: func.isRequired,
     };
 
     componentDidMount() {
@@ -26,7 +28,7 @@ class Board extends React.Component {
 
     render() {
         const {
-            CreateColumn, CreateTask, board, match,
+            CreateColumn, CreateTask, DeleteTask, board, match,
         } = this.props;
         const data = { lanes: [] };
         if ( board && board.columns ) {
@@ -45,6 +47,7 @@ class Board extends React.Component {
                 return column;
             } );
         }
+
         return (
             <KanbanBoard
                 data={ data }
@@ -54,6 +57,7 @@ class Board extends React.Component {
                 editable
                 onCardAdd={ ( args, laneId ) => CreateTask( { name: args.title, column: laneId, description: args.description } ) }
                 onLaneAdd={ args => CreateColumn( { board: match.params.boardId, name: args.title } ) }
+                onCardDelete={ cardId => DeleteTask( cardId ) }
             />
         );
     }
@@ -65,6 +69,7 @@ const mDTP = dispatch => ( {
     GetBoard: args => dispatch( actions.getBoard( args ) ),
     CreateColumn: args => dispatch( actions.createColumn( args ) ),
     CreateTask: args => dispatch( actions.createTask( args ) ),
+    DeleteTask: args => dispatch( actions.deleteTask( args ) ),
 } );
 
 export default connect( mSTP, mDTP )( Board );
