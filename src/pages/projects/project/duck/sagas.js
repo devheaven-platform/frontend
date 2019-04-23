@@ -1,11 +1,16 @@
 import {
     takeLatest,
-    call, put, takeEvery, select,
+    call,
+    all,
+    put,
+    takeEvery,
+    select,
 } from "redux-saga/effects";
 import { Axios } from "common/helpers";
 import { SubmissionError } from "redux-form";
-import types from "./types";
 import actions from "./actions";
+import stub from "./__stub__";
+import types from "./types";
 
 function* getBoards( action ) {
     try {
@@ -19,6 +24,27 @@ function* getBoards( action ) {
         yield put( { type: types.GET_BOARDS_SUCCESS, payload: { boards } } );
     } catch ( error ) {
         yield put( { type: types.GET_BOARDS_ERROR } );
+    }
+}
+
+function* getProject( action ) {
+    try {
+        const { data } = yield call( Axios.get, `/projects/${ action.payload }` );
+        const members = data.members.map( id => call( stub.get, `/users/${ id }` ) );
+        const { data: client } = yield call( stub.get, `/clients/${ data.client }` );
+        const { data: owner } = yield call( stub.get, `/users/${ data.owner }` );
+
+        yield put( {
+            type: types.GET_PROJECT_SUCCESS,
+            payload: {
+                ...data,
+                members: members.map( response => response.data ),
+                client,
+                owner,
+            },
+        } );
+    } catch ( error ) {
+        yield put( { type: types.GET_PROJECT_ERROR, payload: { error } } );
     }
 }
 
@@ -81,6 +107,7 @@ function* updateBoard( action ) {
 }
 
 export default function* main() {
+    yield takeLatest( types.GET_PROJECT, getProject );
     yield takeEvery( types.GET_BOARDS, getBoards );
     yield takeEvery( actions.createBoard.REQUEST, createBoard );
     yield takeLatest( types.ARCHIVE_PROJECT, archiveProject );

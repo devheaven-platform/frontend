@@ -6,9 +6,21 @@ import actions from "./actions";
 const defaultState = {
     boards: [],
     projectId: "",
+    project: null,
     isArchived: false,
     isCreateModalOpen: false,
 };
+
+const project = ( state = defaultState.project, { type, payload } ) => {
+    if ( type === types.GET_PROJECT_SUCCESS ) {
+        return payload;
+    }
+    if ( type === types.GET_PROJECT_ERROR ) {
+        return state;
+    }
+    return state;
+};
+
 const boards = ( state = defaultState.boards, { type, payload } ) => {
     if ( type === types.GET_BOARDS_SUCCESS ) {
         return payload.boards;
@@ -45,6 +57,6 @@ const isArchived = ( state = defaultState.isArchived, { type } ) => {
 };
 
 export default combineReducers( {
-    boards, projectId, isArchived,
+    boards, projectId, isArchived, project,
 } );
 /* eslint-enable complexity */

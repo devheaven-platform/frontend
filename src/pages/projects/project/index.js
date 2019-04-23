@@ -13,12 +13,15 @@ class Project extends React.Component {
     static defaultProps = {
         boards: [],
         projectId: "",
+        project: null,
     };
 
     static propTypes = {
         match: shape( {} ).isRequired,
         boards: arrayOf( shape( { id: string, name: string, archived: bool } ) ),
+        project: shape( {} ),
         GetBoards: func.isRequired,
+        GetProject: func.isRequired,
         DeleteBoard: func.isRequired,
         projectId: string,
         ArchiveProject: func.isRequired,
@@ -37,8 +40,9 @@ class Project extends React.Component {
     }
 
     componentDidMount() {
-        const { GetBoards, match } = this.props;
+        const { GetBoards, GetProject, match } = this.props;
         GetBoards( match.params.id );
+        GetProject( match.params.id );
     }
 
     toggleShowArchived = () => {
@@ -47,7 +51,7 @@ class Project extends React.Component {
 
     render() {
         const {
-            boards, DeleteBoard, UpdateBoard, ArchiveProject, ArchiveBoard, projectId, isArchived,
+            boards, DeleteBoard, UpdateBoard, ArchiveProject, ArchiveBoard, projectId, isArchived, project,
         } = this.props;
         const { searchBoardName, showArchived } = this.state;
 
@@ -112,13 +116,14 @@ class Project extends React.Component {
 
 const mSTP = ( {
     project: {
-        boards, projectId, isArchived,
+        boards, projectId, isArchived, project,
     },
 } ) => ( {
-    boards, projectId, isArchived,
+    boards, projectId, isArchived, project,
 } );
 
 const mDTP = dispatch => ( {
+    GetProject: args => dispatch( actions.getProject( args ) ),
     GetBoards: args => dispatch( actions.getBoards( args ) ),
     DeleteBoard: args => dispatch( actions.deleteBoard( args ) ),
     UpdateBoard: args => dispatch( actions.updateBoard( args ) ),
