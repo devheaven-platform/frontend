@@ -11,8 +11,8 @@ function* getBoards( action ) {
     try {
         const boards = [];
         // TODO coupling with project service
-        const boardIds = [ "6266213f-0f79-4120-a6e4-459d42f79fd6" ];
-        for ( let i = 0; i < boardIds.length; i++ ) {
+        const boardIds = [ ];// fill in hardcoded id
+        for ( let i = 0; i < boardIds.length; i += 1 ) {
             const { data } = yield call( Axios.get, `/boards/${ boardIds[ i ] }` );
             boards.push( data );
         }
@@ -66,6 +66,7 @@ function* archiveBoard( action ) {
         const { data } = yield call( Axios.patch, `/boards/${ action.payload.id }`, action.payload );
         yield put( { type: types.ARCHIVE_BOARD_SUCCESS, payload: data } );
     } catch ( error ) {
+        console.log( error );
         yield put( { type: types.ARCHIVE_BOARD_ERROR, payload: error } );
     }
 }

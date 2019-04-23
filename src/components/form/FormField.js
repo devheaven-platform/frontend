@@ -23,33 +23,33 @@ const FormField = ( {
     ...rest
 } ) => {
     switch ( type ) {
-    case "hidden":
-        return (
-            <Field name={ name } type={ type } component={ HiddenField } { ...rest } /> );
-    case "textarea":
-        return (
-            <Field name={ name } type={ type } label={ label } component={ TextAreaField } { ...rest } />
-        );
-    case "select":
-        return (
-            <Field name={ name } type={ type } label={ label } component={ SelectField } { ...rest }>
-                { children }
-            </Field>
-        );
-    case "checkbox":
-        return (
-            <Field name={ name } type={ type } label={ label } component={ CheckBoxField } { ...rest } />
-        );
-    case "radio":
-        return (
-            <Field name={ name } type={ type } label={ label } component={ RadioField } { ...rest }>
-                { children }
-            </Field>
-        );
-    default:
-        return (
-            <Field name={ name } type={ type } label={ label } component={ InputField } { ...rest } />
-        );
+        case "hidden":
+            return (
+                <Field name={ name } type={ type } component={ HiddenField } { ...rest } /> );
+        case "textarea":
+            return (
+                <Field name={ name } type={ type } label={ label } component={ TextAreaField } { ...rest } />
+            );
+        case "select":
+            return (
+                <Field name={ name } type={ type } label={ label } component={ SelectField } { ...rest }>
+                    { children }
+                </Field>
+            );
+        case "checkbox":
+            return (
+                <Field name={ name } type={ type } label={ label } component={ CheckBoxField } { ...rest } />
+            );
+        case "radio":
+            return (
+                <Field name={ name } type={ type } label={ label } component={ RadioField } { ...rest }>
+                    { children }
+                </Field>
+            );
+        default:
+            return (
+                <Field name={ name } type={ type } label={ label } component={ InputField } { ...rest } />
+            );
     }
 };
 

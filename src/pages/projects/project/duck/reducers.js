@@ -18,12 +18,12 @@ const boards = ( state = defaultState.boards, { type, payload } ) => {
         return state.filter( b => b.id !== boardId );
     }
     if ( type === types.ARCHIVE_BOARD_SUCCESS ) {
-        const stateWithoutBoard = state.filter( b => b.id !== payload.board.id );
-        return [ ...stateWithoutBoard, payload.board ];
+        const stateWithoutBoard = state.filter( b => b.id !== payload.id );
+        return [ ...stateWithoutBoard, payload ];
     }
     if ( type === types.UPDATE_BOARD_SUCCESS ) {
-        const stateWithoutBoard = state.filter( b => b.id !== payload.board.id );
-        return [ ...stateWithoutBoard, payload.board ];
+        const stateWithoutBoard = state.filter( b => b.id !== payload.id );
+        return [ ...stateWithoutBoard, payload ];
     }
     if ( type === actions.createBoard.SUCCESS ) {
         return [ ...state, payload ];
