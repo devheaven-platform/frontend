@@ -89,14 +89,15 @@ class Project extends React.Component {
                         } }
                         placeholder="Boardname"
                     />
-                    <Form>
-                        <FormField
+                    {/* <Form>
+
                             type="checkbox"
+                            name="archived"
                             label="Show archived"
                             checked={ showArchived }
                             onClick={ this.toggleShowArchived }
                         />
-                    </Form>
+                    </Form> */}
                 </div>
                 <ul className="boards-list">
                     {boardItems}
