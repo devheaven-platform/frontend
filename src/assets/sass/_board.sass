@@ -1,47 +1,40 @@
-
-.content .boards-list
-    margin: 0
-    padding: 10px
-
 .board
-    background-color: grey
-    padding: 15px
-    border-radius: 5px
-
-.board:hover
-    background-color: lightgray
-    cursor: pointer
-
-.board-header
-    border-radius: 5px
-    margin-bottom: 10px
-    
-.delete-btn
-    color: darkred
-
-.delete-btn:hover
-    color: red
-  
-.archive-btn
-    color: darkgrey
-
-.archive-btn:hover
-    color: black
-    cursor: pointer
-
-.archive-btn-checked:hover
-    color: darkgrey    
-.archive-btn-checked
-    color: black
     cursor: pointer
 
 .favorite-btn
-    color: yellow
+    color: hsl(48,  100%, 67%)
+
 
 .favorite-btn:hover .not-fav,
 .favorite-btn .fav
     display: none
 
 .favorite-btn:hover .fav
+    display: inline
+    cursor: pointer
+
+.archive-btn,
+.archive-btn-checked 
+    color: #3273dc
+
+.archive-btn:hover .not-fav,
+.archive-btn-checked .not-fav,
+.archive-btn .fav,
+.archive-btn-checked .fav,
+    display: none
+
+.archive-btn:hover .fav,
+.archive-btn-checked .fav,
+    display: inline
+    cursor: pointer
+
+.delete-btn
+    color: #ff3860
+
+.delete-btn:hover .not-fav,
+.delete-btn .fav
+    display: none
+
+.delete-btn:hover .fav
     display: inline
     cursor: pointer

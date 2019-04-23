@@ -7,8 +7,19 @@ import { Redirect } from "react-router-dom";
 import {
     Modal, Form, FormField, BoardItem, SubmitButton, Search,
 } from "components";
+import posed, { PoseGroup } from "react-pose";
 import { actions } from "./duck";
 
+const AnimatedItem = posed.li( {
+    enter: {
+        opacity: 1,
+        transition: { duration: 500 },
+    },
+    exit: {
+        opacity: 0,
+        transition: { duration: 500 },
+    },
+} );
 class Project extends React.Component {
     static defaultProps = {
         boards: [],
@@ -58,53 +69,73 @@ class Project extends React.Component {
         if ( !showArchived ) {
             filteredBoards = filteredBoards.filter( b => !b.archived );
         }
+        filteredBoards.sort( ( a, b ) => a.createdAt - b.createdAt );
         const boardItems = filteredBoards.map( b => (
-            <BoardItem key={ b.id } projectId={ projectId } boardId={ b.id } archived={ b.archived } name={ b.name } onUpdate={ UpdateBoard } onArchive={ ArchiveBoard } onDelete={ DeleteBoard } />
+            <AnimatedItem className="item" key={ b.id }>
+                <BoardItem key={ b.id } projectId={ projectId } boardId={ b.id } archived={ b.archived } name={ b.name } onUpdate={ UpdateBoard } onArchive={ ArchiveBoard } onDelete={ DeleteBoard } />
+            </AnimatedItem>
         ) );
 
         return (
             <div className="container">
-                <div className="level">
-                    <Modal
-                        title="Create"
-                        description="Create a board for this project."
-                        body={ (
-                            <Form
-                                form="createBoardForm"
-                                onSubmit={ actions.createBoard }
-                            >
-                                <FormField name="name" type="text" label="Name" placeholder="Sprint 1" />
-                            </Form>
-                        ) }
-                        footer={
-                            <SubmitButton form="createBoardForm">Create</SubmitButton>
-                        }
-                        enableCancelButton
-                    />
-                </div>
-                <div className="boards-filter">
-                    <Search
-                        onSearch={ ( name ) => {
-                            this.setState( { searchBoardName: name } );
-                        } }
-                        placeholder="Boardname"
-                    />
-                    {/* <Form>
-
-                            type="checkbox"
-                            name="archived"
-                            label="Show archived"
-                            checked={ showArchived }
-                            onClick={ this.toggleShowArchived }
+                <div className="columns is-vcentered">
+                    <div className="column">
+                        <p className="subtitle is-5">
+                            <strong>{boardItems.length}</strong>
+                            {" "}
+boards
+                        </p>
+                    </div>
+                    <div className="column is-three-quarters">
+                        <Search
+                            onSearch={ ( name ) => {
+                                this.setState( { searchBoardName: name } );
+                            } }
+                            placeholder="Boardname"
                         />
-                    </Form> */}
+                    </div>
+                    <div className="column">
+                        <button
+                            type="button"
+                            className={ showArchived ? "button is-primary" : "button" }
+                            onClick={ () => {
+                                this.setState( { showArchived: !showArchived } );
+                            } }
+                        >
+Archived
+                        </button>
+                    </div>
+                    <div className="column">
+                        <Modal
+                            title="New"
+                            description="Create a board for this project."
+                            body={ (
+                                <Form
+                                    form="createBoardForm"
+                                    onSubmit={ actions.createBoard }
+                                >
+                                    <FormField name="name" type="text" label="Name" placeholder="Sprint 1" />
+                                </Form>
+                            ) }
+                            footer={
+                                <SubmitButton form="createBoardForm">Create</SubmitButton>
+                            }
+                            enableCancelButton
+                        />
+                    </div>
+
                 </div>
+
                 <ul className="boards-list">
-                    {boardItems}
+                    <PoseGroup>
+                        {boardItems}
+                    </PoseGroup>
                 </ul>
-                <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>
-                    Archive
-                </button>
+                <div className="level-right">
+                    <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>
+                    Archive Project
+                    </button>
+                </div>
             </div>
         );
     }
