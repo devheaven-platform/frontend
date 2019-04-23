@@ -32,6 +32,7 @@ class Project extends React.Component {
 
         this.state = {
             searchBoardName: "",
+            showArchived: false,
         };
     }
 
@@ -40,16 +41,23 @@ class Project extends React.Component {
         GetBoards( match.params.id );
     }
 
+    toggleShowArchived = () => {
+        this.setState( prevState => ( { showArchived: !prevState.showArchived } ) );
+    }
+
     render() {
         const {
             boards, DeleteBoard, UpdateBoard, ArchiveProject, ArchiveBoard, projectId, isArchived,
         } = this.props;
-        const { searchBoardName } = this.state;
+        const { searchBoardName, showArchived } = this.state;
 
         if ( isArchived ) {
             return <Redirect to="/projects" />;
         }
-        const filteredBoards = boards.filter( b => b.name.toLowerCase().startsWith( searchBoardName.toLowerCase() ) );
+        let filteredBoards = boards.filter( b => b.name.toLowerCase().startsWith( searchBoardName.toLowerCase() ) );
+        if ( !showArchived ) {
+            filteredBoards = filteredBoards.filter( b => !b.archived );
+        }
         const boardItems = filteredBoards.map( b => (
             <BoardItem key={ b.id } projectId={ projectId } boardId={ b.id } name={ b.name } onUpdate={ UpdateBoard } onArchive={ ArchiveBoard } onDelete={ DeleteBoard } />
         ) );
@@ -81,6 +89,14 @@ class Project extends React.Component {
                         } }
                         placeholder="Boardname"
                     />
+                    <Form>
+                        <FormField
+                            type="checkbox"
+                            label="Show archived"
+                            checked={ showArchived }
+                            onClick={ this.toggleShowArchived }
+                        />
+                    </Form>
                 </div>
                 <ul className="boards-list">
                     {boardItems}

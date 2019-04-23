@@ -49,7 +49,7 @@ BoardItem.defaultProps = {
 BoardItem.propTypes = {
     onDelete: func.isRequired,
     onArchive: func.isRequired,
-    onUpdate: string.isRequired,
+    onUpdate: func.isRequired,
     name: string.isRequired,
     projectId: string.isRequired,
     boardId: string.isRequired,
