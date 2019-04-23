@@ -66,7 +66,6 @@ function* archiveBoard( action ) {
         const { data } = yield call( Axios.patch, `/boards/${ action.payload.id }`, action.payload );
         yield put( { type: types.ARCHIVE_BOARD_SUCCESS, payload: data } );
     } catch ( error ) {
-        console.log( error );
         yield put( { type: types.ARCHIVE_BOARD_ERROR, payload: error } );
     }
 }
