@@ -36,7 +36,7 @@ class Projects extends React.Component {
             ArchiveProject,
             clients,
         } = this.props;
-        const projectItems = projects.map( p => <ProjectItem key={ p.id } name={ p.name } description={ p.description } id={ p.id } onArchive={ ArchiveProject } /> );
+        const projectItems = projects.map( p => !p.archived && <ProjectItem key={ p.id } name={ p.name } description={ p.description } id={ p.id } onArchive={ ArchiveProject } /> );
         const clientItems = clients.map( c => <SelectOption key={ c.id } name={ c.name } value={ c.id } /> );
         return (
             <>

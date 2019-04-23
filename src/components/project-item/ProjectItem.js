@@ -2,6 +2,7 @@ import React from "react";
 import {
     string,
     func,
+    boolean,
 } from "prop-types";
 import { Link } from "react-router-dom";
 
@@ -9,6 +10,7 @@ const ProjectItem = ( {
     id,
     name,
     description,
+    archived,
     onArchive,
 } ) => (
     <>
