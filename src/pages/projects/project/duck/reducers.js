@@ -14,7 +14,7 @@ const boards = ( state = defaultState.boards, { type, payload } ) => {
         return payload.boards;
     }
     if ( type === types.DELETE_BOARD_SUCCESS ) {
-        const boardId = payload;
+        const boardId = payload.id;
         return state.filter( b => b.id !== boardId );
     }
     if ( type === types.ARCHIVE_BOARD_SUCCESS ) {
@@ -47,3 +47,4 @@ const isArchived = ( state = defaultState.isArchived, { type } ) => {
 export default combineReducers( {
     boards, projectId, isArchived,
 } );
+/* eslint-enable complexity */

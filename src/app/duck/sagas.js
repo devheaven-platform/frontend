@@ -1,15 +1,23 @@
-import { call, put, takeEvery } from "redux-saga/effects";
+import {
+    all,
+    call,
+    put,
+    takeEvery,
+} from "redux-saga/effects";
 import { Axios } from "common/helpers";
 import types from "./types";
 
 function* init() {
-    // Config axios
-    if ( process.env.NODE_ENV !== "development" ) {
-        Axios.defaults.baseURL = process.env.REACT_APP_API_ENDPOINT;
+    const env = process.env.REACT_APP_ENV_NAME;
+    const health = process.env[ `REACT_APP_HEALTH_URL_${ env }` ];
 
-        // Do health check
+    if ( env !== "development" ) {
         try {
-            yield call( Axios.get, "/api/v1/health/" );
+            yield all( [
+                call( Axios.get, `${ health }/task-management/health/` ),
+                call( Axios.get, `${ health }/project-management/health/` ),
+            ] );
+
             yield put( { type: types.VALIDATE_CONNECTION_SUCCESS } );
         } catch ( error ) {
             yield put( { type: types.VALIDATE_CONNECTION_ERROR, error } );

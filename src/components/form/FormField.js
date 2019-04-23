@@ -1,3 +1,4 @@
+/* eslint complexity: 0 */
 import React from "react";
 import { Field } from "redux-form";
 import {
@@ -45,7 +46,6 @@ const FormField = ( {
                 { children }
             </Field>
         );
-
     default:
         return (
             <Field name={ name } type={ type } label={ label } component={ InputField } { ...rest } />

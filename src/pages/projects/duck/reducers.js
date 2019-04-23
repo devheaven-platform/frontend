@@ -1,17 +1,18 @@
 import { combineReducers } from "redux";
+import actions from "./actions";
 import types from "./types";
 
 const defaultState = {
-    isCollapsed: false,
-    isConnected: null,
-    isAuthenticated: false,
-    roles: [],
     projects: [],
+    clients: [],
 };
 
 const projects = ( state = defaultState.projects, { type, payload } ) => {
-    if ( type === types.CREATE_PROJECT_SUCCESS ) {
+    if ( type === actions.createProject.SUCCESS ) {
         return [ ...state, payload ];
+    }
+    if ( type === types.GET_ALL_PROJECTS_SUCCESS ) {
+        return payload;
     }
     if ( type === types.ARCHIVE_PROJECT_SUCCESS ) {
         return state.filter( p => p.id !== payload );
@@ -19,6 +20,14 @@ const projects = ( state = defaultState.projects, { type, payload } ) => {
     return state;
 };
 
+const clients = ( state = defaultState.clients, { type, payload } ) => {
+    if ( type === types.GET_ALL_CLIENTS_SUCCESS ) {
+        return payload;
+    }
+    return state;
+};
+
 export default combineReducers( {
     projects,
+    clients,
 } );

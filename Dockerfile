@@ -11,11 +11,11 @@ RUN npm config set unsafe-perm true
 RUN npm install --silent
 RUN npm install react-scripts@1.1.5 -g --silent
 
+# Get build arguments
+ARG ENV_NAME=staging
+
 # Set environment variables
-ENV NODE_PATH=src/
-ENV NODE_ENV=production
-ENV REACT_APP_NAME=DevHeaven
-ENV REACT_APP_API_ENDPOINT=http://localhost:8080/api
+ENV REACT_APP_ENV_NAME=$ENV_NAME
 
 # Create build
 COPY . /app

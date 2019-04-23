@@ -13,6 +13,26 @@ function* getBoard( action ) {
     }
 }
 
+function* createColumn( action ) {
+    try {
+        const { data } = yield call( Axios.post, "/columns/", action.payload );
+        yield put( { type: types.CREATE_COLUMN_SUCCESS, payload: data } );
+    } catch ( error ) {
+        yield put( { type: types.CREATE_COLUMN_ERROR } );
+    }
+}
+
+function* createTask( action ) {
+    try {
+        const { data } = yield call( Axios.post, "/tasks/", action.payload );
+        yield put( { type: types.CREATE_TASK_SUCCESS, payload: { ...data, columnId: action.payload.column } } );
+    } catch ( error ) {
+        yield put( { type: types.CREATE_TASK_ERROR } );
+    }
+}
+
 export default function* main() {
     yield takeEvery( types.GET_BOARD, getBoard );
+    yield takeEvery( types.CREATE_COLUMN, createColumn );
+    yield takeEvery( types.CREATE_TASK, createTask );
 }
