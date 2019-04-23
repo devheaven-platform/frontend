@@ -1,13 +1,14 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import {
-    string, func, shape,
+    string, func, shape, bool,
 } from "prop-types";
 // import EditableLabel from "react-editable-label";
 
 const BoardItem = ( {
     name,
     boardId,
+    archived,
     projectId,
     onArchive,
     onDelete,
@@ -32,11 +33,10 @@ const BoardItem = ( {
                 <i className="not-fav far fa-star fa-lg" />
                 <i className="fav fas fa-star fa-lg " />
             </div>
-            <div className="level-item icon archive-btn" onClick={ ( e ) => { e.stopPropagation(); onArchive( { id: boardId, archived: true } ); } }>
+            <div className={ archived ? "level-item icon archive-btn-checked" : "level-item icon archive-btn " } onClick={ ( e ) => { e.stopPropagation(); onArchive( { id: boardId, archived: !archived } ); } }>
                 <i className="fas fa-archive" />
             </div>
             <div className="level-item icon delete-btn" onClick={ ( e ) => { e.stopPropagation(); onDelete( { id: boardId } ); } }>
-
                 <i className="fas fa-trash-alt" />
             </div>
         </div>
@@ -52,6 +52,7 @@ BoardItem.propTypes = {
     onUpdate: func.isRequired,
     name: string.isRequired,
     projectId: string.isRequired,
+    archived: bool.isRequired,
     boardId: string.isRequired,
     history: shape( {} ).isRequired,
 };

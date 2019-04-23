@@ -59,7 +59,7 @@ class Project extends React.Component {
             filteredBoards = filteredBoards.filter( b => !b.archived );
         }
         const boardItems = filteredBoards.map( b => (
-            <BoardItem key={ b.id } projectId={ projectId } boardId={ b.id } name={ b.name } onUpdate={ UpdateBoard } onArchive={ ArchiveBoard } onDelete={ DeleteBoard } />
+            <BoardItem key={ b.id } projectId={ projectId } boardId={ b.id } archived={ b.archived } name={ b.name } onUpdate={ UpdateBoard } onArchive={ ArchiveBoard } onDelete={ DeleteBoard } />
         ) );
 
         return (
