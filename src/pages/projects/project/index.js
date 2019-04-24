@@ -13,7 +13,7 @@ class Project extends React.Component {
     static defaultProps = {
         boards: [],
         projectId: "",
-        project: null,
+        project: {},
     };
 
     static propTypes = {
@@ -59,6 +59,11 @@ class Project extends React.Component {
         if ( isArchived ) {
             return <Redirect to="/projects" />;
         }
+
+        if ( project === null ) {
+            return <div>Loading</div>;
+        }
+
         let filteredBoards = boards.filter( b => b.name.toLowerCase().startsWith( searchBoardName.toLowerCase() ) );
         if ( !showArchived ) {
             filteredBoards = filteredBoards.filter( b => !b.archived );
@@ -67,37 +72,105 @@ class Project extends React.Component {
             <BoardItem key={ b.id } projectId={ projectId } boardId={ b.id } archived={ b.archived } name={ b.name } onUpdate={ UpdateBoard } onArchive={ ArchiveBoard } onDelete={ DeleteBoard } />
         ) );
 
-        return (
-            <div className="container">
-                <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>
-                    Archive
-                </button>
-                <div className="level">
-                    <Modal
-                        title="Create"
-                        description="Create a board for this project."
-                        body={ (
-                            <Form
-                                form="createBoardForm"
-                                onSubmit={ actions.createBoard }
-                            >
-                                <FormField name="name" type="text" label="Name" placeholder="Sprint 1" />
-                            </Form>
-                        ) }
-                        footer={
-                            <SubmitButton form="createBoardForm">Create</SubmitButton>
-                        }
-                        enableCancelButton
-                    />
-                </div>
-                <div className="boards-filter">
-                    <Search
-                        onSearch={ ( name ) => {
-                            this.setState( { searchBoardName: name } );
-                        } }
-                        placeholder="Boardname"
-                    />
-                    {/* <Form>
+        const members = project.members.map( item => <li key={ item.id }>{ `${ item.firstname } ${ item.lastname }`}</li> );
+        const milestones = project.milestones.map( item => <li key={ item.id }>{ item.name }</li> );
+
+        if ( project != null ) {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <h1>
+                            {project.name}
+                            {" "}
+                            <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>
+                            Archive
+                            </button>
+
+                        </h1>
+                        <div>
+                            <b>
+                                Description:
+                                {" "}
+                            </b>
+                            <p>{project.description}</p>
+                            <b>
+                                Owner:
+                                {" "}
+                            </b>
+                            <p>{`${ project.owner.firstname } ${ project.owner.lastname }`}</p>
+                            <b>
+                                Client:
+                                {" "}
+                            </b>
+                            <p>{project.client.name}</p>
+                        </div>
+
+                    </div>
+
+                    <div className="columns">
+                        <div className="column is-one-third is-multiline">
+                            <div className="card">
+                                <header className="card-header">
+                                    <p className="card-header-title">
+                                Members
+                                    </p>
+                                </header>
+                                <div className="card-content ">
+                                    <div className="content " />
+                                    <ul>
+                                        { members }
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div className="column is-one-third" align="right">
+                            <div className="card">
+                                <header className="card-header">
+                                    <p className="card-header-title">
+                                        Milestones
+                                    </p>
+                                </header>
+                                <div className="card-content">
+                                    <div className="content" />
+                                    <ul>
+                                        { milestones }
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div className="level">
+                        <Modal
+                            title="Create"
+                            description="Create a board for this project."
+                            body={ (
+                                <Form
+                                    form="createBoardForm"
+                                    onSubmit={ actions.createBoard }
+                                >
+                                    <FormField name="name" type="text" label="Name" placeholder="Sprint 1" />
+                                </Form>
+                            ) }
+                            footer={
+                                <SubmitButton form="createBoardForm">Create</SubmitButton>
+                            }
+                            enableCancelButton
+                        />
+                    </div>
+                    <div className="boards-filter">
+                        <Search
+                            onSearch={ ( name ) => {
+                                this.setState( { searchBoardName: name } );
+                            } }
+                            placeholder="Boardname"
+                        />
+                        {/* <Form>
 
                             type="checkbox"
                             name="archived"
@@ -106,11 +179,15 @@ class Project extends React.Component {
                             onClick={ this.toggleShowArchived }
                         />
                     </Form> */}
+                    </div>
+                    <ul className="boards-list">
+                        {boardItems}
+                    </ul>
                 </div>
-                <ul className="boards-list">
-                    {boardItems}
-                </ul>
-            </div>
+            );
+        }
+        return (
+            <h1>loading page</h1>
         );
     }
 }

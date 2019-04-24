@@ -1,6 +1,7 @@
 import {
     takeLatest,
     call,
+    all,
     put,
     takeEvery,
     select,
@@ -11,7 +12,7 @@ import actions from "./actions";
 import stub from "./__stub__";
 import types from "./types";
 
-function* getBoards( action ) {
+function* getBoards() {
     try {
         const boards = [];
         // TODO coupling with project service
@@ -29,7 +30,7 @@ function* getBoards( action ) {
 function* getProject( action ) {
     try {
         const { data } = yield call( Axios.get, `/projects/${ action.payload }` );
-        const members = data.members.map( id => call( stub.get, `/users/${ id }` ) );
+        const members = yield all( data.members.map( id => call( stub.get, `/users/${ id }` ) ) );
         const { data: client } = yield call( stub.get, `/clients/${ data.client }` );
         const { data: owner } = yield call( stub.get, `/users/${ data.owner }` );
 
@@ -91,7 +92,6 @@ function* archiveBoard( action ) {
         const { data } = yield call( Axios.patch, `/boards/${ action.payload.id }`, action.payload );
         yield put( { type: types.ARCHIVE_BOARD_SUCCESS, payload: data } );
     } catch ( error ) {
-        console.log( error );
         yield put( { type: types.ARCHIVE_BOARD_ERROR, payload: error } );
     }
 }
