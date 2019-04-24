@@ -53,6 +53,7 @@ class Project extends React.Component {
         const {
             boards, DeleteBoard, UpdateBoard, ArchiveProject, ArchiveBoard, projectId, isArchived, project,
         } = this.props;
+
         const { searchBoardName, showArchived } = this.state;
 
         if ( isArchived ) {
@@ -68,6 +69,9 @@ class Project extends React.Component {
 
         return (
             <div className="container">
+                <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>
+                    Archive
+                </button>
                 <div className="level">
                     <Modal
                         title="Create"
@@ -106,9 +110,6 @@ class Project extends React.Component {
                 <ul className="boards-list">
                     {boardItems}
                 </ul>
-                <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>
-                    Archive
-                </button>
             </div>
         );
     }
