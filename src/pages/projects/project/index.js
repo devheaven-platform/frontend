@@ -75,6 +75,7 @@ class Project extends React.Component {
         const members = project.members.map( item => <li key={ item.id }>{ `${ item.firstname } ${ item.lastname }`}</li> );
         const milestones = project.milestones.map( item => <li key={ item.id }>{ item.name }</li> );
 
+        console.log( project );
         if ( project != null ) {
             return (
                 <div className="container">
