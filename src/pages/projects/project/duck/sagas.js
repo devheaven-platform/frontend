@@ -105,6 +105,32 @@ function* updateBoard( action ) {
     }
 }
 
+function* removeMember( action ) {
+    try {
+        const { data } = yield call( Axios.delete, `/projects/${ action.payload.projectid }/members/${ action.payload.memberid }`, action.payload );
+        const members = yield all( data.members.map( id => call( stub.get, `/users/${ id }` ) ) );
+        const { data: client } = yield call( stub.get, `/clients/${ data.client }` );
+        const { data: owner } = yield call( stub.get, `/users/${ data.owner }` );
+        yield put( {
+            type: types.REMOVE_MEMBER_SUCCESS,
+            payload: {
+                ...data,
+                members: members.map( response => response.data ),
+                client,
+                owner,
+            },
+        } );
+    } catch ( error ) {
+        yield put( { type: types.REMOVE_MEMBER_ERROR, payload: error } );
+    }
+}
+
+fuction* getAllMembers( action ) {
+    try {
+        // todo do some shit
+    }
+}
+
 export default function* main() {
     yield takeLatest( types.GET_PROJECT, getProject );
     yield takeEvery( types.GET_BOARDS, getBoards );
@@ -113,4 +139,5 @@ export default function* main() {
     yield takeLatest( types.DELETE_BOARD, deleteBoard );
     yield takeLatest( types.ARCHIVE_BOARD, archiveBoard );
     yield takeLatest( types.UPDATE_BOARD, updateBoard );
+    yield takeLatest( types.REMOVE_MEMBER, removeMember );
 }

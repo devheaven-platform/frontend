@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React from "react";
 import {
     func, shape, string, arrayOf, bool,
@@ -14,12 +15,14 @@ class Project extends React.Component {
         boards: [],
         projectId: "",
         project: {},
+        allMembers: [],
     };
 
     static propTypes = {
         match: shape( {} ).isRequired,
         boards: arrayOf( shape( { id: string, name: string, archived: bool } ) ),
         project: shape( {} ),
+        allMembers: [],
         GetBoards: func.isRequired,
         GetProject: func.isRequired,
         DeleteBoard: func.isRequired,
@@ -28,6 +31,8 @@ class Project extends React.Component {
         ArchiveBoard: func.isRequired,
         UpdateBoard: func.isRequired,
         isArchived: bool.isRequired,
+        RemoveMember: func.isRequired,
+        GetAllMembers: func.isRequired,
     };
 
     constructor( props ) {
@@ -40,9 +45,12 @@ class Project extends React.Component {
     }
 
     componentDidMount() {
-        const { GetBoards, GetProject, match } = this.props;
+        const {
+            GetBoards, GetProject, GetAllMembers, match,
+        } = this.props;
         GetBoards( match.params.id );
         GetProject( match.params.id );
+        GetAllMembers( "yeet" );
     }
 
     toggleShowArchived = () => {
@@ -51,7 +59,7 @@ class Project extends React.Component {
 
     render() {
         const {
-            boards, DeleteBoard, UpdateBoard, ArchiveProject, ArchiveBoard, projectId, isArchived, project,
+            match, boards, DeleteBoard, UpdateBoard, ArchiveProject, ArchiveBoard, RemoveMember, projectId, isArchived, project, allMembers,
         } = this.props;
 
         const { searchBoardName, showArchived } = this.state;
@@ -72,79 +80,135 @@ class Project extends React.Component {
             <BoardItem key={ b.id } projectId={ projectId } boardId={ b.id } archived={ b.archived } name={ b.name } onUpdate={ UpdateBoard } onArchive={ ArchiveBoard } onDelete={ DeleteBoard } />
         ) );
 
-        const members = project.members.map( item => <li key={ item.id }>{ `${ item.firstname } ${ item.lastname }`}</li> );
-        const milestones = project.milestones.map( item => <li key={ item.id }>{ item.name }</li> );
+        let members = [];
+        if ( project.members.length === 0 ) {
+            project.members.push( { key: 1, firstname: "This project has no members", lastname: "" } );
+        }
+        members = project.members.map( item => (
+            <div className="list-item" key={ item.id }>
+                { `${ item.firstname } ${ item.lastname }` }
+                <button className="button is-small is-pulled-right is-danger" type="button" onClick={ () => RemoveMember( { projectid: match.params.id, memberid: item.id } ) }>-</button>
+            </div>
+        ) );
+
+        let milestones = [];
+        if ( project.milestones.length === 0 ) {
+            project.milestones[ 0 ] = { id: "yeet", name: "This project has no milestones" };
+        }
+        milestones = project.milestones.map( item => (
+            <div className="list-item" key={ item.id }>
+                { item.name }
+            </div>
+        ) );
+
+        const allMembersList = allMembers.map( item => (
+            <div className="list-item" key={ item.id }>
+                { `${ item.firstname } ${ item.lastname }` }
+                <button className="button is-small is-pulled-right is-danger" type="button" onClick={ () => RemoveMember( { projectid: match.params.id, memberid: item.id } ) }>-</button>
+            </div>
+        ) );
+
+        project.start = new Date( project.start ).toString();
+        project.updatedAt = new Date( project.updatedAt ).toString();
 
         console.log( project );
+
         if ( project != null ) {
             return (
                 <div className="container">
-                    <div className="row">
-                        <h1>
-                            {project.name}
-                            {" "}
-                            <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>
+
+                    <h1>
+                        {project.name}
+                        {" "}
+                        <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>
                             Archive
-                            </button>
+                        </button>
 
-                        </h1>
-                        <div>
-                            <b>
+                    </h1>
+                    <div className="columns">
+                        <div className="column is-one-third">
+                            <div>
+                                <b>
                                 Description:
-                                {" "}
-                            </b>
-                            <p>{project.description}</p>
-                            <b>
+                                    {" "}
+                                </b>
+                                <p>{project.description}</p>
+                                <b>
                                 Owner:
-                                {" "}
-                            </b>
-                            <p>{`${ project.owner.firstname } ${ project.owner.lastname }`}</p>
-                            <b>
+                                    {" "}
+                                </b>
+                                <p>{`${ project.owner.firstname } ${ project.owner.lastname }`}</p>
+                                <b>
                                 Client:
+                                    {" "}
+                                </b>
+                                <p>{project.client.name}</p>
+                            </div>
+                        </div>
+                        <div className="column is-half">
+                            <b>
+                                Start date:
                                 {" "}
                             </b>
-                            <p>{project.client.name}</p>
+                            <p>{ project.start }</p>
+                            <b>
+                                Last updated at:
+                                {" "}
+                            </b>
+                            <p>{ project.updatedAt }</p>
                         </div>
-
                     </div>
+
+                    <hr />
 
                     <div className="columns">
-                        <div className="column is-one-third is-multiline">
-                            <div className="card">
-                                <header className="card-header">
-                                    <p className="card-header-title">
-                                Members
-                                    </p>
-                                </header>
-                                <div className="card-content ">
-                                    <div className="content " />
-                                    <ul>
-                                        { members }
-                                    </ul>
-                                </div>
+                        <div className="column is-one-third">
 
+                            <div className="box">
+                                <b>
+                                    Members
+                                </b>
+                                { " " }
+
+                                <Modal
+                                    title="+"
+                                    description="Add a member to this project."
+                                    body={ (
+                                        <Form
+                                            form="addMemberForm"
+                                            onSubmit={ actions.addMember }
+                                        >
+                                            <div className="list">
+                                                {/* add list of members here { members } */}
+                                                { allMembersList }
+                                            </div>
+                                        </Form>
+                                    ) }
+                                    footer={
+                                        <SubmitButton form="addMemberForm">Add member</SubmitButton>
+                                    }
+                                    enableCancelButton
+                                />
+
+                                <hr />
+                                <div className="list">
+                                    { members }
+                                </div>
                             </div>
                         </div>
 
-                        <div className="column is-one-third" align="right">
-                            <div className="card">
-                                <header className="card-header">
-                                    <p className="card-header-title">
-                                        Milestones
-                                    </p>
-                                </header>
-                                <div className="card-content">
-                                    <div className="content" />
-                                    <ul>
-                                        { milestones }
-                                    </ul>
+                        <div className="column is-one-third">
+                            <div className="box">
+                                <b>Milestones</b>
+                                <hr />
+                                <div className="list">
+                                    { milestones }
                                 </div>
-
                             </div>
                         </div>
                     </div>
 
-                    <br />
+                    <hr />
 
                     <div className="level">
                         <Modal
@@ -208,6 +272,8 @@ const mDTP = dispatch => ( {
     UpdateBoard: args => dispatch( actions.updateBoard( args ) ),
     ArchiveBoard: args => dispatch( actions.archiveBoard( args ) ),
     ArchiveProject: args => dispatch( actions.archiveProject( args ) ),
+    RemoveMember: args => dispatch( actions.removeMember( args ) ),
+    GetAllMembers: args => dispatch( actions.getAllMembers( args ) ),
 } );
 
 export default connect( mSTP, mDTP )( Project );

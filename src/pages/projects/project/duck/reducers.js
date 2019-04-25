@@ -18,6 +18,9 @@ const project = ( state = defaultState.project, { type, payload } ) => {
     if ( type === types.GET_PROJECT_ERROR ) {
         return state;
     }
+    if ( type === types.REMOVE_MEMBER_SUCCESS ) {
+        return payload;
+    }
     return state;
 };
 
