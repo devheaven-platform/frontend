@@ -26,6 +26,9 @@ const get = ( resource ) => {
     if ( resource.includes( "/clients/" ) ) {
         return new Promise( resolve => setTimeout( resolve, 50, { data: client, status: 200 } ) );
     }
+    if ( resource.includes( "/members/" ) ) {
+        return new Promise( resolve => setTimeout( resolve, 50, { data: members, status: 200 } ) );
+    }
     return new Promise( reject => setTimeout( reject, 50, { data: "An error occurred", status: 500 } ) );
 };
 

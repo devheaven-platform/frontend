@@ -125,9 +125,32 @@ function* removeMember( action ) {
     }
 }
 
-fuction* getAllMembers( action ) {
+function* addMember( action ) {
     try {
-        // todo do some shit
+        const { data } = yield call( Axios.patch, `/projects/${ action.payload.projectid }/members/${ action.payload.memberid }`, action.payload );
+        const members = yield all( data.members.map( id => call( stub.get, `/users/${ id }` ) ) );
+        const { data: client } = yield call( stub.get, `/clients/${ data.client }` );
+        const { data: owner } = yield call( stub.get, `/users/${ data.owner }` );
+        yield put( {
+            type: types.ADD_MEMBER_SUCCESS,
+            payload: {
+                ...data,
+                members: members.map( response => response.data ),
+                client,
+                owner,
+            },
+        } );
+    } catch ( error ) {
+        yield put( { type: types.ADD_MEMBER_ERROR, payload: error } );
+    }
+}
+
+function* getAllMembers( action ) {
+    try {
+        const { data } = yield call( stub.get, "/members/" );
+        yield put( { type: types.GET_ALL_MEMBERS_SUCCESS, payload: data } );
+    } catch ( error ) {
+        yield put( { type: types.REMOVE_MEMBER_ERROR, payload: error } );
     }
 }
 
@@ -140,4 +163,6 @@ export default function* main() {
     yield takeLatest( types.ARCHIVE_BOARD, archiveBoard );
     yield takeLatest( types.UPDATE_BOARD, updateBoard );
     yield takeLatest( types.REMOVE_MEMBER, removeMember );
+    yield takeLatest( types.GET_ALL_MEMBERS, getAllMembers );
+    yield takeLatest( types.ADD_MEMBER, addMember );
 }

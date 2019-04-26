@@ -22,7 +22,7 @@ class Project extends React.Component {
         match: shape( {} ).isRequired,
         boards: arrayOf( shape( { id: string, name: string, archived: bool } ) ),
         project: shape( {} ),
-        allMembers: [],
+        allMembers: arrayOf( shape( {} ) ),
         GetBoards: func.isRequired,
         GetProject: func.isRequired,
         DeleteBoard: func.isRequired,
@@ -32,6 +32,7 @@ class Project extends React.Component {
         UpdateBoard: func.isRequired,
         isArchived: bool.isRequired,
         RemoveMember: func.isRequired,
+        AddMember: func.isRequired,
         GetAllMembers: func.isRequired,
     };
 
@@ -50,7 +51,7 @@ class Project extends React.Component {
         } = this.props;
         GetBoards( match.params.id );
         GetProject( match.params.id );
-        GetAllMembers( "yeet" );
+        GetAllMembers( "idk hoe het zonder args moet hehe xd" );
     }
 
     toggleShowArchived = () => {
@@ -59,7 +60,7 @@ class Project extends React.Component {
 
     render() {
         const {
-            match, boards, DeleteBoard, UpdateBoard, ArchiveProject, ArchiveBoard, RemoveMember, projectId, isArchived, project, allMembers,
+            match, boards, DeleteBoard, UpdateBoard, ArchiveProject, ArchiveBoard, RemoveMember, projectId, isArchived, project, allMembers, AddMember,
         } = this.props;
 
         const { searchBoardName, showArchived } = this.state;
@@ -101,17 +102,28 @@ class Project extends React.Component {
             </div>
         ) );
 
-        const allMembersList = allMembers.map( item => (
+        let allMembersList = allMembers.map( item => (
             <div className="list-item" key={ item.id }>
                 { `${ item.firstname } ${ item.lastname }` }
-                <button className="button is-small is-pulled-right is-danger" type="button" onClick={ () => RemoveMember( { projectid: match.params.id, memberid: item.id } ) }>-</button>
+                <button className="button is-small is-pulled-right is-success" type="button" onClick={ () => AddMember( { projectid: match.params.id, memberid: item.id } ) }>+</button>
             </div>
         ) );
 
+        // eslint-disable-next-line no-restricted-syntax
+        const newAllMembersList = [];
+        const checkMemberList = [];
+        project.members.map( ( item ) => {
+            checkMemberList.push( item.id );
+        } );
+        allMembersList.map( ( item ) => {
+            if ( !checkMemberList.includes( item.key ) ) {
+                newAllMembersList.push( item );
+            }
+        } );
+        allMembersList = newAllMembersList;
+
         project.start = new Date( project.start ).toString();
         project.updatedAt = new Date( project.updatedAt ).toString();
-
-        console.log( project );
 
         if ( project != null ) {
             return (
@@ -176,17 +188,14 @@ class Project extends React.Component {
                                     body={ (
                                         <Form
                                             form="addMemberForm"
-                                            onSubmit={ actions.addMember }
+                                            onSubmit={ actions.AddMember }
                                         >
                                             <div className="list">
-                                                {/* add list of members here { members } */}
                                                 { allMembersList }
                                             </div>
                                         </Form>
                                     ) }
-                                    footer={
-                                        <SubmitButton form="addMemberForm">Add member</SubmitButton>
-                                    }
+
                                     enableCancelButton
                                 />
 
@@ -259,10 +268,11 @@ class Project extends React.Component {
 
 const mSTP = ( {
     project: {
-        boards, projectId, isArchived, project,
+        boards, projectId, isArchived, project, allMembers,
     },
+
 } ) => ( {
-    boards, projectId, isArchived, project,
+    boards, projectId, isArchived, project, allMembers,
 } );
 
 const mDTP = dispatch => ( {
@@ -273,6 +283,7 @@ const mDTP = dispatch => ( {
     ArchiveBoard: args => dispatch( actions.archiveBoard( args ) ),
     ArchiveProject: args => dispatch( actions.archiveProject( args ) ),
     RemoveMember: args => dispatch( actions.removeMember( args ) ),
+    AddMember: args => dispatch( actions.addMember( args ) ),
     GetAllMembers: args => dispatch( actions.getAllMembers( args ) ),
 } );
 

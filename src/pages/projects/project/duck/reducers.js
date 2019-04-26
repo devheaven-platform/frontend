@@ -9,6 +9,7 @@ const defaultState = {
     project: null,
     isArchived: false,
     isCreateModalOpen: false,
+    allMembers: [],
 };
 
 const project = ( state = defaultState.project, { type, payload } ) => {
@@ -20,6 +21,19 @@ const project = ( state = defaultState.project, { type, payload } ) => {
     }
     if ( type === types.REMOVE_MEMBER_SUCCESS ) {
         return payload;
+    }
+    if ( type === types.ADD_MEMBER_SUCCESS ) {
+        return payload;
+    }
+    return state;
+};
+
+const allMembers = ( state = defaultState.allMembers, { type, payload } ) => {
+    if ( type === types.GET_ALL_MEMBERS_SUCCESS ) {
+        return payload;
+    }
+    if ( type === types.GET_ALL_MEMBERS_ERROR ) {
+        return state;
     }
     return state;
 };
@@ -60,6 +74,6 @@ const isArchived = ( state = defaultState.isArchived, { type } ) => {
 };
 
 export default combineReducers( {
-    boards, projectId, isArchived, project,
+    boards, projectId, isArchived, project, allMembers,
 } );
 /* eslint-enable complexity */
