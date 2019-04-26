@@ -154,6 +154,15 @@ function* getAllMembers() {
     }
 }
 
+function* editProject( action ) {
+    try {
+        const { data } = yield call( Axios.patch, `/projects/${ action.payload.id }`, action.payload );
+        yield put( { type: types.EDIT_PROJECT_SUCCESS, payload: data } );
+    } catch ( error ) {
+        yield put( { type: types.EDIT_PROJECT_ERROR, payload: error } );
+    }
+}
+
 export default function* main() {
     yield takeLatest( types.GET_PROJECT, getProject );
     yield takeEvery( types.GET_BOARDS, getBoards );
@@ -165,4 +174,5 @@ export default function* main() {
     yield takeLatest( types.REMOVE_MEMBER, removeMember );
     yield takeLatest( types.GET_ALL_MEMBERS, getAllMembers );
     yield takeLatest( types.ADD_MEMBER, addMember );
+    yield takeEvery( actions.editProject.REQUEST, editProject );
 }

@@ -149,16 +149,35 @@ class Project extends React.Component {
                         <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>
                             Archive
                         </button>
+                        {" "}
+                        <Modal
+                            title="Edit"
+                            description="Edit the name and description for this project."
+                            body={ (
+                                <Form
+                                    form="editProjectForm"
+                                    onSubmit={ actions.editProject }
+                                >
+                                    <FormField name="id" type="text" label="Id" placeholder="Id" value={ match.params.id } defaultValue={ match.params.id } />
+                                    <FormField name="name" type="text" label="Name" placeholder="New Name" />
+                                    <FormField name="description" type="text" label="Description" placeholder="New Description" />
+                                </Form>
+                            ) }
+                            footer={
+                                <SubmitButton form="editProjectForm">Save changes</SubmitButton>
+                            }
+                            enableCancelButton
+                        />
 
                     </h1>
                     <div className="columns">
-                        <div className="column is-one-third">
+                        <div className="column is-one-third is-multiline is-inline-flex">
                             <div>
                                 <b>
                                 Description:
                                     {" "}
                                 </b>
-                                <p>{project.description}</p>
+                                <p style={ { display: "block", overflowWrap: "break-word", maxWidth: "100%" } }>{project.description}</p>
                                 <b>
                                 Owner:
                                     {" "}
