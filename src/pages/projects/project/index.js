@@ -51,7 +51,7 @@ class Project extends React.Component {
         } = this.props;
         GetBoards( match.params.id );
         GetProject( match.params.id );
-        GetAllMembers( "idk hoe het zonder args moet hehe xd" );
+        GetAllMembers( "" );
     }
 
     toggleShowArchived = () => {
@@ -112,13 +112,12 @@ class Project extends React.Component {
         // eslint-disable-next-line no-restricted-syntax
         const newAllMembersList = [];
         const checkMemberList = [];
-        project.members.map( ( item ) => {
-            checkMemberList.push( item.id );
-        } );
+        project.members.map( item => checkMemberList.push( item.id ) );
         allMembersList.map( ( item ) => {
             if ( !checkMemberList.includes( item.key ) ) {
-                newAllMembersList.push( item );
+                return newAllMembersList.push( item );
             }
+            return null;
         } );
         allMembersList = newAllMembersList;
 

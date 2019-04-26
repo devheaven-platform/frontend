@@ -145,7 +145,7 @@ function* addMember( action ) {
     }
 }
 
-function* getAllMembers( action ) {
+function* getAllMembers() {
     try {
         const { data } = yield call( stub.get, "/members/" );
         yield put( { type: types.GET_ALL_MEMBERS_SUCCESS, payload: data } );
