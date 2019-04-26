@@ -10,6 +10,7 @@ import {
 } from "components";
 import posed, { PoseGroup } from "react-pose";
 import { actions } from "./duck";
+import ProjectMembers from "../../../components/projectmembers/ProjectMembers";
 
 const AnimatedItem = posed.li( {
     enter: {
@@ -188,35 +189,7 @@ class Project extends React.Component {
 
                     <div className="columns">
                         <div className="column is-one-third">
-
-                            <div className="box">
-                                <b>
-                                    Members
-                                </b>
-                                { " " }
-
-                                <Modal
-                                    title="+"
-                                    description="Add a member to this project."
-                                    body={ (
-                                        <Form
-                                            form="addMemberForm"
-                                            onSubmit={ actions.AddMember }
-                                        >
-                                            <div className="list">
-                                                { allMembersList }
-                                            </div>
-                                        </Form>
-                                    ) }
-
-                                    enableCancelButton
-                                />
-
-                                <hr />
-                                <div className="list">
-                                    { members }
-                                </div>
-                            </div>
+                            <ProjectMembers key="projectMembers" members={ members } allMembersList={ allMembersList } addMember={ actions.addMember } />
                         </div>
 
                         <div className="column is-one-third">
