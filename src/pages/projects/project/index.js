@@ -138,164 +138,160 @@ class Project extends React.Component {
         project.start = new Date( project.start ).toString();
         project.updatedAt = new Date( project.updatedAt ).toString();
 
-        // if ( project != null ) {
-        return (
-            <div className="container">
+        if ( project != null ) {
+            return (
+                <div className="container">
 
-                <h1>
-                    {project.name}
-                    {" "}
-                    <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>
+                    <h1>
+                        {project.name}
+                        {" "}
+                        <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>
                             Archive
-                    </button>
+                        </button>
 
-                </h1>
-                <div className="columns">
-                    <div className="column is-one-third">
-                        <div>
-                            <b>
+                    </h1>
+                    <div className="columns">
+                        <div className="column is-one-third">
+                            <div>
+                                <b>
                                 Description:
-                                {" "}
-                            </b>
-                            <p>{project.description}</p>
-                            <b>
+                                    {" "}
+                                </b>
+                                <p>{project.description}</p>
+                                <b>
                                 Owner:
-                                {" "}
-                            </b>
-                            <p>{`${ project.owner.firstname } ${ project.owner.lastname }`}</p>
-                            <b>
+                                    {" "}
+                                </b>
+                                <p>{`${ project.owner.firstname } ${ project.owner.lastname }`}</p>
+                                <b>
                                 Client:
+                                    {" "}
+                                </b>
+                                <p>{project.client.name}</p>
+                            </div>
+                        </div>
+                        <div className="column is-half">
+                            <b>
+                                Start date:
                                 {" "}
                             </b>
-                            <p>{project.client.name}</p>
+                            <p>{ project.start }</p>
+                            <b>
+                                Last updated at:
+                                {" "}
+                            </b>
+                            <p>{ project.updatedAt }</p>
                         </div>
                     </div>
-                    <div className="column is-half">
-                        <b>
-                                Start date:
-                            {" "}
-                        </b>
-                        <p>{ project.start }</p>
-                        <b>
-                                Last updated at:
-                            {" "}
-                        </b>
-                        <p>{ project.updatedAt }</p>
-                    </div>
-                </div>
 
-                <hr />
+                    <hr />
 
-                <div className="columns">
-                    <div className="column is-one-third">
+                    <div className="columns">
+                        <div className="column is-one-third">
 
-                        <div className="box">
-                            <b>
+                            <div className="box">
+                                <b>
                                     Members
-                            </b>
-                            { " " }
+                                </b>
+                                { " " }
 
+                                <Modal
+                                    title="+"
+                                    description="Add a member to this project."
+                                    body={ (
+                                        <Form
+                                            form="addMemberForm"
+                                            onSubmit={ actions.AddMember }
+                                        >
+                                            <div className="list">
+                                                { allMembersList }
+                                            </div>
+                                        </Form>
+                                    ) }
+
+                                    enableCancelButton
+                                />
+
+                                <hr />
+                                <div className="list">
+                                    { members }
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="column is-one-third">
+                            <div className="box">
+                                <b>Milestones</b>
+                                <hr />
+                                <div className="list">
+                                    { milestones }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div className="columns is-vcentered">
+                        <div className="column">
+                            <p className="subtitle is-5">
+                                <strong>{boardItems.length}</strong>
+                                {" "}
+boards
+                            </p>
+                        </div>
+                        <div className="column is-three-quarters">
+                            <Search
+                                onSearch={ ( name ) => {
+                                    this.setState( { searchBoardName: name } );
+                                } }
+                                placeholder="Boardname"
+                            />
+                        </div>
+                        <div className="column">
+                            <button
+                                type="button"
+                                className={ showArchived ? "button is-primary" : "button" }
+                                onClick={ () => {
+                                    this.setState( { showArchived: !showArchived } );
+                                } }
+                            >
+Archived
+                            </button>
+                        </div>
+                        <div className="column">
                             <Modal
-                                title="+"
-                                description="Add a member to this project."
+                                title="New"
+                                description="Create a board for this project."
                                 body={ (
                                     <Form
-                                        form="addMemberForm"
-                                        onSubmit={ actions.AddMember }
+                                        form="createBoardForm"
+                                        onSubmit={ actions.createBoard }
                                     >
-                                        <div className="list">
-                                            { allMembersList }
-                                        </div>
+                                        <FormField name="name" type="text" label="Name" placeholder="Sprint 1" />
                                     </Form>
                                 ) }
-
+                                footer={
+                                    <SubmitButton form="createBoardForm">Create</SubmitButton>
+                                }
                                 enableCancelButton
                             />
-
-                            <hr />
-                            <div className="list">
-                                { members }
-                            </div>
                         </div>
+
                     </div>
 
-                    <div className="column is-one-third">
-                        <div className="box">
-                            <b>Milestones</b>
-                            <hr />
-                            <div className="list">
-                                { milestones }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr />
-
-                <div className="columns is-vcentered">
-                    <div className="column">
-                        <p className="subtitle is-5">
-                            <strong>{boardItems.length}</strong>
-                            {" "}
-boards
-                        </p>
-                    </div>
-                    <div className="column is-three-quarters">
-                        <Search
-                            onSearch={ ( name ) => {
-                                this.setState( { searchBoardName: name } );
-                            } }
-                            placeholder="Boardname"
-                        />
-                    </div>
-                    <div className="column">
-                        <button
-                            type="button"
-                            className={ showArchived ? "button is-primary" : "button" }
-                            onClick={ () => {
-                                this.setState( { showArchived: !showArchived } );
-                            } }
-                        >
-Archived
-                        </button>
-                    </div>
-                    <div className="column">
-                        <Modal
-                            title="New"
-                            description="Create a board for this project."
-                            body={ (
-                                <Form
-                                    form="createBoardForm"
-                                    onSubmit={ actions.createBoard }
-                                >
-                                    <FormField name="name" type="text" label="Name" placeholder="Sprint 1" />
-                                </Form>
-                            ) }
-                            footer={
-                                <SubmitButton form="createBoardForm">Create</SubmitButton>
-                            }
-                            enableCancelButton
-                        />
-                    </div>
+                    <ul className="boards-list">
+                        <PoseGroup>
+                            {boardItems}
+                        </PoseGroup>
+                    </ul>
 
                 </div>
-
-                <ul className="boards-list">
-                    <PoseGroup>
-                        {boardItems}
-                    </PoseGroup>
-                </ul>
-                <div className="level-right">
-                    <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>
-Archive Project
-                    </button>
-                </div>
-            </div>
+            );
+        }
+        return (
+            <h1>loading page</h1>
         );
-        // }
-        // return (
-        //     <h1>loading page</h1>
-        // );
     }
 }
 
