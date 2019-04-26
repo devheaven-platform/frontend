@@ -47,8 +47,10 @@ const boards = ( state = defaultState.boards, { type, payload } ) => {
         return state.filter( b => b.id !== boardId );
     }
     if ( type === types.ARCHIVE_BOARD_SUCCESS ) {
-        const stateWithoutBoard = state.filter( b => b.id !== payload.id );
-        return [ ...stateWithoutBoard, payload ];
+        const { id, archived } = payload;
+        return state.map( b => (
+            b.id === id ? { ...b, archived } : b
+        ) );
     }
     if ( type === types.UPDATE_BOARD_SUCCESS ) {
         const stateWithoutBoard = state.filter( b => b.id !== payload.id );

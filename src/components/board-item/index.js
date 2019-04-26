@@ -15,7 +15,7 @@ const BoardItem = ( {
     onUpdate,
     history,
 } ) => (
-    <li role="presentation" className="board level" onClick={ () => { history.push( `/project/${ projectId }/board/${ boardId }` ); } }>
+    <li role="presentation" className="box board level" onClick={ () => { history.push( `/project/${ projectId }/board/${ boardId }` ); } }>
         <div
             role="presentation"
             className="level-left"
@@ -34,10 +34,12 @@ const BoardItem = ( {
                 <i className="fav fas fa-star fa-lg " />
             </div>
             <div className={ archived ? "level-item icon archive-btn-checked" : "level-item icon archive-btn " } onClick={ ( e ) => { e.stopPropagation(); onArchive( { id: boardId, archived: !archived } ); } }>
-                <i className="fas fa-archive" />
+                <i className="not-fav far fa-folder fa-lg" />
+                <i className="fav fas fa-folder fa-lg " />
             </div>
             <div className="level-item icon delete-btn" onClick={ ( e ) => { e.stopPropagation(); onDelete( { id: boardId } ); } }>
-                <i className="fas fa-trash-alt" />
+                <i className="not-fav far fa-times-circle fa-lg" />
+                <i className="fav fa fa-times-circle fa-lg " />
             </div>
         </div>
     </li>
