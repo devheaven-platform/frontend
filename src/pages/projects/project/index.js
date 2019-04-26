@@ -109,7 +109,6 @@ class Project extends React.Component {
             </div>
         ) );
 
-        // eslint-disable-next-line no-restricted-syntax
         const newAllMembersList = [];
         const checkMemberList = [];
         project.members.map( item => checkMemberList.push( item.id ) );
