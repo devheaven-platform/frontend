@@ -158,7 +158,7 @@ class Project extends React.Component {
                                     form="editProjectForm"
                                     onSubmit={ actions.editProject }
                                 >
-                                    <FormField name="id" type="text" label="Id" placeholder="Id" value={ match.params.id } defaultValue={ match.params.id } />
+                                    {/* <FormField name="id" type="text" label="Id" placeholder="Id" value={ match.params.id } defaultValue={ match.params.id } /> */}
                                     <FormField name="name" type="text" label="Name" placeholder="New Name" />
                                     <FormField name="description" type="text" label="Description" placeholder="New Description" />
                                 </Form>
