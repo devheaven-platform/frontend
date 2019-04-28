@@ -179,16 +179,39 @@ class Project extends React.Component {
                         <button className="button is-danger" type="button" onClick={ () => ArchiveProject( projectId ) }>
                             Archive
                         </button>
+                        {" "}
+                        <Modal
+                            title="Edit"
+                            description="Edit this project."
+                            body={ (
+                                <Form
+                                    form="editProjectForm"
+                                    onSubmit={ actions.editProject }
+                                >
+                                    <FormField name="name" type="text" label="Name" placeholder="New Name" />
+                                    <FormField name="description" type="text" label="Description" placeholder="New Description" />
+                                    <FormField name="owner" type="select" label="Owner">
+                                        {allMembers.map( member => <option key={ member.id } value={ member.id }>{`${ member.firstname } ${ member.lastname }`}</option> )}
+;
+                                    </FormField>
+                                    <FormField name="start" type="date" label="Start Date" />
+                                </Form>
+                            ) }
+                            footer={
+                                <SubmitButton form="editProjectForm">Save changes</SubmitButton>
+                            }
+                            enableCancelButton
+                        />
 
                     </h1>
                     <div className="columns">
-                        <div className="column is-one-third">
+                        <div className="column is-one-third is-multiline is-inline-flex">
                             <div>
                                 <b>
                                 Description:
                                     {" "}
                                 </b>
-                                <p>{project.description}</p>
+                                <p style={ { display: "block", overflowWrap: "break-word", maxWidth: "100%" } }>{project.description}</p>
                                 <b>
                                 Owner:
                                     {" "}

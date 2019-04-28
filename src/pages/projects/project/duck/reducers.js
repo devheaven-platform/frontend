@@ -34,6 +34,9 @@ const project = ( state = defaultState.project, { type, payload } ) => {
         }
         return { ...state, milestones: [ ...state.milestones, payload ] };
     }
+    if ( type === types.EDIT_PROJECT_SUCCESS ) {
+        return payload;
+    }
     return state;
 };
 

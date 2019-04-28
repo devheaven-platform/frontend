@@ -13,6 +13,7 @@ const removeMember = payload => ( { type: types.REMOVE_MEMBER, payload } );
 const addMember = payload => ( { type: types.ADD_MEMBER, payload } );
 const getAllMembers = payload => ( { type: types.GET_ALL_MEMBERS, payload } );
 const removeMilestone = payload => ( { type: types.REMOVE_MILESTONE, payload } );
+const editProject = createFormAction( types.EDIT_PROJECT );
 export default {
-    getBoards, getAllMembers, createBoard, archiveProject, deleteBoard, archiveBoard, updateBoard, getProject, removeMember, addMember, removeMilestone, addMilestone,
+    getBoards, getAllMembers, createBoard, archiveProject, deleteBoard, archiveBoard, updateBoard, getProject, removeMember, addMember, removeMilestone, addMilestone, editProject,
 };
