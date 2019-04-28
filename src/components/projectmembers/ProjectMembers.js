@@ -49,7 +49,7 @@ ProjectMembers.defaultProps = {
 };
 
 ProjectMembers.propTypes = {
-    members: [],
+    members: arrayOf( shape( {} ) ),
     allMembersList: arrayOf( shape( {} ) ),
     addMember: func.isRequired,
 
