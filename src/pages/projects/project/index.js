@@ -152,15 +152,19 @@ class Project extends React.Component {
                         {" "}
                         <Modal
                             title="Edit"
-                            description="Edit the name and description for this project."
+                            description="Edit this project."
                             body={ (
                                 <Form
                                     form="editProjectForm"
                                     onSubmit={ actions.editProject }
                                 >
-                                    {/* <FormField name="id" type="text" label="Id" placeholder="Id" value={ match.params.id } defaultValue={ match.params.id } /> */}
                                     <FormField name="name" type="text" label="Name" placeholder="New Name" />
                                     <FormField name="description" type="text" label="Description" placeholder="New Description" />
+                                    <FormField name="owner" type="select" label="Owner">
+                                        {allMembers.map( member => <option key={ member.id } value={ member.id }>{`${ member.firstname } ${ member.lastname }`}</option> )}
+;
+                                    </FormField>
+                                    <FormField name="start" type="date" label="Start Date" />
                                 </Form>
                             ) }
                             footer={
