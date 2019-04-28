@@ -154,6 +154,28 @@ function* getAllMembers() {
     }
 }
 
+function* editProject( action ) {
+    try {
+        const state = yield select( getState );
+        const { projectId } = state.project;
+        const { data } = yield call( Axios.patch, `/projects/${ projectId }`, action.payload );
+        const members = yield all( data.members.map( id => call( stub.get, `/users/${ id }` ) ) );
+        const { data: client } = yield call( stub.get, `/clients/${ data.client }` );
+        const { data: owner } = yield call( stub.get, `/users/${ data.owner }` );
+        yield put( {
+            type: types.EDIT_PROJECT_SUCCESS,
+            payload: {
+                ...data,
+                members: members.map( response => response.data ),
+                client,
+                owner,
+            },
+        } );
+    } catch ( error ) {
+        yield put( { type: types.EDIT_PROJECT_ERROR, payload: error } );
+    }
+}
+
 export default function* main() {
     yield takeLatest( types.GET_PROJECT, getProject );
     yield takeEvery( types.GET_BOARDS, getBoards );
@@ -165,4 +187,5 @@ export default function* main() {
     yield takeLatest( types.REMOVE_MEMBER, removeMember );
     yield takeLatest( types.GET_ALL_MEMBERS, getAllMembers );
     yield takeLatest( types.ADD_MEMBER, addMember );
+    yield takeEvery( actions.editProject.REQUEST, editProject );
 }

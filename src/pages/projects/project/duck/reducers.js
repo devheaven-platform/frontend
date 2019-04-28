@@ -25,6 +25,9 @@ const project = ( state = defaultState.project, { type, payload } ) => {
     if ( type === types.ADD_MEMBER_SUCCESS ) {
         return payload;
     }
+    if ( type === types.EDIT_PROJECT_SUCCESS ) {
+        return payload;
+    }
     return state;
 };
 
