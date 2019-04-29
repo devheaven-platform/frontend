@@ -28,7 +28,7 @@ class Project extends React.Component {
     static defaultProps = {
         boards: [],
         projectId: "",
-        project: {},
+        project: null,
         allMembers: [],
     };
 
@@ -44,7 +44,6 @@ class Project extends React.Component {
         ArchiveProject: func.isRequired,
         ArchiveBoard: func.isRequired,
         UpdateBoard: func.isRequired,
-        isArchived: bool.isRequired,
         RemoveMember: func.isRequired,
         AddMember: func.isRequired,
         GetAllMembers: func.isRequired,
@@ -75,17 +74,17 @@ class Project extends React.Component {
 
     render() {
         const {
-            match, boards, DeleteBoard, UpdateBoard, ArchiveProject, ArchiveBoard, RemoveMember, projectId, isArchived, project, allMembers, AddMember, RemoveMilestone,
+            match, boards, DeleteBoard, UpdateBoard, ArchiveProject, ArchiveBoard, RemoveMember, projectId, project, allMembers, AddMember, RemoveMilestone,
         } = this.props;
 
         const { searchBoardName, showArchived } = this.state;
 
-        if ( isArchived ) {
-            return <Redirect to="/projects" />;
-        }
-
         if ( project === null ) {
             return <div>Loading</div>;
+        }
+
+        if ( project.archived ) {
+            return <Redirect to="/projects" />;
         }
 
         let filteredBoards = boards.filter( b => b.name.toLowerCase().startsWith( searchBoardName.toLowerCase() ) );

@@ -19,6 +19,9 @@ const project = ( state = defaultState.project, { type, payload } ) => {
     if ( type === types.GET_PROJECT_ERROR ) {
         return state;
     }
+    if ( type === types.ARCHIVE_PROJECT_SUCCESS ) {
+        return payload;
+    }
     if ( type === types.REMOVE_MEMBER_SUCCESS ) {
         return payload;
     }
@@ -80,14 +83,7 @@ const projectId = ( state = defaultState.projectId, { type, payload } ) => {
     return state;
 };
 
-const isArchived = ( state = defaultState.isArchived, { type } ) => {
-    if ( type === types.ARCHIVE_PROJECT_SUCCESS ) {
-        return true;
-    }
-    return state;
-};
-
 export default combineReducers( {
-    boards, projectId, isArchived, project, allMembers,
+    boards, projectId, project, allMembers,
 } );
 /* eslint-enable complexity */
