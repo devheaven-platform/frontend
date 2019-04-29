@@ -176,6 +176,43 @@ function* editProject( action ) {
     }
 }
 
+function* removeMilestone( action ) {
+    try {
+        const state = yield select( getState );
+        const { projectId } = state.project;
+        yield call( Axios.delete, `/milestones/${ action.payload }` );
+        const { data } = yield call( Axios.get, `/projects/${ projectId }` );
+        const members = yield all( data.members.map( id => call( stub.get, `/users/${ id }` ) ) );
+        const { data: client } = yield call( stub.get, `/clients/${ data.client }` );
+        const { data: owner } = yield call( stub.get, `/users/${ data.owner }` );
+
+        yield put( {
+            type: types.REMOVE_MILESTONE_SUCCESS,
+            payload: {
+                ...data,
+                members: members.map( response => response.data ),
+                client,
+                owner,
+            },
+        } );
+    } catch ( error ) {
+        yield put( { type: types.REMOVE_MILESTONE_ERROR, payload: error } );
+    }
+}
+
+function* addMilestone( action ) {
+    try {
+        const state = yield select( getState );
+        const { projectId } = state.project;
+        const { data } = yield call( Axios.post, "/milestones/", {
+            name: action.payload.name, description: action.payload.description, date: action.payload.date, project: projectId,
+        } );
+        yield put( { type: types.ADD_MILESTONE_SUCCESS, payload: data } );
+    } catch ( error ) {
+        yield put( { type: types.ADD_MILESTONE_ERROR, payload: error } );
+    }
+}
+
 export default function* main() {
     yield takeLatest( types.GET_PROJECT, getProject );
     yield takeEvery( types.GET_BOARDS, getBoards );
@@ -187,5 +224,7 @@ export default function* main() {
     yield takeLatest( types.REMOVE_MEMBER, removeMember );
     yield takeLatest( types.GET_ALL_MEMBERS, getAllMembers );
     yield takeLatest( types.ADD_MEMBER, addMember );
+    yield takeLatest( types.REMOVE_MILESTONE, removeMilestone );
+    yield takeLatest( actions.addMilestone.REQUEST, addMilestone );
     yield takeEvery( actions.editProject.REQUEST, editProject );
 }

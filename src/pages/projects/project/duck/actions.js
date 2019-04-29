@@ -2,6 +2,7 @@ import { createFormAction } from "redux-form-saga";
 import types from "./types";
 
 const createBoard = createFormAction( types.CREATE_BOARD );
+const addMilestone = createFormAction( types.ADD_MILESTONE );
 const getProject = payload => ( { type: types.GET_PROJECT, payload } );
 const getBoards = payload => ( { type: types.GET_BOARDS, payload } );
 const archiveProject = payload => ( { type: types.ARCHIVE_PROJECT, payload } );
@@ -11,8 +12,8 @@ const updateBoard = payload => ( { type: types.UPDATE_BOARD, payload } );
 const removeMember = payload => ( { type: types.REMOVE_MEMBER, payload } );
 const addMember = payload => ( { type: types.ADD_MEMBER, payload } );
 const getAllMembers = payload => ( { type: types.GET_ALL_MEMBERS, payload } );
+const removeMilestone = payload => ( { type: types.REMOVE_MILESTONE, payload } );
 const editProject = createFormAction( types.EDIT_PROJECT );
-
 export default {
-    getBoards, getAllMembers, createBoard, archiveProject, deleteBoard, archiveBoard, updateBoard, getProject, removeMember, addMember, editProject,
+    getBoards, getAllMembers, createBoard, archiveProject, deleteBoard, archiveBoard, updateBoard, getProject, removeMember, addMember, removeMilestone, addMilestone, editProject,
 };

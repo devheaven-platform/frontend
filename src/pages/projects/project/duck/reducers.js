@@ -25,6 +25,15 @@ const project = ( state = defaultState.project, { type, payload } ) => {
     if ( type === types.ADD_MEMBER_SUCCESS ) {
         return payload;
     }
+    if ( type === types.REMOVE_MILESTONE_SUCCESS ) {
+        return payload;
+    }
+    if ( type === types.ADD_MILESTONE_SUCCESS ) {
+        if ( state.milestones[ 0 ].id === "yeet" ) {
+            return { ...state, milestones: [ payload ] };
+        }
+        return { ...state, milestones: [ ...state.milestones, payload ] };
+    }
     if ( type === types.EDIT_PROJECT_SUCCESS ) {
         return payload;
     }

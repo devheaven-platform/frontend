@@ -11,6 +11,7 @@ import {
 import posed, { PoseGroup } from "react-pose";
 import { actions } from "./duck";
 import ProjectMembers from "../../../components/projectmembers/ProjectMembers";
+import ProjectMilestones from "../../../components/projectmilestones/ProjectMilestones";
 
 const AnimatedItem = posed.li( {
     enter: {
@@ -47,6 +48,7 @@ class Project extends React.Component {
         RemoveMember: func.isRequired,
         AddMember: func.isRequired,
         GetAllMembers: func.isRequired,
+        RemoveMilestone: func.isRequired,
     };
 
     constructor( props ) {
@@ -73,7 +75,7 @@ class Project extends React.Component {
 
     render() {
         const {
-            match, boards, DeleteBoard, UpdateBoard, ArchiveProject, ArchiveBoard, RemoveMember, projectId, isArchived, project, allMembers, AddMember,
+            match, boards, DeleteBoard, UpdateBoard, ArchiveProject, ArchiveBoard, RemoveMember, projectId, isArchived, project, allMembers, AddMember, RemoveMilestone,
         } = this.props;
 
         const { searchBoardName, showArchived } = this.state;
@@ -99,24 +101,52 @@ class Project extends React.Component {
 
         let members = [];
         if ( project.members.length === 0 ) {
-            project.members.push( { key: 1, firstname: "This project has no members", lastname: "" } );
+            project.members.push( {
+                firstname: "This project has no members", lastname: "", id: "randomid",
+            } );
+
+            members = project.members.map( item => (
+                <div className="list-item" key={ item.id }>
+                    <b>{ `${ item.firstname } ${ item.lastname }` }</b>
+                </div>
+            ) );
+        } else {
+            members = project.members.map( item => (
+                <div className="list-item" key={ item.id }>
+                    { `${ item.firstname } ${ item.lastname }` }
+                    <button className="button is-small is-pulled-right is-danger" type="button" onClick={ () => RemoveMember( { projectid: match.params.id, memberid: item.id } ) }>-</button>
+                </div>
+            ) );
         }
-        members = project.members.map( item => (
-            <div className="list-item" key={ item.id }>
-                { `${ item.firstname } ${ item.lastname }` }
-                <button className="button is-small is-pulled-right is-danger" type="button" onClick={ () => RemoveMember( { projectid: match.params.id, memberid: item.id } ) }>-</button>
-            </div>
-        ) );
 
         let milestones = [];
         if ( project.milestones.length === 0 ) {
             project.milestones[ 0 ] = { id: "yeet", name: "This project has no milestones" };
+
+            milestones = project.milestones.map( item => (
+                <div className="list-item" key={ item.id }>
+                    <b>
+                        { item.name }
+                    </b>
+                </div>
+            ) );
+        } else {
+            milestones = project.milestones.map( item => (
+                <div className="list-item" key={ item.id }>
+                    <b>
+                        { item.name }
+                        {" "}
+                    </b>
+                    { ( new Date( item.date ).toLocaleDateString() ) }
+                    {" "}
+                    <button className="button is-small is-pulled-right is-danger" type="button" onClick={ () => RemoveMilestone( item.id ) }>-</button>
+                    <br />
+                    <cite>
+                        { item.description }
+                    </cite>
+                </div>
+            ) );
         }
-        milestones = project.milestones.map( item => (
-            <div className="list-item" key={ item.id }>
-                { item.name }
-            </div>
-        ) );
 
         let allMembersList = allMembers.map( item => (
             <div className="list-item" key={ item.id }>
@@ -216,13 +246,7 @@ class Project extends React.Component {
                         </div>
 
                         <div className="column is-one-third">
-                            <div className="box">
-                                <b>Milestones</b>
-                                <hr />
-                                <div className="list">
-                                    { milestones }
-                                </div>
-                            </div>
+                            <ProjectMilestones key="projectMilestones" milestones={ milestones } addMilestone={ actions.addMilestone } />
                         </div>
                     </div>
 
@@ -310,6 +334,7 @@ const mDTP = dispatch => ( {
     RemoveMember: args => dispatch( actions.removeMember( args ) ),
     AddMember: args => dispatch( actions.addMember( args ) ),
     GetAllMembers: args => dispatch( actions.getAllMembers( args ) ),
+    RemoveMilestone: args => dispatch( actions.removeMilestone( args ) ),
 } );
 
 export default connect( mSTP, mDTP )( Project );
