@@ -10,7 +10,7 @@ const PageHome = () => (
         </Page.Content>
         <Page.Footer>
             <p>
-                { `Copyright © ${ new Date().getFullYear() } Garden.io`}
+                { `Copyright © ${ new Date().getFullYear() } Devheaven.nl`}
             </p>
         </Page.Footer>
     </Page>

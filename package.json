@@ -1,5 +1,5 @@
 {
-  "name": "garden.io",
+  "name": "devheaven-frontend",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
@@ -25,7 +25,9 @@
     "redux-types": "^2.0.3"
   },
   "scripts": {
-    "start": "REACT_APP_ENV_NAME=development react-scripts start",
+    "start": "cross-env REACT_APP_ENV_NAME=development react-scripts start",
+    "start:remote:staging": "cross-env REACT_APP_ENV_NAME=staging react-scripts start",
+    "start:remote:production": "cross-env REACT_APP_ENV_NAME=production react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -41,6 +43,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "eslint-config-airbnb": "^17.1.0"
   }
 }

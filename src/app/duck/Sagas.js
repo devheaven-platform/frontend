@@ -1,4 +1,9 @@
-import { call, put, takeEvery } from "redux-saga/effects";
+import {
+    all,
+    call,
+    put,
+    takeEvery,
+} from "redux-saga/effects";
 import axios from "axios";
 
 import errorSelectors from "components/error/duck/Selectors";
@@ -7,13 +12,23 @@ import stub from "./__Stub__";
 import types from "./Types";
 
 function* init() {
-    axios.defaults.baseURL = process.env[ `REACT_APP_API_URL_${ process.env.REACT_APP_ENV_NAME }` ];
+    const env = process.env.REACT_APP_ENV_NAME;
+    const health = process.env[ `REACT_APP_HEALTH_URL_${ env }` ];
 
-    try {
-        yield call( stub.get, "/api/health/" );
+    if ( env !== "development" ) {
+        try {
+            yield all( [
+                call( axios.get, `${ health }/task-management/health/` ),
+                call( axios.get, `${ health }/project-management/health/` ),
+                call( axios.get, `${ health }/invoice/health/` ),
+            ] );
+
+            yield put( { type: types.VALIDATE_CONNECTION_SUCCESS } );
+        } catch ( error ) {
+            yield put( { type: types.VALIDATE_CONNECTION_ERROR, error } );
+        }
+    } else {
         yield put( { type: types.VALIDATE_CONNECTION_SUCCESS } );
-    } catch ( error ) {
-        yield put( { type: types.VALIDATE_CONNECTION_ERROR, error } );
     }
 }
 

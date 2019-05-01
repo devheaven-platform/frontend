@@ -1,6 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
+import axios from "axios";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import "@fortawesome/fontawesome-free/css/all.css";
 import "react-notifications/lib/notifications.css";
@@ -16,6 +17,7 @@ class App extends React.Component {
     componentDidMount() {
         const { Init } = this.props;
         Init();
+        axios.defaults.baseURL = process.env[ `REACT_APP_API_URL_${ process.env.REACT_APP_ENV_NAME }` ];
     }
 
     render() {

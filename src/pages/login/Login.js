@@ -53,7 +53,6 @@ class PageLogin extends React.Component {
                     <div className="box column is-3-fullhd is-6-tablet is-12-mobile has-padding-4">
                         <div className="has-text-centered has-margin-bottom-3">
                             <img src={ icon } alt="icon" className="is-rounded" width="64" height="64" />
-                            <h4 className="title is-4">Login</h4>
                             <h6 className="subtitle is-6">Please login to proceed.</h6>
                         </div>
                         <Form

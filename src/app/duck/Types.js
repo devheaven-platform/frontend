@@ -6,7 +6,6 @@ export default types( "@app", [
     "LOGIN_SUCCESS",
     "LOGIN_ERROR",
     "LOGOUT",
-    "VALIDATE_CONNECTION",
     "VALIDATE_CONNECTION_SUCCESS",
     "VALIDATE_CONNECTION_ERROR",
 ] );
