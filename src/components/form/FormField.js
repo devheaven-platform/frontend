@@ -3,7 +3,13 @@ import { withFormsy } from "formsy-react";
 import PropTypes from "prop-types";
 
 import FIELD_TYPES from "forms/Types";
-import { FormFieldInput, FormFieldSelect, FormFieldCheckbox } from "./fields";
+import {
+    FormFieldInput,
+    FormFieldTextArea,
+    FormFieldDate,
+    FormFieldSelect,
+    FormFieldCheckbox,
+} from "./fields";
 
 const FormField = ( {
     label,
@@ -20,6 +26,30 @@ const FormField = ( {
     const error = getErrorMessage();
 
     switch ( type ) {
+        case FIELD_TYPES.TEXTAREA:
+            return (
+                <FormFieldTextArea
+                    label={ label }
+                    name={ name }
+                    type={ type }
+                    value={ value }
+                    error={ error }
+                    touched={ touched }
+                    onChange={ setValue }
+                />
+            );
+        case FIELD_TYPES.DATE:
+            return (
+                <FormFieldDate
+                    label={ label }
+                    name={ name }
+                    type={ type }
+                    value={ value }
+                    error={ error }
+                    touched={ touched }
+                    onChange={ setValue }
+                />
+            );
         case FIELD_TYPES.SELECT:
             return (
                 <FormFieldSelect
@@ -64,10 +94,16 @@ FormField.propTypes = {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    options: PropTypes.oneOfType( [
-        PropTypes.arrayOf( PropTypes.string ),
-        PropTypes.arrayOf( PropTypes.number ),
-    ] ),
+    options: PropTypes.arrayOf( PropTypes.shape( {
+        value: PropTypes.oneOfType( [
+            PropTypes.string,
+            PropTypes.number,
+        ] ).isRequired,
+        label: PropTypes.oneOfType( [
+            PropTypes.string,
+            PropTypes.number,
+        ] ).isRequired,
+    } ) ),
     getValue: PropTypes.func.isRequired,
     setValue: PropTypes.func.isRequired,
     isPristine: PropTypes.func.isRequired,

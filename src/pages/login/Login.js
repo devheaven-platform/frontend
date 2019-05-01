@@ -21,7 +21,7 @@ class PageLogin extends React.Component {
     };
 
     static defaultProps = {
-        errors: null,
+        errors: {},
     };
 
     componentDidMount() {

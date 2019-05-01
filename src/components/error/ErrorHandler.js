@@ -15,7 +15,7 @@ class ErrorHandler extends Component {
         const { errors, Clear } = this.props;
         if ( errors.length > 0 ) {
             errors.forEach( ( error ) => {
-                NotificationManager.error( error, "Error", 15000 );
+                NotificationManager.error( error, "Error", 3000 );
             } );
             Clear();
         }

@@ -2,11 +2,11 @@ import React from "react";
 
 import { Page } from "components";
 
-const PageHome = () => (
+const PageProject = () => (
     <Page>
-        <Page.Header title="Home" subtitle="Subtitle" />
+        <Page.Header title="Project" subtitle="Subtitle" />
         <Page.Content>
-                   Content
+                Content
         </Page.Content>
         <Page.Footer>
             <p>
@@ -16,4 +16,4 @@ const PageHome = () => (
     </Page>
 );
 
-export default PageHome;
+export default PageProject;

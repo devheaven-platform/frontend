@@ -25,11 +25,12 @@ const PageLoading = ( { isActive, isFullSize } ) => {
 };
 
 PageLoading.propTypes = {
-    isActive: PropTypes.bool.isRequired,
+    isActive: PropTypes.bool,
     isFullSize: PropTypes.bool,
 };
 
 PageLoading.defaultProps = {
+    isActive: true,
     isFullSize: false,
 };
 

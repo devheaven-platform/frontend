@@ -34,7 +34,7 @@ function* init() {
 
 function* login( { payload } ) {
     try {
-        const { data } = yield call( stub.post, "/api/login/", payload );
+        const { data } = yield call( stub.post, "/auth/login/", payload );
         yield put( { type: types.LOGIN_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {

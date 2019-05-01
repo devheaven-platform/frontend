@@ -2,9 +2,9 @@ import React from "react";
 
 import { Page } from "components";
 
-const PageHome = () => (
+const PageBoard = () => (
     <Page>
-        <Page.Header title="Home" subtitle="Subtitle" />
+        <Page.Header title="Board" subtitle="Subtitle" />
         <Page.Content>
                    Content
         </Page.Content>
@@ -16,4 +16,4 @@ const PageHome = () => (
     </Page>
 );
 
-export default PageHome;
+export default PageBoard;

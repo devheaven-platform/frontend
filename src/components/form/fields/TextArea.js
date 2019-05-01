@@ -3,12 +3,11 @@ import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 
-const FormFieldSelect = ( {
+const FormFieldTextArea = ( {
     label,
     name,
     type,
     value,
-    options,
     error,
     touched,
     onChange,
@@ -16,16 +15,14 @@ const FormFieldSelect = ( {
     <div className="field">
         <label htmlFor={ name } className="label">{ label }</label>
         <div className="control">
-            <select
+            <textarea
                 type={ type }
                 name={ name }
                 value={ value }
                 onChange={ e => onChange( e.currentTarget.value ) }
                 onBlur={ e => onChange( e.currentTarget.value ) }
-                className={ classNames( "input", { "is-danger": touched && error } ) }
-            >
-                { options.map( option => <option key={ option.value } value={ option.value }>{ option.label }</option> ) }
-            </select>
+                className={ classNames( "textarea", { "is-danger": touched && error } ) }
+            />
         </div>
         { ( touched && error ) && (
             <p className="help is-danger">{ error }</p>
@@ -33,7 +30,7 @@ const FormFieldSelect = ( {
     </div>
 );
 
-FormFieldSelect.propTypes = {
+FormFieldTextArea.propTypes = {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -41,26 +38,16 @@ FormFieldSelect.propTypes = {
         PropTypes.string,
         PropTypes.number,
     ] ),
-    options: PropTypes.arrayOf( PropTypes.shape( {
-        value: PropTypes.oneOfType( [
-            PropTypes.string,
-            PropTypes.number,
-        ] ).isRequired,
-        label: PropTypes.oneOfType( [
-            PropTypes.string,
-            PropTypes.number,
-        ] ).isRequired,
-    } ) ).isRequired,
     error: PropTypes.string,
     touched: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
 };
 
-FormFieldSelect.defaultProps = {
+FormFieldTextArea.defaultProps = {
     value: "",
     error: null,
     touched: false,
 };
 
-export default FormFieldSelect;
+export default FormFieldTextArea;
 /* eslint-enable jsx-a11y/label-has-for */
