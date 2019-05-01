@@ -1,0 +1,18 @@
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $dropdown-divider-background-color;
+
+    &:hover {
+        background-color: $dropdown-item-hover-background-color;
+        color: $dropdown-item-hover-color;
+    }
+
+    &:last-of-type {
+        border-bottom: 0;
+    }
+
+    .icon {
+        margin-right: 7px;
+    }
+}

@@ -1,0 +1,24 @@
+$spacings: 0 0.25 0.5 1 1.5 3;
+$types: top bottom left right;
+
+@each $spacing in $spacings {
+    $idx: index($spacings, $spacing) - 1;
+
+    @each $type in $types {
+        .has-margin-#{$type}-#{$idx} {
+            margin-#{$type}: $spacing * 1rem !important;
+        }
+
+        .has-margin-#{$idx} {
+            padding: $spacing * 1rem !important;
+        }
+
+        .has-padding-#{$type}-#{$idx} {
+            padding-#{$type}: $spacing * 1rem !important;
+        }
+
+        .has-padding-#{$idx} {
+            padding: $spacing * 1rem !important;
+        }
+    }
+}

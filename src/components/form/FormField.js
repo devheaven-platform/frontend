@@ -1,67 +1,81 @@
-/* eslint complexity: 0 */
 import React from "react";
-import { Field } from "redux-form";
-import {
-    string,
-    node,
-} from "prop-types";
+import { withFormsy } from "formsy-react";
+import PropTypes from "prop-types";
 
-import {
-    InputField,
-    HiddenField,
-    TextAreaField,
-    SelectField,
-    CheckBoxField,
-    RadioField,
-} from "./components";
+import FIELD_TYPES from "forms/Types";
+import { FormFieldInput, FormFieldSelect, FormFieldCheckbox } from "./fields";
 
 const FormField = ( {
+    label,
     name,
     type,
-    label,
-    children,
-    ...rest
+    options,
+    getValue,
+    setValue,
+    isPristine,
+    getErrorMessage,
 } ) => {
+    const value = getValue();
+    const touched = !isPristine();
+    const error = getErrorMessage();
+
     switch ( type ) {
-        case "hidden":
+        case FIELD_TYPES.SELECT:
             return (
-                <Field name={ name } type={ type } component={ HiddenField } { ...rest } /> );
-        case "textarea":
-            return (
-                <Field name={ name } type={ type } label={ label } component={ TextAreaField } { ...rest } />
+                <FormFieldSelect
+                    label={ label }
+                    name={ name }
+                    type={ type }
+                    options={ options }
+                    value={ value }
+                    error={ error }
+                    touched={ touched }
+                    onChange={ setValue }
+                />
             );
-        case "select":
+        case FIELD_TYPES.CHECKBOX:
             return (
-                <Field name={ name } type={ type } label={ label } component={ SelectField } { ...rest }>
-                    { children }
-                </Field>
-            );
-        case "checkbox":
-            return (
-                <Field name={ name } type={ type } label={ label } component={ CheckBoxField } { ...rest } />
-            );
-        case "radio":
-            return (
-                <Field name={ name } type={ type } label={ label } component={ RadioField } { ...rest }>
-                    { children }
-                </Field>
+                <FormFieldCheckbox
+                    label={ label }
+                    name={ name }
+                    type={ type }
+                    value={ value }
+                    error={ error }
+                    touched={ touched }
+                    onChange={ setValue }
+                />
             );
         default:
             return (
-                <Field name={ name } type={ type } label={ label } component={ InputField } { ...rest } />
+                <FormFieldInput
+                    label={ label }
+                    name={ name }
+                    type={ type }
+                    value={ value }
+                    error={ error }
+                    touched={ touched }
+                    onChange={ setValue }
+                />
             );
     }
 };
 
-FormField.defaultProps = {
-    children: null,
-};
-
 FormField.propTypes = {
-    name: string.isRequired,
-    type: string.isRequired,
-    label: string.isRequired,
-    children: node,
+    label: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    options: PropTypes.oneOfType( [
+        PropTypes.arrayOf( PropTypes.string ),
+        PropTypes.arrayOf( PropTypes.number ),
+    ] ),
+    getValue: PropTypes.func.isRequired,
+    setValue: PropTypes.func.isRequired,
+    isPristine: PropTypes.func.isRequired,
+    getErrorMessage: PropTypes.func.isRequired,
 };
 
-export default FormField;
+FormField.defaultProps = {
+    options: [],
+};
+
+export default withFormsy( FormField );

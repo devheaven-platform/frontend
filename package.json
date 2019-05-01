@@ -1,35 +1,31 @@
 {
-  "name": "devheaven-frontend",
+  "name": "garden.io",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.7.2",
+    "@fortawesome/fontawesome-free": "^5.8.1",
     "axios": "^0.18.0",
     "bulma": "^0.7.4",
     "bulma-pageloader": "^2.1.0",
-    "bulma-switch": "^2.0.0",
-    "bulma-tooltip": "^2.0.2",
-    "http-proxy-middleware": "^0.19.1",
+    "classnames": "^2.2.6",
+    "formsy-react": "^1.1.5",
+    "jwt-decode": "^2.2.0",
+    "moment": "^2.24.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
+    "query-string": "^6.4.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-notifications": "^1.4.3",
-    "react-pose": "^4.0.8",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",
-    "react-trello": "^2.1.3",
     "redux": "^4.0.1",
-    "redux-form": "^8.1.0",
-    "redux-form-saga": "^0.2.0",
     "redux-saga": "^1.0.2",
-    "styled-components": "^4.2.0"
+    "redux-types": "^2.0.3"
   },
   "scripts": {
-    "start": "cross-env REACT_APP_ENV_NAME=development react-scripts start",
-    "start:remote:staging": "cross-env REACT_APP_ENV_NAME=staging react-scripts start",
-    "start:remote:production": "cross-env REACT_APP_ENV_NAME=production react-scripts start",
+    "start": "REACT_APP_ENV_NAME=development react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -45,7 +41,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "cross-env": "^5.2.0",
     "eslint-config-airbnb": "^17.1.0"
   }
 }
