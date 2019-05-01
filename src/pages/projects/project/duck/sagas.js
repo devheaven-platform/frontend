@@ -80,8 +80,9 @@ function* deleteBoard( action ) {
 
 function* archiveProject( action ) {
     try {
-        yield call( Axios.patch, `/projects/${ action.payload }`, { archived: true } );
-        yield put( { type: types.ARCHIVE_PROJECT_SUCCESS, payload: action.payload } );
+        const { data } = yield call( Axios.patch, `/projects/${ action.payload }`, { archived: true } );
+        yield put( { type: types.ARCHIVE_PROJECT_SUCCESS, payload: data } );
+        yield put( { type: types.ARCHIVE_PROJECT_SUCCESS, payload: null } );
     } catch ( error ) {
         yield put( { type: types.ARCHIVE_PROJECT_ERROR, payload: error } );
     }
