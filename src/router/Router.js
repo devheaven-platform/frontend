@@ -4,7 +4,14 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import ROLES from "./Roles";
 
-import { PageHome, PageLogin, PageError } from "../pages";
+import {
+    PageHome,
+    PageProjects,
+    PageProject,
+    PageBoard,
+    PageLogin,
+    PageError,
+} from "../pages";
 import RestrictedRoute from "./RestrictedRoute";
 
 const Router = ( { isAuthenticated, roles, children } ) => (
@@ -13,6 +20,9 @@ const Router = ( { isAuthenticated, roles, children } ) => (
             { children }
             <Switch>
                 <RestrictedRoute exact path="/" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageHome } />
+                <RestrictedRoute exact path="/projects" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageProjects } />
+                <RestrictedRoute exact path="/project/:id" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageProject } />
+                <RestrictedRoute exact path="/project/:id/board/:boardId" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageBoard } />
                 <Route exact path="/login" component={ PageLogin } />
                 <Route
                     path="*"

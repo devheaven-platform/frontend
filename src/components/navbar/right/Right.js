@@ -9,6 +9,9 @@ const NavbarRight = ( { isAuthenticated } ) => {
                 <div className="navbar-item has-dropdown is-hoverable">
                     <div className="navbar-link">Account</div>
                     <div className="navbar-dropdown">
+                        <NavLink exact to="/profile" className="navbar-item" activeClassName="is-active">Profile</NavLink>
+                        <NavLink exact to="/help" className="navbar-item" activeClassName="is-active">Help</NavLink>
+                        <NavLink exact to="/settings" className="navbar-item" activeClassName="is-active">Settings</NavLink>
                         <NavLink to="/login?logout=true" className="navbar-item">Logout</NavLink>
                     </div>
                 </div>
@@ -17,7 +20,7 @@ const NavbarRight = ( { isAuthenticated } ) => {
     }
     return (
         <div className="navbar-end">
-            <NavLink exact to="/login" className="navbar-item" activeClassName="is-active">Login</NavLink>
+            <NavLink exact to="/login" className="navbar-item">Login</NavLink>
         </div>
     );
 };
