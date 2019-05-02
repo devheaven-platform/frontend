@@ -1,8 +1,8 @@
-# Frontend Refactor
+### Frontend
 
 * Make date input pretty.
 * Unarchive a project?
 
-# Project Management
+### Project Management
 
 * Budget is set to 0 when archiving a project.
