@@ -71,6 +71,9 @@ const boards = ( state = defaultState.boards, { type, payload } ) => {
     if ( type === types.LOAD_SUCCESS ) {
         return payload.project.boards;
     }
+    if ( type === types.CREATE_BOARD_SUCCESS ) {
+        return [ ...state, payload ];
+    }
     return state;
 };
 

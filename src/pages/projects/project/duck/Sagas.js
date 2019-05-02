@@ -137,6 +137,20 @@ function* removeMilestone( { payload } ) {
     }
 }
 
+function* createBoard( { payload } ) {
+    try {
+        const id = yield select( selectors.projectId );
+        const { data } = yield call( axios.post, "/boards/", { ...payload, project: id } );
+
+        yield put( { type: types.CREATE_BOARD_SUCCESS, payload: data } );
+    } catch ( error ) {
+        yield put( {
+            type: errorSelectors.errorType( error, types.CREATE_BOARD_ERROR, errorTypes.APP_ERROR ),
+            payload: errorSelectors.errorPayload( error ),
+        } );
+    }
+}
+
 export default function* main() {
     yield takeLatest( types.LOAD, load );
     yield takeLatest( types.EDIT_PROJECT, editProject );
@@ -145,4 +159,5 @@ export default function* main() {
     yield takeLatest( types.REMOVE_MEMBER, removeMember );
     yield takeLatest( types.CREATE_MILESTONE, createMilestone );
     yield takeLatest( types.REMOVE_MILESTONE, removeMilestone );
+    yield takeLatest( types.CREATE_BOARD, createBoard );
 }
