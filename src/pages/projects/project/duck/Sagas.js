@@ -124,6 +124,19 @@ function* createMilestone( { payload } ) {
     }
 }
 
+function* removeMilestone( { payload } ) {
+    try {
+        yield call( axios.delete, `/milestones/${ payload.id }` );
+
+        yield put( { type: types.REMOVE_MILESTONE_SUCCESS, payload: payload.id } );
+    } catch ( error ) {
+        yield put( {
+            type: errorTypes.APP_ERROR,
+            payload: errorSelectors.errorPayload( error ),
+        } );
+    }
+}
+
 export default function* main() {
     yield takeLatest( types.LOAD, load );
     yield takeLatest( types.EDIT_PROJECT, editProject );
@@ -131,4 +144,5 @@ export default function* main() {
     yield takeLatest( types.ADD_MEMBER, addMember );
     yield takeLatest( types.REMOVE_MEMBER, removeMember );
     yield takeLatest( types.CREATE_MILESTONE, createMilestone );
+    yield takeLatest( types.REMOVE_MILESTONE, removeMilestone );
 }

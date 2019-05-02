@@ -61,6 +61,9 @@ const milestones = ( state = defaultState.milestones, { type, payload } ) => {
     if ( type === types.CREATE_MILESTONE_SUCCESS ) {
         return [ ...state, payload ];
     }
+    if ( type === types.REMOVE_MILESTONE_SUCCESS ) {
+        return state.filter( m => m.id !== payload );
+    }
     return state;
 };
 
