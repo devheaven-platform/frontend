@@ -8,8 +8,8 @@
 * Edit milestone?
 * Connect project-management and task-management service to save boards.
 * Edit board in board page.
-* Archive set budget to zero
 
 ### Project Management
 
 * Budget is set to 0 when archiving a project.
+* Use JWT token id for project owner.

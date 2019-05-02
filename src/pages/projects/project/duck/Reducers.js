@@ -58,6 +58,9 @@ const milestones = ( state = defaultState.milestones, { type, payload } ) => {
     if ( type === types.LOAD_SUCCESS ) {
         return payload.project.milestones;
     }
+    if ( type === types.CREATE_MILESTONE_SUCCESS ) {
+        return [ ...state, payload ];
+    }
     return state;
 };
 

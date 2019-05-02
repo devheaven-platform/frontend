@@ -110,10 +110,25 @@ function* removeMember( { payload } ) {
     }
 }
 
+function* createMilestone( { payload } ) {
+    try {
+        const id = yield select( selectors.projectId );
+        const { data } = yield call( axios.post, "/milestones/", { ...payload, project: id } );
+
+        yield put( { type: types.CREATE_MILESTONE_SUCCESS, payload: data } );
+    } catch ( error ) {
+        yield put( {
+            type: errorSelectors.errorType( error, types.CREATE_MILESTONE_ERROR, errorTypes.APP_ERROR ),
+            payload: errorSelectors.errorPayload( error ),
+        } );
+    }
+}
+
 export default function* main() {
     yield takeLatest( types.LOAD, load );
     yield takeLatest( types.EDIT_PROJECT, editProject );
     yield takeLatest( types.ARCHIVE_PROJECT, archiveProject );
     yield takeLatest( types.ADD_MEMBER, addMember );
     yield takeLatest( types.REMOVE_MEMBER, removeMember );
+    yield takeLatest( types.CREATE_MILESTONE, createMilestone );
 }
