@@ -89,9 +89,20 @@ class PageProject extends React.Component {
                         errors={ errors }
                         submit={ EditProject }
                     />
-                    <button type="button" className="button is-danger has-margin-left-2" onClick={ ArchiveProject }>Archive</button>
+                    { !project.archived && ( <button type="button" className="button is-danger has-margin-left-2" onClick={ ArchiveProject }>Archive</button> ) }
                 </Page.Header>
                 <Page.Content>
+                    { project.archived && (
+                        <div className="columns">
+                            <div className="column">
+                                <div className="message is-warning">
+                                    <div className="message-body">
+                                        Warning: This project is archived.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ) }
                     <div className="columns">
                         <ProjectDetails
                             client={ project.client }
