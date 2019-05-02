@@ -49,11 +49,6 @@ export default [
         icon: "ellipsis-v",
         actions: [
             {
-                label: "Edit",
-                key: "edit",
-                icon: "edit",
-            },
-            {
                 label: "Archive",
                 key: "archive",
                 icon: "archive",

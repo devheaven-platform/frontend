@@ -104,6 +104,8 @@ class PageProject extends React.Component {
                     <div className="columns">
                         <ProjectMembers
                             members={ members }
+                            users={ users }
+                            errors={ errors }
                             add={ AddMember }
                             remove={ RemoveMember }
                         />
@@ -118,7 +120,7 @@ class PageProject extends React.Component {
                     <div className="columns">
                         <div className="column">
                             <div className="is-flex has-space-between has-margin-bottom-2">
-                                <h6 className="title is-6">Boards</h6>
+                                <h5 className="title is-5">Boards</h5>
                                 <ModalForm
                                     title="Create"
                                     description="Create a new board."

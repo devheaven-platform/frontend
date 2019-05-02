@@ -24,7 +24,7 @@ const ProjectMilestones = ( {
     return (
         <div className="column">
             <div className="is-flex has-space-between has-margin-bottom-2">
-                <h6 className="title is-6">Milestones</h6>
+                <h5 className="title is-5">Milestones</h5>
                 <ModalForm
                     title="Create"
                     description="Create a new milestone"

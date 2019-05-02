@@ -1,16 +1,55 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ProjectMembers = ( { members, add, remove } ) => (
-    <div className="column">
-        <h6 className="title is-6">Members</h6>
-    </div>
-);
+import addMemberForm from "forms/AddMember";
+import Member from "./member/Member";
+import ModalForm from "../../modal/form/Form";
+
+const ProjectMembers = ( {
+    members,
+    users,
+    errors,
+    add,
+    remove,
+} ) => {
+    const items = members.map( member => (
+        <Member
+            key={ member.id }
+            firstname={ member.firstname }
+            lastname={ member.lastname }
+            remove={ () => remove( member ) }
+        />
+    ) );
+
+    return (
+        <div className="column">
+            <div className="is-flex has-space-between has-margin-bottom-2">
+                <h5 className="title is-5">Members</h5>
+                <ModalForm
+                    title="Create"
+                    description="Create a new milestone"
+                    fields={ addMemberForm( { users } ) }
+                    errors={ errors }
+                    submit={ add }
+                />
+            </div>
+            <div className="list">
+                { items }
+            </div>
+        </div>
+    );
+};
 
 ProjectMembers.propTypes = {
     members: PropTypes.arrayOf( PropTypes.shape() ).isRequired,
+    users: PropTypes.arrayOf( PropTypes.shape() ).isRequired,
+    errors: PropTypes.shape(),
     add: PropTypes.func.isRequired,
     remove: PropTypes.func.isRequired,
+};
+
+ProjectMembers.defaultProps = {
+    errors: {},
 };
 
 export default ProjectMembers;
