@@ -1,0 +1,23 @@
+import types from "redux-types";
+
+export default types( "@project", [
+    "LOAD",
+    "LOAD_SUCCESS",
+    "EDIT_PROJECT",
+    "EDIT_PROJECT_SUCCESS",
+    "EDIT_PROJECT_ERROR",
+    "ARCHIVE_PROJECT",
+    "ARCHIVE_PROJECT_SUCCESS",
+    "ADD_MEMBER",
+    "ADD_MEMBER_SUCCESS",
+    "ADD_MILESTONE",
+    "ADD_MILESTONE_SUCCESS",
+    "CREATE_BOARD",
+    "CREATE_BOARD_SUCCESS",
+    "CREATE_BOARD_ERROR",
+    "EDIT_BOARD",
+    "EDIT_BOARD_SUCCESS",
+    "EDIT_BOARD_ERROR",
+    "ARCHIVE_BOARD",
+    "ARCHIVE_BOARD_SUCCESS",
+] );

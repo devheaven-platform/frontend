@@ -30,6 +30,9 @@ const clients = ( state = defaultState.clients, { type, payload } ) => {
 };
 
 const errors = ( state = defaultState.errors, { type, payload } ) => {
+    if ( type === types.CREATE ) {
+        return {};
+    }
     if ( type === types.CREATE_ERROR ) {
         return payload;
     }

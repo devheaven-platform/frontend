@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import projectTable from "tables/Project";
-import projectForm from "forms/Project";
+import createProjectForm from "forms/CreateProject";
 import { Page, ModalForm, Table } from "components";
 import { PageLoading } from "pages";
 import { actions } from "./duck";
@@ -55,7 +55,7 @@ class PageProjects extends React.Component {
                     <ModalForm
                         title="Create"
                         description="Create a new project."
-                        fields={ projectForm( { clients } ) }
+                        fields={ createProjectForm( { clients } ) }
                         errors={ errors }
                         submit={ Create }
                     />

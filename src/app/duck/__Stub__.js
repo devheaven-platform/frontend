@@ -17,14 +17,14 @@ const loginResponse = {
 };
 
 function get( resource ) {
-    if ( resource.includes( "/api/health/" ) ) {
+    if ( resource.includes( "/health/" ) ) {
         return new Promise( resolve => setTimeout( resolve, 100, { data: healthResponse, status: 200 } ) );
     }
     return new Promise( ( resolve, reject ) => setTimeout( reject, 500, { data: { message: "An error occurred" }, status: 500 } ) );
 }
 
 function post( resource ) {
-    if ( resource.includes( "/api/login/" ) ) {
+    if ( resource.includes( "/auth/login/" ) ) {
         return new Promise( resolve => setTimeout( resolve, 100, { data: loginResponse, status: 200 } ) );
     }
     return new Promise( ( resolve, reject ) => setTimeout( reject, 500, { data: { message: "An error occurred" }, status: 500 } ) );

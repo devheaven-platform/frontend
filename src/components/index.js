@@ -1,3 +1,6 @@
+export { default as ProjectMilestones } from "./project/milestones/Milestones";
+export { default as ProjectDetails } from "./project/details/Details";
+export { default as ProjectMembers } from "./project/members/Members";
 export { default as ModalConfirm } from "./modal/confirm/Confirm";
 export { default as ErrorHandler } from "./error/ErrorHandler";
 export { default as DropDown } from "./dropdown/DropDown";
