@@ -151,6 +151,19 @@ function* createBoard( { payload } ) {
     }
 }
 
+function* archiveBoard( { payload } ) {
+    try {
+        const { data } = yield call( axios.patch, `/boards/${ payload.id }`, { archived: true } );
+
+        yield put( { type: types.ARCHIVE_BOARD_SUCCESS, payload: data } );
+    } catch ( error ) {
+        yield put( {
+            type: errorTypes.APP_ERROR,
+            payload: errorSelectors.errorPayload( error ),
+        } );
+    }
+}
+
 export default function* main() {
     yield takeLatest( types.LOAD, load );
     yield takeLatest( types.EDIT_PROJECT, editProject );
@@ -160,4 +173,5 @@ export default function* main() {
     yield takeLatest( types.CREATE_MILESTONE, createMilestone );
     yield takeLatest( types.REMOVE_MILESTONE, removeMilestone );
     yield takeLatest( types.CREATE_BOARD, createBoard );
+    yield takeLatest( types.ARCHIVE_BOARD, archiveBoard );
 }

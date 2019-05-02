@@ -74,6 +74,9 @@ const boards = ( state = defaultState.boards, { type, payload } ) => {
     if ( type === types.CREATE_BOARD_SUCCESS ) {
         return [ ...state, payload ];
     }
+    if ( type === types.ARCHIVE_BOARD_SUCCESS ) {
+        return state.map( b => ( b.id === payload.id ? payload : b ) );
+    }
     return state;
 };
 
