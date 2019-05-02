@@ -45,6 +45,9 @@ const members = ( state = defaultState.members, { type, payload } ) => {
     if ( type === types.LOAD_SUCCESS ) {
         return payload.project.members;
     }
+    if ( type === types.ADD_MEMBER_SUCCESS ) {
+        return [ ...state, payload ];
+    }
     return state;
 };
 

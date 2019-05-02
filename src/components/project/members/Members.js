@@ -26,8 +26,8 @@ const ProjectMembers = ( {
             <div className="is-flex has-space-between has-margin-bottom-2">
                 <h5 className="title is-5">Members</h5>
                 <ModalForm
-                    title="Create"
-                    description="Create a new milestone"
+                    title="Add"
+                    description="Add a new member."
                     fields={ addMemberForm( { users } ) }
                     errors={ errors }
                     submit={ add }

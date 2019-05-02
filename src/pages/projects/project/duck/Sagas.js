@@ -19,8 +19,9 @@ function* load( { payload } ) {
             call( axios.get, `/projects/${ payload }` ),
             call( stub.get, "/users/" ),
         ] );
-        const members = yield all( project.data.members.map( id => call( stub.get, `/users/${ id }` ) ) );
-        // const boards = yield all( project.data.boards.map( id => call( axios.get, `/boards/${ id }` ) ) ); // TODO: uncomment this line when project/task management services are finished
+        const members = yield all( project.data.members.map( userId => call( stub.get, `/users/${ userId }` ) ) );
+        // TODO: uncomment this line when project/task management services are finished
+        // const boards = yield all( project.data.boards.map( boardId => call( axios.get, `/boards/${ boardId }` ) ) );
         const { data: boards } = yield call( axios.get, "/boards/" );
         const { data: client } = yield call( stub.get, `/clients/${ project.data.client }` );
         const { data: owner } = yield call( stub.get, `/users/${ project.data.owner }` );
@@ -30,7 +31,8 @@ function* load( { payload } ) {
             payload: {
                 project: {
                     ...project.data,
-                    // boards: boards.map( res => res.data ), // TODO: uncomment this line when project/task management services are finished
+                    // TODO: uncomment this line when project/task management services are finished
+                    // boards: boards.map( res => res.data ),
                     boards,
                     members: members.map( res => res.data ),
                     client,
@@ -79,8 +81,24 @@ function* archiveProject() {
     }
 }
 
+function* addMember( { payload } ) {
+    try {
+        const id = yield select( selectors.projectId );
+        yield call( axios.patch, `/projects/${ id }/members/${ payload.user }`, payload );
+        const { data: member } = yield call( stub.get, `/users/${ payload.user }` );
+
+        yield put( { type: types.ADD_MEMBER_SUCCESS, payload: member } );
+    } catch ( error ) {
+        yield put( {
+            type: errorSelectors.errorType( error, types.EDIT_PROJECT_ERROR, errorTypes.APP_ERROR ),
+            payload: errorSelectors.errorPayload( error ),
+        } );
+    }
+}
+
 export default function* main() {
     yield takeLatest( types.LOAD, load );
     yield takeLatest( types.EDIT_PROJECT, editProject );
     yield takeLatest( types.ARCHIVE_PROJECT, archiveProject );
+    yield takeLatest( types.ADD_MEMBER, addMember );
 }

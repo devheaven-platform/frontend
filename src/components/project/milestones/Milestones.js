@@ -27,7 +27,7 @@ const ProjectMilestones = ( {
                 <h5 className="title is-5">Milestones</h5>
                 <ModalForm
                     title="Create"
-                    description="Create a new milestone"
+                    description="Create a new milestone."
                     fields={ createMilestoneForm }
                     errors={ errors }
                     submit={ create }
