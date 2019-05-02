@@ -18,7 +18,7 @@ function* load( { payload } ) {
             call( stub.get, "/users/" ),
         ] );
         const members = yield all( project.data.members.map( id => call( stub.get, `/users/${ id }` ) ) );
-        // const boards = yield all( project.data.boards.map( id => call( axios.get, `/boards/${ id }` ) ) );
+        // const boards = yield all( project.data.boards.map( id => call( axios.get, `/boards/${ id }` ) ) ); // TODO: uncomment this line when project/task management services are finished
         const { data: boards } = yield call( axios.get, "/boards/" );
         const { data: client } = yield call( stub.get, `/clients/${ project.data.client }` );
         const { data: owner } = yield call( stub.get, `/users/${ project.data.owner }` );
@@ -28,7 +28,7 @@ function* load( { payload } ) {
             payload: {
                 project: {
                     ...project.data,
-                    // boards: boards.map( res => res.data ),
+                    // boards: boards.map( res => res.data ), // TODO: uncomment this line when project/task management services are finished
                     boards,
                     members: members.map( res => res.data ),
                     client,

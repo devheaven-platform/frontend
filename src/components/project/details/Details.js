@@ -6,7 +6,7 @@ const ProjectDetails = ( {
     client,
     owner,
     start,
-    updatedAt,
+    budget,
 } ) => (
     <React.Fragment>
         <div className="column">
@@ -27,9 +27,9 @@ const ProjectDetails = ( {
                 </p>
             </div>
             <div>
-                <p><b>Updated At</b></p>
+                <p><b>Budget</b></p>
                 <p>
-                    { moment( updatedAt ).format( "DD-MM-YYYY" ) }
+                    { budget || "No budget set" }
                 </p>
             </div>
         </div>
@@ -40,7 +40,11 @@ ProjectDetails.propTypes = {
     client: PropTypes.shape().isRequired,
     owner: PropTypes.shape().isRequired,
     start: PropTypes.number.isRequired,
-    updatedAt: PropTypes.number.isRequired,
+    budget: PropTypes.number,
+};
+
+ProjectDetails.defaultProps = {
+    budget: null,
 };
 
 export default ProjectDetails;
