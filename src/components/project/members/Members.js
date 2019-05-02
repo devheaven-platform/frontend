@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const ProjectMembers = ( { members, add, remove } ) => (
     <div className="column">
-        Members
+        <h6 className="title is-6">Members</h6>
     </div>
 );
 

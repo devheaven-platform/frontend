@@ -18,6 +18,7 @@ class App extends React.Component {
         const { Init } = this.props;
         Init();
         axios.defaults.baseURL = process.env[ `REACT_APP_API_URL_${ process.env.REACT_APP_ENV_NAME }` ];
+        axios.defaults.timeout = 10000;
     }
 
     render() {

@@ -6,6 +6,8 @@
 * Unarchive a board?
 * Use confirmation modal when archiving a board.
 * Edit milestone?
+* Connect project-management and task-management service to save boards.
+* Edit board in board page.
 
 ### Project Management
 

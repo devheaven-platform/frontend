@@ -16,6 +16,7 @@
 @import "bulma/sass/grid/tiles.sass";
 @import "bulma/sass/grid/columns.sass";
 
+@import "bulma/sass/components/list.sass";
 @import "bulma/sass/components/modal.sass";
 @import "bulma/sass/components/navbar.sass";
 @import "bulma/sass/components/message.sass";
@@ -24,6 +25,7 @@
 @import "bulma-pageloader/src/sass/index.sass";
 
 // Custom
+@import "flex.scss";
 @import "page.scss";
 @import "table.scss";
 @import "navbar.scss";

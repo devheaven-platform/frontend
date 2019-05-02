@@ -21,8 +21,8 @@ const Router = ( { isAuthenticated, roles, children } ) => (
             <Switch>
                 <RestrictedRoute exact path="/" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageHome } />
                 <RestrictedRoute exact path="/projects" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageProjects } />
-                <RestrictedRoute exact path="/projects/:projectId" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageProject } />
-                <RestrictedRoute exact path="/projects/:projectId/boards/:boardId" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageBoard } />
+                <RestrictedRoute exact path="/projects/:id" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageProject } />
+                <RestrictedRoute exact path="/boards/:id" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageBoard } />
                 <Route exact path="/login" component={ PageLogin } />
                 <Route
                     path="*"

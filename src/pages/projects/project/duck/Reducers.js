@@ -60,16 +60,16 @@ const errors = ( state = defaultState.errors, { type, payload } ) => {
     if ( type === types.EDIT_PROJECT_ERROR ) {
         return payload;
     }
+    if ( type === types.CREATE_MILESTONE ) {
+        return {};
+    }
+    if ( type === types.CREATE_MILESTONE_ERROR ) {
+        return payload;
+    }
     if ( type === types.CREATE_BOARD ) {
         return {};
     }
     if ( type === types.CREATE_BOARD_ERROR ) {
-        return payload;
-    }
-    if ( type === types.EDIT_BOARD ) {
-        return {};
-    }
-    if ( type === types.EDIT_BOARD_ERROR ) {
         return payload;
     }
     return state;

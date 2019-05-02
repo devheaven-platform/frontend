@@ -10,13 +10,11 @@ const addMember = payload => ( { type: types.ADD_MEMBER, payload } );
 
 const removeMember = payload => ( { type: types.REMOVE_MEMBER, payload } );
 
-const addMilestone = payload => ( { type: types.ADD_MILESTONE, payload } );
+const createMilestone = payload => ( { type: types.CREATE_MILESTONE, payload } );
 
 const removeMilestone = payload => ( { type: types.REMOVE_MILESTONE, payload } );
 
 const createBoard = payload => ( { type: types.CREATE_BOARD, payload } );
-
-const editBoard = payload => ( { type: types.EDIT_BOARD, payload } );
 
 const archiveBoard = payload => ( { type: types.ARCHIVE_BOARD, payload } );
 
@@ -26,9 +24,8 @@ export default {
     archiveProject,
     addMember,
     removeMember,
-    addMilestone,
+    createMilestone,
     removeMilestone,
     createBoard,
-    editBoard,
     archiveBoard,
 };

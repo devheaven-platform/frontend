@@ -1,16 +1,54 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ProjectMilestones = ( { milestones, add, remove } ) => (
-    <div className="column">
-        Milestones
-    </div>
-);
+import createMilestoneForm from "forms/CreateMilestone";
+import Milestone from "./milestone/Milestone";
+import ModalForm from "../../modal/form/Form";
+
+const ProjectMilestones = ( {
+    milestones,
+    errors,
+    create,
+    remove,
+} ) => {
+    const items = milestones.map( milestone => (
+        <Milestone
+            key={ milestone.id }
+            name={ milestone.name }
+            description={ milestone.description }
+            date={ milestone.date }
+            remove={ () => remove( milestone ) }
+        />
+    ) );
+
+    return (
+        <div className="column">
+            <div className="is-flex has-space-between has-margin-bottom-2">
+                <h6 className="title is-6">Milestones</h6>
+                <ModalForm
+                    title="Create"
+                    description="Create a new milestone"
+                    fields={ createMilestoneForm }
+                    errors={ errors }
+                    submit={ create }
+                />
+            </div>
+            <div className="list">
+                { items }
+            </div>
+        </div>
+    );
+};
 
 ProjectMilestones.propTypes = {
     milestones: PropTypes.arrayOf( PropTypes.shape() ).isRequired,
-    add: PropTypes.func.isRequired,
+    errors: PropTypes.shape(),
+    create: PropTypes.func.isRequired,
     remove: PropTypes.func.isRequired,
+};
+
+ProjectMilestones.defaultProps = {
+    errors: {},
 };
 
 export default ProjectMilestones;

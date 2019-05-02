@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import editProjectForm from "forms/EditProject";
+import createBoardForm from "forms/CreateBoard";
+import boardTable from "tables/Board";
 import { PageLoading } from "pages";
 import {
     Page,
@@ -11,6 +13,7 @@ import {
     ProjectMembers,
     ProjectMilestones,
     ModalForm,
+    Table,
 } from "components";
 import { actions } from "./duck";
 
@@ -28,10 +31,9 @@ class PageProject extends React.Component {
         ArchiveProject: PropTypes.func.isRequired,
         AddMember: PropTypes.func.isRequired,
         RemoveMember: PropTypes.func.isRequired,
-        AddMilestone: PropTypes.func.isRequired,
+        CreateMilestone: PropTypes.func.isRequired,
         RemoveMilestone: PropTypes.func.isRequired,
         CreateBoard: PropTypes.func.isRequired,
-        EditBoard: PropTypes.func.isRequired,
         ArchiveBoard: PropTypes.func.isRequired,
     }
 
@@ -46,7 +48,14 @@ class PageProject extends React.Component {
 
     componentDidMount() {
         const { Load, match } = this.props;
-        Load( match.params.projectId );
+        Load( match.params.id );
+    }
+
+    onContextMenuClick = ( action, board ) => {
+        const { ArchiveBoard } = this.props;
+        if ( action === "archive" ) {
+            ArchiveBoard( board );
+        }
     }
 
     render() {
@@ -61,8 +70,9 @@ class PageProject extends React.Component {
             ArchiveProject,
             AddMember,
             RemoveMember,
-            AddMilestone,
+            CreateMilestone,
             RemoveMilestone,
+            CreateBoard,
         } = this.props;
 
         if ( project === null || members === null || milestones === null || boards === null || users === null ) {
@@ -99,14 +109,29 @@ class PageProject extends React.Component {
                         />
                         <ProjectMilestones
                             milestones={ milestones }
-                            add={ AddMilestone }
+                            errors={ errors }
+                            create={ values => CreateMilestone( { ...values, project: project.id } ) }
                             remove={ RemoveMilestone }
                         />
                     </div>
                     <hr />
                     <div className="columns">
                         <div className="column">
-                            Boards
+                            <div className="is-flex has-space-between has-margin-bottom-2">
+                                <h6 className="title is-6">Boards</h6>
+                                <ModalForm
+                                    title="Create"
+                                    description="Create a new board."
+                                    fields={ createBoardForm }
+                                    errors={ errors }
+                                    submit={ values => CreateBoard( { ...values, project: project.id } ) }
+                                />
+                            </div>
+                            <Table
+                                columns={ boardTable }
+                                data={ boards }
+                                onContextMenuClick={ this.onContextMenuClick }
+                            />
                         </div>
                     </div>
                 </Page.Content>
@@ -144,10 +169,9 @@ const mDTP = dispatch => ( {
     ArchiveProject: payload => dispatch( actions.archiveProject( payload ) ),
     AddMember: payload => dispatch( actions.addMember( payload ) ),
     RemoveMember: payload => dispatch( actions.removeMember( payload ) ),
-    AddMilestone: payload => dispatch( actions.addMilestone( payload ) ),
+    CreateMilestone: payload => dispatch( actions.createMilestone( payload ) ),
     RemoveMilestone: payload => dispatch( actions.removeMilestone( payload ) ),
     CreateBoard: payload => dispatch( actions.createBoard( payload ) ),
-    EditBoard: payload => dispatch( actions.editBoard( payload ) ),
     ArchiveBoard: payload => dispatch( actions.archiveBoard( payload ) ),
 } );
 
