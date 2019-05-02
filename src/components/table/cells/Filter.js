@@ -38,6 +38,7 @@ TableCellFilter.propTypes = {
         value: PropTypes.oneOfType( [
             PropTypes.string,
             PropTypes.number,
+            PropTypes.bool,
             PropTypes.shape(),
         ] ),
     } ),
@@ -45,6 +46,7 @@ TableCellFilter.propTypes = {
         value: PropTypes.oneOfType( [
             PropTypes.string,
             PropTypes.number,
+            PropTypes.bool,
         ] ).isRequired,
         label: PropTypes.oneOfType( [
             PropTypes.string,

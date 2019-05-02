@@ -11,6 +11,12 @@ const matchNumber = ( target, filter ) => target !== filter;
 
 const matchExact = ( target, filter ) => target !== filter;
 
+const matchBoolean = ( target, filter ) => {
+    const a = target;
+    const b = filter !== "true";
+    return a === b;
+};
+
 const matchRangeNumbers = ( target, filter ) => {
     const a = parseFloat( target );
     const min = parseFloat( filter.min );
@@ -36,8 +42,11 @@ const filterItem = ( item, filters ) => {
         // Search (number)
         if ( type === FILTER_TYPES.SEARCH && typeof target === "number" && matchNumber( target, value ) ) return false;
 
-        // Select
-        if ( type === FILTER_TYPES.SELECT && matchExact( target, value ) ) return false;
+        // Select (default)
+        if ( type === FILTER_TYPES.SELECT && !( value === "true" || value === "false" ) && matchExact( target, value ) ) return false;
+
+        // Select (boolean)
+        if ( type === FILTER_TYPES.SELECT && ( value === "true" || value === "false" ) && matchBoolean( target, value ) ) return false;
 
         // Range (number)
         if ( type === FILTER_TYPES.RANGE_NUMBER && matchRangeNumbers( target, value ) ) return false;

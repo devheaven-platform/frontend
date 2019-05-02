@@ -40,7 +40,7 @@ function* create( { payload } ) {
 
 function* archive( { payload } ) {
     try {
-        const { data } = yield call( axios.patch, `/projects/${ payload }`, { archived: true } );
+        const { data } = yield call( axios.patch, `/projects/${ payload.id }`, { archived: true } );
         yield put( { type: types.ARCHIVE_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {

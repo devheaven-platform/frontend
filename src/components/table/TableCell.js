@@ -2,7 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { CELL_TYPES } from "../../tables/Types";
-import { TableCellText, TableCellDate, TableCellContextMenu } from "./cells";
+import {
+    TableCellText,
+    TableCellBoolean,
+    TableCellDate,
+    TableCellContextMenu,
+} from "./cells";
 
 const TableCell = ( {
     type,
@@ -18,6 +23,12 @@ const TableCell = ( {
                 <TableCellText
                     value={ value }
                     link={ link }
+                />
+            );
+        case CELL_TYPES.BOOLEAN:
+            return (
+                <TableCellBoolean
+                    value={ value }
                 />
             );
         case CELL_TYPES.DATE:
@@ -48,6 +59,7 @@ TableCell.propTypes = {
     value: PropTypes.oneOfType( [
         PropTypes.string,
         PropTypes.number,
+        PropTypes.bool,
         PropTypes.shape(),
     ] ),
     icon: PropTypes.string,

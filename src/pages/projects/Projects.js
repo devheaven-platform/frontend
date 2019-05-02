@@ -2,8 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+import projectTable from "tables/Project";
 import projectForm from "forms/Project";
-import { Page, ModalForm } from "components";
+import { Page, ModalForm, Table } from "components";
 import { PageLoading } from "pages";
 import { actions } from "./duck";
 
@@ -26,6 +27,14 @@ class PageProjects extends React.Component {
     componentDidMount() {
         const { Load } = this.props;
         Load();
+    }
+
+    onContextMenuClick = ( action, project ) => {
+        const { Archive } = this.props;
+
+        if ( action === "archive" ) {
+            Archive( project );
+        }
     }
 
     render() {
@@ -52,7 +61,11 @@ class PageProjects extends React.Component {
                     />
                 </Page.Header>
                 <Page.Content>
-                           Content
+                    <Table
+                        columns={ projectTable }
+                        data={ projects }
+                        onContextMenuClick={ this.onContextMenuClick }
+                    />
                 </Page.Content>
                 <Page.Footer>
                     <p>

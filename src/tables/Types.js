@@ -1,6 +1,7 @@
 const CELL_TYPES = {
     TEXT: "text",
     DATE: "date",
+    BOOLEAN: "boolean",
     CONTEXT_MENU: "CONTEXT_MENU",
 };
 

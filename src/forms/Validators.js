@@ -16,7 +16,7 @@ const isNumeric = ( values, value ) => ( _isEmpty( value ) || typeof value === "
     : "Must be a number."
 );
 
-const isAlphanumeric = ( values, value ) => ( _isEmpty( value ) || _matchRegex( value, "^[0-9A-Z]+$/i" )
+const isAlphanumeric = ( values, value ) => ( _isEmpty( value ) || _matchRegex( value, "[\\w ]" )
     ? true
     : "Can only contain numbers and letters."
 );

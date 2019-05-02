@@ -9,6 +9,7 @@ const Column = PropTypes.shape( {
         value: PropTypes.oneOfType( [
             PropTypes.string,
             PropTypes.number,
+            PropTypes.bool,
         ] ).isRequired,
         label: PropTypes.oneOfType( [
             PropTypes.string,
