@@ -84,13 +84,27 @@ function* archiveProject() {
 function* addMember( { payload } ) {
     try {
         const id = yield select( selectors.projectId );
-        yield call( axios.patch, `/projects/${ id }/members/${ payload.user }`, payload );
+        yield call( axios.patch, `/projects/${ id }/members/${ payload.user }` );
         const { data: member } = yield call( stub.get, `/users/${ payload.user }` );
 
         yield put( { type: types.ADD_MEMBER_SUCCESS, payload: member } );
     } catch ( error ) {
         yield put( {
-            type: errorSelectors.errorType( error, types.EDIT_PROJECT_ERROR, errorTypes.APP_ERROR ),
+            type: errorSelectors.errorType( error, types.ADD_MEMBER_ERROR, errorTypes.APP_ERROR ),
+            payload: errorSelectors.errorPayload( error ),
+        } );
+    }
+}
+
+function* removeMember( { payload } ) {
+    try {
+        const id = yield select( selectors.projectId );
+        yield call( axios.delete, `/projects/${ id }/members/${ payload.id }` );
+
+        yield put( { type: types.REMOVE_MEMBER_SUCCESS, payload: payload.id } );
+    } catch ( error ) {
+        yield put( {
+            type: errorTypes.APP_ERROR,
             payload: errorSelectors.errorPayload( error ),
         } );
     }
@@ -101,4 +115,5 @@ export default function* main() {
     yield takeLatest( types.EDIT_PROJECT, editProject );
     yield takeLatest( types.ARCHIVE_PROJECT, archiveProject );
     yield takeLatest( types.ADD_MEMBER, addMember );
+    yield takeLatest( types.REMOVE_MEMBER, removeMember );
 }

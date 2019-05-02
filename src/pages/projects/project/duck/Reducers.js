@@ -48,6 +48,9 @@ const members = ( state = defaultState.members, { type, payload } ) => {
     if ( type === types.ADD_MEMBER_SUCCESS ) {
         return [ ...state, payload ];
     }
+    if ( type === types.REMOVE_MEMBER_SUCCESS ) {
+        return state.filter( m => m.id !== payload );
+    }
     return state;
 };
 
