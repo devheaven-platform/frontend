@@ -89,7 +89,7 @@ class PageProject extends React.Component {
                         errors={ errors }
                         submit={ EditProject }
                     />
-                    <button type="button" className="button is-danger has-margin-left-2" onClick={ () => ArchiveProject( project ) }>Archive</button>
+                    <button type="button" className="button is-danger has-margin-left-2" onClick={ ArchiveProject }>Archive</button>
                 </Page.Header>
                 <Page.Content>
                     <div className="columns">
@@ -112,7 +112,7 @@ class PageProject extends React.Component {
                         <ProjectMilestones
                             milestones={ milestones }
                             errors={ errors }
-                            create={ values => CreateMilestone( { ...values, project: project.id } ) }
+                            create={ CreateMilestone }
                             remove={ RemoveMilestone }
                         />
                     </div>
@@ -126,7 +126,7 @@ class PageProject extends React.Component {
                                     description="Create a new board."
                                     fields={ createBoardForm }
                                     errors={ errors }
-                                    submit={ values => CreateBoard( { ...values, project: project.id } ) }
+                                    submit={ CreateBoard }
                                 />
                             </div>
                             <Table

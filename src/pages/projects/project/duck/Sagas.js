@@ -2,12 +2,14 @@ import {
     all,
     call,
     put,
+    select,
     takeLatest,
 } from "redux-saga/effects";
 import axios from "axios";
 
 import errorSelectors from "components/error/duck/Selectors";
 import errorTypes from "components/error/duck/Types";
+import selectors from "./Selectors";
 import stub from "./__Stub__";
 import types from "./Types";
 
@@ -45,6 +47,23 @@ function* load( { payload } ) {
     }
 }
 
+function* editProject( { payload } ) {
+    try {
+        const id = yield select( selectors.projectId );
+        const { data: project } = yield call( axios.patch, `/projects/${ id }`, payload );
+        const { data: client } = yield call( stub.get, `/clients/${ project.client }` );
+        const { data: owner } = yield call( stub.get, `/users/${ project.owner }` );
+
+        yield put( { type: types.EDIT_PROJECT_SUCCESS, payload: { ...project, client, owner } } );
+    } catch ( error ) {
+        yield put( {
+            type: errorSelectors.errorType( error, types.EDIT_PROJECT_ERROR, errorTypes.APP_ERROR ),
+            payload: errorSelectors.errorPayload( error ),
+        } );
+    }
+}
+
 export default function* main() {
     yield takeLatest( types.LOAD, load );
+    yield takeLatest( types.EDIT_PROJECT, editProject );
 }

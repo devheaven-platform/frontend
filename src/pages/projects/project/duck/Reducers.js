@@ -22,6 +22,14 @@ const project = ( state = defaultState.project, { type, payload } ) => {
             boards: undefined,
         };
     }
+    if ( type === types.EDIT_PROJECT_SUCCESS ) {
+        return {
+            ...payload,
+            members: undefined,
+            milestones: undefined,
+            boards: undefined,
+        };
+    }
     return state;
 };
 
