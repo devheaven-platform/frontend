@@ -8,6 +8,7 @@
 * Edit milestone?
 * Connect project-management and task-management service to save boards.
 * Edit board in board page.
+* Write conventions down in README.md
 
 ### Project Management
 
