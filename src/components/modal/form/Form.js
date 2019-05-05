@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames";
 import PropTypes from "prop-types";
 
 import FormPropTypesField from "../../form/propTypes/Field";
@@ -10,6 +11,7 @@ class ModalForm extends React.Component {
    static propTypes = {
        title: PropTypes.string.isRequired,
        description: PropTypes.string,
+       className: PropTypes.string,
        fields: PropTypes.arrayOf( FormPropTypesField ).isRequired,
        errors: PropTypes.shape(),
        submit: PropTypes.func.isRequired,
@@ -17,6 +19,7 @@ class ModalForm extends React.Component {
 
    static defaultProps = {
        description: null,
+       className: null,
        errors: {},
    };
 
@@ -60,6 +63,7 @@ class ModalForm extends React.Component {
        const {
            title,
            description,
+           className,
            fields,
            errors,
        } = this.props;
@@ -71,7 +75,7 @@ class ModalForm extends React.Component {
 
        return (
            <React.Fragment>
-               <button type="button" className="button is-primary" onClick={ () => this.setIsFormModalOpen( !isFormModalOpen ) }>{ title }</button>
+               <button type="button" className={ classNames( "button is-primary", { [ className ]: className } ) } onClick={ () => this.setIsFormModalOpen( !isFormModalOpen ) }>{ title }</button>
                <Modal
                    title={ title }
                    description={ description }

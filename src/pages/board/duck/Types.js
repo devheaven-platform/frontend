@@ -1,0 +1,25 @@
+import types from "redux-types";
+
+export default types( "@board", [
+    "LOAD",
+    "LOAD_SUCCESS",
+    "EDIT_BOARD",
+    "EDIT_BOARD_SUCCESS",
+    "EDIT_BOARD_ERROR",
+    "CREATE_COLUMN",
+    "CREATE_COLUMN_SUCCESS",
+    "CREATE_COLUMN_ERROR",
+    "EDIT_COLUMN",
+    "EDIT_COLUMN_SUCCESS",
+    "EDIT_COLUMN_ERROR",
+    "REMOVE_COLUMN",
+    "REMOVE_COLUMN_SUCCESS",
+    "CREATE_TASK",
+    "CREATE_TASK_SUCCESS",
+    "CREATE_TASK_ERROR",
+    "EDIT_TASK",
+    "EDIT_TASK_SUCCESS",
+    "EDIT_TASK_ERROR",
+    "REMOVE_TASK",
+    "REMOVE_TASK_SUCCESS",
+] );

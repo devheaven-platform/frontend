@@ -1,3 +1,4 @@
+/* eslint complexity: 0 */
 import React from "react";
 import { withFormsy } from "formsy-react";
 import PropTypes from "prop-types";
@@ -5,6 +6,7 @@ import PropTypes from "prop-types";
 import FIELD_TYPES from "forms/Types";
 import {
     FormFieldInput,
+    FormFieldNumber,
     FormFieldTextArea,
     FormFieldDate,
     FormFieldSelect,
@@ -26,6 +28,18 @@ const FormField = ( {
     const error = getErrorMessage();
 
     switch ( type ) {
+        case FIELD_TYPES.NUMBER:
+            return (
+                <FormFieldNumber
+                    label={ label }
+                    name={ name }
+                    type={ type }
+                    value={ value }
+                    error={ error }
+                    touched={ touched }
+                    onChange={ setValue }
+                />
+            );
         case FIELD_TYPES.TEXTAREA:
             return (
                 <FormFieldTextArea

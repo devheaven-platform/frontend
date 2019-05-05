@@ -46,12 +46,12 @@ const maxLength = max => ( values, value ) => ( _isEmpty( value ) || value.lengt
     : `Must be ${ max } characters or less.`
 );
 
-const minValue = min => ( values, value ) => ( _isEmpty( value ) || typeof value === "number" || value >= min
+const minValue = min => ( values, value ) => ( _isEmpty( value ) || value >= min
     ? true
     : `Must be at least ${ min }.`
 );
 
-const maxValue = max => ( values, value ) => ( _isEmpty( value ) || typeof value === "number" || value <= max
+const maxValue = max => ( values, value ) => ( _isEmpty( value ) || value <= max
     ? true
     : `Must be ${ max } or less.`
 );

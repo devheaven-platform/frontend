@@ -9,5 +9,6 @@ export { default as ModalBase } from "./modal/base/Base";
 export { default as Sidebar } from "./sidebar/Sidebar";
 export { default as Navbar } from "./navbar/Navbar";
 export { default as Table } from "./table/Table";
+export { default as Board } from "./board/Board";
 export { default as Form } from "./form/Form";
 export { default as Page } from "./page";
