@@ -1,48 +1,40 @@
-.is-full-size {
-    height: 100vh
+.board-column {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    min-width: $column-width;
+    max-width: $column-width;
+    min-height: $column-height;
+    margin: $column-margin !important;
+    background: $white-ter;
+
+    .board-column-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .board-column-content {
+        min-height: $column-height;
+    }
+
+    .board-column-footer {
+        margin-top: auto;
+    }
 }
-.has-min-width-1 {
-    min-width: 10rem;
-}
-.has-min-width-2 {
-    min-width: 20rem;
-}
-.has-min-width-3 {
-    min-width: 30rem;
-}
-.has-min-width-4 {
-    min-width: 40rem;
-}
-.has-min-width-5 {
-    min-width: 50rem;
-}
-.has-max-width-1 {
-    max-width: 10rem;
-}
-.has-max-width-2 {
-    max-width: 20rem;
-}
-.has-max-width-3 {
-    max-width: 30rem;
-}
-.has-max-width-4 {
-    max-width: 40rem;
-}
-.has-max-width-5 {
-    max-width: 50rem;
-}
-.has-min-height-1 {
-    min-height: 10rem; 
-}
-.has-min-height-2 {
-    min-height: 20rem; 
-}
-.has-min-height-3 {
-    min-height: 30rem; 
-}
-.has-min-height-4 {
-    min-height: 40rem; 
-}
-.has-break-word {
-    word-wrap: break-word !important;
+
+.board-task {
+    margin: $task-margin 0 !important;
+    padding: $task-padding;
+
+    .board-task-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+    }
+
+    .board-task-footer {
+        margin-top: 0.5rem;
+    }
 }

@@ -5,11 +5,12 @@ import {
     maxLength,
 } from "./Validators";
 
-export default [
+export default defaults => [
     {
         label: "Name",
         name: "name",
         type: FIELD_TYPES.TEXT,
+        default: defaults.name,
         validations: [
             isAlphanumeric,
             minLength( 2 ),
@@ -20,6 +21,7 @@ export default [
         label: "Status",
         name: "status",
         type: FIELD_TYPES.SELECT,
+        defaults: defaults.status,
         options: [
             {
                 value: "Open",

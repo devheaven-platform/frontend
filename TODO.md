@@ -6,7 +6,8 @@
 * Unarchive a board?
 * Use confirmation modal when archiving a board.
 * Edit milestone?
-* Edit board in board page.
+* Use confirmation modal when deleting a column.
+* Use confirmation modal when deleting a task.
 * Write conventions down in README.md
 
 ### Project Management

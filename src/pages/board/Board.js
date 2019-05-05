@@ -2,15 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import editBoardForm from "forms/EditBoard";
 import createColumnForm from "forms/CreateColumn";
+import editBoardForm from "forms/EditBoard";
+import { Page, ModalForm, Board } from "components";
 import { PageLoading } from "pages";
-import { Page, ModalForm, Board as KanbanBoard } from "components";
 import { actions } from "./duck";
 
 class PageBoard extends React.Component {
     static propTypes = {
         board: PropTypes.shape(),
+        columns: PropTypes.arrayOf( PropTypes.shape() ),
         errors: PropTypes.shape(),
         match: PropTypes.shape().isRequired,
         Load: PropTypes.func.isRequired,
@@ -25,6 +26,7 @@ class PageBoard extends React.Component {
 
     static defaultProps = {
         board: null,
+        columns: null,
         errors: {},
     }
 
@@ -36,6 +38,7 @@ class PageBoard extends React.Component {
     render() {
         const {
             board,
+            columns,
             errors,
             EditBoard,
             CreateColumn,
@@ -46,7 +49,7 @@ class PageBoard extends React.Component {
             RemoveTask,
         } = this.props;
 
-        if ( board === null ) {
+        if ( board === null || columns === null ) {
             return <PageLoading />;
         }
 
@@ -56,29 +59,38 @@ class PageBoard extends React.Component {
                     <ModalForm
                         title="Edit"
                         description="Edit this board."
-                        fields={ editBoardForm }
+                        fields={ editBoardForm( board ) }
                         errors={ errors }
                         submit={ EditBoard }
                     />
                     <ModalForm
                         title="Create Column"
                         description="Create a new column."
-                        className="is-secondary has-margin-left-2"
+                        button={ ( { onClick } ) => (
+                            <button
+                                type="button"
+                                className="button is-secondary has-margin-left-2"
+                                onClick={ onClick }
+                            >
+                                Create Column
+                            </button>
+                        ) }
                         fields={ createColumnForm }
                         errors={ errors }
                         submit={ CreateColumn }
                     />
                 </Page.Header>
                 <Page.Content>
-                    <KanbanBoard
-                        board={ board }
-                        onBoardEdit={ EditBoard }
-                        onTaskAdd={ CreateTask }
-                        onTaskEdit={ EditTask }
-                        onTaskRemove={ RemoveTask }
-                        onColumnAdd={ CreateColumn }
-                        onColumnEdit={ EditColumn }
-                        onColumnRemove={ RemoveColumn }
+                    <Board
+                        id={ board.id }
+                        columns={ columns }
+                        errors={ errors }
+                        editBoard={ EditBoard }
+                        editColumn={ EditColumn }
+                        removeColumn={ RemoveColumn }
+                        createTask={ CreateTask }
+                        editTask={ EditTask }
+                        removeTask={ RemoveTask }
                     />
                 </Page.Content>
                 <Page.Footer>
@@ -91,7 +103,7 @@ class PageBoard extends React.Component {
     }
 }
 
-const mSTP = ( { board: { board, errors } } ) => ( { board, errors } );
+const mSTP = ( { board: { board, columns, errors } } ) => ( { board, columns, errors } );
 
 const mDTP = dispatch => ( {
     Load: args => dispatch( actions.load( args ) ),

@@ -1,86 +1,71 @@
 import React from "react";
+import { Draggable } from "react-beautiful-dnd";
 import PropTypes from "prop-types";
-import { Droppable } from "react-beautiful-dnd";
-import { ModalForm } from "components";
-import createTaskForm from "forms/CreateTask";
-import Task from "../task/Task";
-import DropDown from "../../dropdown/DropDown";
 
-const Column = ( {
-    errors,
+import BoardColumnHeader from "./header/Header";
+import BoardColumnContent from "./content/Content";
+import BoardColumnFooter from "./footer/Footer";
+
+const BoardColumn = ( {
+    index,
     column,
-    onColumnRemove,
-    onTaskAdd,
-    onTaskEdit,
-    onTaskRemove,
-    getListStyle,
+    errors,
+    editColumn,
+    removeColumn,
+    createTask,
+    editTask,
+    removeTask,
 } ) => (
-    <div className="column is-narrow">
-        <article className="message is-primary">
-            <div className="message-header">
-                <p>{column.name}</p>
-                <DropDown
-                    icon="ellipsis-h"
-                    actions={ [ {
-                        label: "Edit",
-                        key: "EDIT",
-                        icon: "edit",
-                    }, {
-                        label: "Delete",
-                        key: "DELETE",
-                        icon: "trash",
-                    } ] }
-                    location="right"
-                    onClick={ ( action ) => {
-                        if ( action === "EDIT" ) {
-                            // TODO
-                        } else if ( action === "DELETE" ) {
-                            onColumnRemove( column.id );
-                        }
-                    } }
+    <Draggable
+        draggableId={ column.id }
+        index={ index }
+    >
+        { provided => (
+            <div
+                ref={ provided.innerRef }
+                { ...provided.draggableProps }
+                { ...provided.dragHandleProps }
+                className="column box board-column"
+            >
+                <BoardColumnHeader
+                    name={ column.name }
+                    errors={ errors }
+                    editColumn={ editColumn }
+                    removeColumn={ removeColumn }
+                />
+                <BoardColumnContent
+                    id={ column.id }
+                    tasks={ column.tasks }
+                    errors={ errors }
+                    editTask={ editTask }
+                    removeTask={ removeTask }
+                />
+                <BoardColumnFooter
+                    errors={ errors }
+                    createTask={ createTask }
                 />
             </div>
-            <div className="message-body">
-                <Droppable key={ column.id } droppableId={ column.id } type="task">
-                    {( provided, snapshot ) => (
-                        <div
-                            ref={ provided.innerRef }
-                            { ...provided.droppableProps }
-                            style={ getListStyle( snapshot.isDraggingOver ) }
-                            className="has-min-height-1"
-                        >
-                            {column.tasks.map( ( task, index ) => (
-                                <Task key={ task.id } task={ task } columnId={ column.id } index={ index } onTaskRemove={ onTaskRemove } onTaskEdit={ onTaskEdit } />
-                            ) )}
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
-            </div>
-        </article>
-        <ModalForm
-            title="Create Task"
-            description="Create a new Task."
-            className="is-secondary has-margin-left-2"
-            fields={ createTaskForm }
-            errors={ errors }
-            submit={ values => onTaskAdd( { ...values, column: column.id } ) }
-        />
-    </div>
+        ) }
+    </Draggable>
 );
 
-Column.propTypes = {
+BoardColumn.propTypes = {
+    index: PropTypes.number.isRequired,
+    column: PropTypes.shape( {
+        id: PropTypes.string,
+        name: PropTypes.string,
+        tasks: PropTypes.arrayOf( PropTypes.shape() ),
+    } ).isRequired,
     errors: PropTypes.shape(),
-    column: PropTypes.shape( {} ).isRequired,
-    onColumnRemove: PropTypes.func.isRequired,
-    onTaskAdd: PropTypes.func.isRequired,
-    onTaskEdit: PropTypes.func.isRequired,
-    onTaskRemove: PropTypes.func.isRequired,
-    getListStyle: PropTypes.func.isRequired,
+    editColumn: PropTypes.func.isRequired,
+    removeColumn: PropTypes.func.isRequired,
+    createTask: PropTypes.func.isRequired,
+    editTask: PropTypes.func.isRequired,
+    removeTask: PropTypes.func.isRequired,
 };
 
-Column.defaultProps = {
+BoardColumn.defaultProps = {
     errors: {},
 };
 
-export default Column;
+export default BoardColumn;

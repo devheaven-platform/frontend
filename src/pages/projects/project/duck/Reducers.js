@@ -88,22 +88,18 @@ const users = ( state = defaultState.users, { type, payload } ) => {
 };
 
 const errors = ( state = defaultState.errors, { type, payload } ) => {
-    if ( type === types.EDIT_PROJECT ) {
+    if ( [
+        types.EDIT_PROJECT,
+        types.CREATE_MILESTONE,
+        types.CREATE_BOARD ].includes( type )
+    ) {
         return {};
     }
-    if ( type === types.EDIT_PROJECT_ERROR ) {
-        return payload;
-    }
-    if ( type === types.CREATE_MILESTONE ) {
-        return {};
-    }
-    if ( type === types.CREATE_MILESTONE_ERROR ) {
-        return payload;
-    }
-    if ( type === types.CREATE_BOARD ) {
-        return {};
-    }
-    if ( type === types.CREATE_BOARD_ERROR ) {
+    if ( [
+        types.EDIT_PROJECT_ERROR,
+        types.CREATE_MILESTONE_ERROR,
+        types.CREATE_BOARD_ERROR ].includes( type )
+    ) {
         return payload;
     }
     return state;

@@ -1,95 +1,65 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Draggable } from "react-beautiful-dnd";
-import { ModalForm } from "components";
-import EditTask from "../../../forms/EditTask";
+import PropTypes from "prop-types";
 
-const Task = ( {
-    errors,
-    task,
+import BoardTaskHeader from "./header/Header";
+import BoardTaskContent from "./content/Content";
+import BoardTaskFooter from "./footer/Footer";
+
+const BoardTask = ( {
     index,
-    onTaskRemove,
-    onTaskEdit,
-    columnId,
+    task,
+    errors,
+    editTask,
+    removeTask,
 } ) => (
     <Draggable
-        key={ task.id }
         draggableId={ task.id }
         index={ index }
     >
-        {provided => (
+        { provided => (
             <div
                 ref={ provided.innerRef }
                 { ...provided.draggableProps }
                 { ...provided.dragHandleProps }
+                className="box board-task"
             >
-                <div className="card">
-                    <header className="card-header">
-                        <p className="card-header-title">
-                            {task.name}
-                        </p>
-                        <div className="card-header-icon" aria-label="delete task">
-                            <span className="icon">
-                                <button type="button" className="button has-background-white" onClick={ () => onTaskRemove( { id: task.id, columnId } ) }>
-                                    <i className="fa fa-trash has-text-danger" aria-hidden="true" />
-                                </button>
-                                {/* <DropDown
-                                    icon="ellipsis-h"
-                                    actions={ [ {
-                                        label: "Edit",
-                                        key: "EDIT",
-                                        icon: "edit",
-                                    }, {
-                                        label: "Delete",
-                                        key: "DELETE",
-                                        icon: "trash",
-                                    } ] }
-                                    location="right"
-                                    onClick={ ( action ) => {
-                                        if ( action === "EDIT" ) {
-                                            // TODO
-                                        } else if ( action === "DELETE" ) {
-                                            onTaskRemove( { id: task.id, columnId } );
-                                        }
-                                    } }
-                                /> */}
-                            </span>
-                        </div>
-                    </header>
-                    <div className="card-content has-padding-2 has-break-word">
-                        <p>{task.description}</p>
-                        <p>
-                            {`Hours: ${ task.hours }`}
-                        </p>
-                    </div>
-                    <footer className="card-footer">
-                        <ModalForm
-                            title="Edit Task"
-                            description="Edit a Task."
-                            className="card-footer-item has-background-white has-text-primary has-padding-1"
-                            fields={ EditTask( task ) }
-                            defaults={ task }
-                            errors={ errors }
-                            submit={ values => onTaskEdit( { values, id: task.id, columnId } ) }
-                        />
-                    </footer>
-                </div>
+                <BoardTaskHeader
+                    name={ task.name }
+                    description={ task.description }
+                    hours={ task.hours }
+                    errors={ errors }
+                    editTask={ values => editTask( { ...values, id: task.id } ) }
+                    removeTask={ () => removeTask( task ) }
+                />
+                <BoardTaskContent
+                    description={ task.description }
+                />
+                <BoardTaskFooter
+                    hours={ task.hours }
+                    assignees={ task.assignees }
+                />
             </div>
-        )}
+        ) }
     </Draggable>
 );
 
-Task.propTypes = {
-    errors: PropTypes.shape(),
-    task: PropTypes.shape( {} ).isRequired,
-    columnId: PropTypes.string.isRequired,
+BoardTask.propTypes = {
     index: PropTypes.number.isRequired,
-    onTaskEdit: PropTypes.func.isRequired,
-    onTaskRemove: PropTypes.func.isRequired,
+    task: PropTypes.shape( {
+        id: PropTypes.string,
+        name: PropTypes.string,
+        description: PropTypes.string,
+        hours: PropTypes.number,
+        assignees: PropTypes.arrayOf( PropTypes.string ),
+    } ).isRequired,
+    errors: PropTypes.shape(),
+    editTask: PropTypes.func.isRequired,
+    removeTask: PropTypes.func.isRequired,
 };
 
-Task.defaultProps = {
+BoardTask.defaultProps = {
     errors: {},
 };
 
-export default Task;
+export default BoardTask;

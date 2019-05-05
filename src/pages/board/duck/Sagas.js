@@ -62,7 +62,7 @@ function* editColumn( { payload } ) {
 
 function* removeColumn( { payload } ) {
     try {
-        yield call( axios.delete, `/columns/${ payload }` );
+        yield call( axios.delete, `/columns/${ payload.id }` );
         yield put( { type: types.REMOVE_COLUMN_SUCCESS, payload } );
     } catch ( error ) {
         yield put( { type: errorTypes.APP_ERROR, payload: errorSelectors.errorPayload( error ) } );
@@ -72,7 +72,7 @@ function* removeColumn( { payload } ) {
 function* createTask( { payload } ) {
     try {
         const { data } = yield call( axios.post, "/tasks/", payload );
-        yield put( { type: types.CREATE_TASK_SUCCESS, payload: { ...data, columnId: payload.column } } );
+        yield put( { type: types.CREATE_TASK_SUCCESS, payload: { ...data, column: payload.column } } );
     } catch ( error ) {
         yield put( {
             type: errorSelectors.errorType( error, types.CREATE_TASK_ERROR, errorTypes.APP_ERROR ),
@@ -83,8 +83,8 @@ function* createTask( { payload } ) {
 
 function* editTask( { payload } ) {
     try {
-        const { data } = yield call( axios.patch, `/tasks/${ payload.id }`, payload.values );
-        yield put( { type: types.EDIT_TASK_SUCCESS, payload: { ...data, columnId: payload.columnId } } );
+        const { data } = yield call( axios.patch, `/tasks/${ payload.id }`, payload );
+        yield put( { type: types.EDIT_TASK_SUCCESS, payload: { ...data, column: payload.column } } );
     } catch ( error ) {
         yield put( {
             type: errorSelectors.errorType( error, types.EDIT_TASK_ERROR, errorTypes.APP_ERROR ),

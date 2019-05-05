@@ -5,95 +5,77 @@ import types from "./Types";
 
 const defaultState = {
     board: null,
+    columns: null,
     errors: {},
 };
 
 const board = ( state = defaultState.board, { type, payload } ) => {
     if ( type === types.LOAD_SUCCESS ) {
-        return payload;
+        return {
+            ...payload,
+            columns: undefined,
+        };
     }
     if ( type === types.EDIT_BOARD_SUCCESS ) {
-        return payload;
-    }
-    if ( type === types.CREATE_COLUMN_SUCCESS ) {
         return {
-            ...state,
-            columns: [ ...state.columns, payload ],
-        };
-    }
-    if ( type === types.EDIT_COLUMN_SUCCESS ) {
-        return {
-            ...state,
-            columns: [
-                ...state.columns.map( column => ( column.id === payload.id ? payload : column ) ),
-            ],
-        };
-    }
-    if ( type === types.REMOVE_COLUMN_SUCCESS ) {
-        return {
-            ...state,
-            columns: [ ...state.columns.filter( c => c.id !== payload ) ],
-        };
-    }
-    if ( type === types.CREATE_TASK_SUCCESS ) {
-        return {
-            ...state,
-            columns: [ ...state.columns.map( column => ( column.id !== payload.columnId ? column : {
-                ...column,
-                tasks: [ ...column.tasks, payload ],
-            } ) ) ],
-        };
-    }
-    if ( type === types.EDIT_TASK_SUCCESS ) {
-        return {
-            ...state,
-            columns: [ ...state.columns.map( column => ( column.id !== payload.columnId ? column : {
-                ...column,
-                tasks: [ ...column.tasks.map( task => ( task.id === payload.id ? payload : task ) ) ],
-            } ) ) ],
-        };
-    }
-    if ( type === types.REMOVE_TASK_SUCCESS ) {
-        return {
-            ...state,
-            columns: [ ...state.columns.map( column => ( column.id !== payload.columnId ? column : {
-                ...column,
-                tasks: [ ...column.tasks.filter( t => t.id !== payload.id ) ],
-            } ) ) ],
+            ...payload,
+            columns: undefined,
         };
     }
     return state;
 };
 
+const columns = ( state = defaultState.columns, { type, payload } ) => {
+    if ( type === types.LOAD_SUCCESS ) {
+        return payload.columns;
+    }
+    if ( type === types.CREATE_COLUMN_SUCCESS ) {
+        return [ ...state, payload ];
+    }
+    if ( type === types.EDIT_COLUMN_SUCCESS ) {
+        return state.map( c => ( c.id !== payload.id ? c : payload ) );
+    }
+    if ( type === types.REMOVE_COLUMN_SUCCESS ) {
+        return state.filter( c => c.id !== payload.id );
+    }
+    if ( type === types.CREATE_TASK_SUCCESS ) {
+        return state.map( c => ( c.id !== payload.column ? c : {
+            ...c,
+            tasks: [ ...c.tasks, { ...payload, column: undefined } ],
+        } ) );
+    }
+    if ( type === types.EDIT_TASK_SUCCESS ) {
+        return state.map( c => ( c.id !== payload.column ? c : {
+            ...c,
+            tasks: [ ...c.tasks.map( t => ( t.id !== payload.id ? t : { ...payload, column: undefined } ) ) ],
+        } ) );
+    }
+    if ( type === types.REMOVE_TASK_SUCCESS ) {
+        return state.map( c => ( c.id !== payload.column ? c : {
+            ...c,
+            tasks: [ ...c.tasks.filter( t => t.id !== payload.id ) ],
+        } ) );
+    }
+    return state;
+};
+
 const errors = ( state = defaultState.errors, { type, payload } ) => {
-    if ( type === types.EDIT_BOARD ) {
+    if ( [
+        types.EDIT_BOARD,
+        types.CREATE_COLUMN,
+        types.EDIT_COLUMN,
+        types.CREATE_TASK,
+        types.EDIT_TASK ].includes( type )
+    ) {
         return {};
     }
-    if ( type === types.EDIT_BOARD_ERROR ) {
-        return payload;
-    }
-    if ( type === types.CREATE_COLUMN ) {
-        return {};
-    }
-    if ( type === types.CREATE_COLUMN_ERROR ) {
-        return payload;
-    }
-    if ( type === types.EDIT_COLUMN ) {
-        return {};
-    }
-    if ( type === types.EDIT_COLUMN_ERROR ) {
-        return payload;
-    }
-    if ( type === types.CREATE_TASK ) {
-        return {};
-    }
-    if ( type === types.CREATE_TASK_ERROR ) {
-        return payload;
-    }
-    if ( type === types.EDIT_TASK ) {
-        return {};
-    }
-    if ( type === types.EDIT_TASK_ERROR ) {
+    if ( [
+        types.EDIT_BOARD_ERROR,
+        types.CREATE_COLUMN_ERROR,
+        types.EDIT_COLUMN_ERROR,
+        types.CREATE_TASK_ERROR,
+        types.EDIT_TASK_ERROR ].includes( type )
+    ) {
         return payload;
     }
     return state;
@@ -101,5 +83,6 @@ const errors = ( state = defaultState.errors, { type, payload } ) => {
 
 export default combineReducers( {
     board,
+    columns,
     errors,
 } );
