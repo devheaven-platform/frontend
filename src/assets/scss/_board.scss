@@ -1,0 +1,40 @@
+.board-column {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    min-width: $column-width;
+    max-width: $column-width;
+    min-height: $column-height;
+    margin: $column-margin !important;
+    background: $white-ter;
+
+    .board-column-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .board-column-content {
+        min-height: 100%;
+    }
+
+    .board-column-footer {
+        margin-top: auto;
+    }
+}
+
+.board-task {
+    margin: $task-margin 0 !important;
+    padding: $task-padding;
+
+    .board-task-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+    }
+
+    .board-task-footer {
+        margin-top: 0.5rem;
+    }
+}

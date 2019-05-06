@@ -1,4 +1,4 @@
-export { default as actions } from "./actions";
-export { default as reducers } from "./reducers";
-export { default as types } from "./types";
-export { default as sagas } from "./sagas";
+export { default as actions } from "./Actions";
+export { default as reducers } from "./Reducers";
+export { default as types } from "./Types";
+export { default as sagas } from "./Sagas";

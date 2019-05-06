@@ -1,14 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import App from "./app";
+import App from "./app/App";
 import store from "./store";
 import * as serviceWorker from "./serviceWorker";
-
-// CSS
-import "@fortawesome/fontawesome-free/css/all.css";
-import "assets/sass/style.sass";
-import "react-notifications/lib/notifications.css";
 
 ReactDOM.render(
     <Provider store={ store }>

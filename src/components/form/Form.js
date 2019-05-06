@@ -1,41 +1,63 @@
+/* eslint-disable react/button-has-type */
 import React from "react";
-import { reduxForm } from "redux-form";
-import {
-    string,
-    func,
-    node,
-    bool,
-} from "prop-types";
+import Formsy from "formsy-react";
+import PropTypes from "prop-types";
 
-import SubmitButton from "./components/SubmitButton";
-import ResetButton from "./components/ResetButton";
+import FormPropTypesField from "./propTypes/Field";
+import FormField from "./FormField";
 
 const Form = ( {
-    form,
-    onSubmit,
-    children,
-    enableSubmitButton,
-    enableResetButton,
-} ) => (
-    <form onSubmit={ onSubmit }>
-        { children }
-        { enableSubmitButton && <SubmitButton form={ form }>Submit</SubmitButton> }
-        { enableResetButton && <ResetButton form={ form }>Reset</ResetButton> }
-    </form>
-);
+    fields,
+    errors,
+    submit,
+    setIsChanged,
+    hasSubmitButton,
+    hasResetButton,
+} ) => {
+    const items = Object.entries( errors ).map( item => <p key={ item[ 0 ] }>{ item[ 1 ] }</p> );
 
-Form.defaultProps = {
-    children: null,
-    enableSubmitButton: false,
-    enableResetButton: false,
+    return (
+        <Formsy
+            onChange={ ( values, isChanged ) => setIsChanged( isChanged ) }
+            onValidSubmit={ submit }
+            className="has-text-left"
+        >
+            { items.length > 0 && (
+                <div className="message is-danger">
+                    <div className="message-body">
+                        { items }
+                    </div>
+                </div>
+            )}
+            { fields && fields.map( ( field ) => {
+                const validations = field.validations
+                    ? field.validations.reduce( ( res, validation, idx ) => ( { ...res, [ idx ]: validation } ), {} )
+                    : {};
+                return (
+                    <FormField { ...field } key={ field.name } value={ field.default } validations={ validations } />
+                );
+            } ) }
+            { hasSubmitButton && <button type="submit" className="button is-primary has-margin-right-2 has-margin-top-2">Submit</button> }
+            { hasResetButton && <button type="reset" className="button is-secondary has-margin-top-2">Reset</button> }
+        </Formsy>
+    );
 };
 
 Form.propTypes = {
-    form: string.isRequired,
-    onSubmit: func.isRequired,
-    children: node,
-    enableSubmitButton: bool,
-    enableResetButton: bool,
+    fields: PropTypes.arrayOf( FormPropTypesField ).isRequired,
+    errors: PropTypes.shape(),
+    submit: PropTypes.func.isRequired,
+    setIsChanged: PropTypes.func,
+    hasSubmitButton: PropTypes.bool,
+    hasResetButton: PropTypes.bool,
 };
 
-export default reduxForm()( Form );
+Form.defaultProps = {
+    setIsChanged: () => {},
+    errors: {},
+    hasSubmitButton: false,
+    hasResetButton: false,
+};
+
+export default Form;
+/* eslint-enable react/button-has-type */
