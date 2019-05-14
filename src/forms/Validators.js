@@ -56,6 +56,8 @@ const maxValue = max => ( values, value ) => ( _isEmpty( value ) || value <= max
     : `Must be ${ max } or less.`
 );
 
+// const isLaterThen = field => ( values, value ) => values[ field ];
+
 export {
     isRequired,
     isNumeric,
