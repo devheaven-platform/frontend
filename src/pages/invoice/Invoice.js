@@ -71,7 +71,7 @@ class PageInvoices extends React.Component {
                             </div>
                             <ModalForm
                                 title="Create"
-                                description="Create a new project."
+                                description="Create a new Invoice."
                                 fields={ createInvoiceForm( { project: selected } ) }
                                 errors={ errors }
                                 submit={ values => Create( { ...values, project: selected.id } ) }
