@@ -19,7 +19,7 @@
     "react-dom": "^16.8.4",
     "react-notifications": "^1.4.3",
     "react-redux": "^7.0.3",
-    "react-router-dom": "^4.3.1",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2",
