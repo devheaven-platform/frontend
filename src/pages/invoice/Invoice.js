@@ -5,7 +5,8 @@ import PropTypes from "prop-types";
 
 import createInvoiceForm from "forms/CreateInvoice";
 import { PageLoading } from "pages";
-import { Page, ModalForm } from "components";
+import { Page, ModalForm, Table } from "components";
+import invoiceTable from "tables/Invoice";
 
 import { actions } from "./duck";
 
@@ -80,7 +81,11 @@ class PageInvoices extends React.Component {
                     ) }
                 </Page.Header>
                 <Page.Content>
-                    Content
+                    <Table
+                        columns={ invoiceTable }
+                        data={ invoices }
+                        onContextMenuClick={ this.onContextMenuClick }
+                    />
                 </Page.Content>
                 <Page.Footer>
                     <p>
