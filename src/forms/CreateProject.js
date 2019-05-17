@@ -34,6 +34,38 @@ export default config => [
         validations: [ isNumeric, minValue( 0 ) ],
     },
     {
+        label: "Identifier",
+        name: "identifier",
+        type: FIELD_TYPES.SELECT,
+        options: [
+            {
+                value: "MONEY",
+                label: "Money",
+            },
+            {
+                value: "STORY_POINTS",
+                label: "Story Points",
+            },
+            {
+                value: "HOURS",
+                label: "Hours",
+            },
+        ],
+        validations: [ isRequired ],
+    },
+    {
+        label: "Price per point",
+        name: "pricePerPoint",
+        type: FIELD_TYPES.NUMBER,
+        validations: [ isNumeric, minValue( 0 ), isRequired ],
+    },
+    {
+        label: "Margin",
+        name: "invoiceMargin",
+        type: FIELD_TYPES.NUMBER,
+        validations: [ isNumeric, minValue( 0 ), isRequired ],
+    },
+    {
         label: "Start Date",
         name: "start",
         type: FIELD_TYPES.DATE,
