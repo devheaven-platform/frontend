@@ -83,7 +83,7 @@ class PageInvoices extends React.Component {
                 <Page.Content>
                     <Table
                         columns={ invoiceTable }
-                        data={ projects }
+                        data={ invoices }
                         onContextMenuClick={ this.onContextMenuClick }
                     />
                 </Page.Content>

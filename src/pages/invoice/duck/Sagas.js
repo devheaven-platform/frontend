@@ -16,6 +16,8 @@ function* load() {
             call( axios.get, "/projects/" ),
             call( axios.get, "/invoices/" ),
         ] );
+        invoices.data.map( invoice => ( { project: call( axios.get, `/projects/${ invoice.project }` ) } ) );
+        console.log( invoices.data );
         yield put( { type: types.LOAD_SUCCESS, payload: { projects: projects.data, invoices: invoices.data } } );
     } catch ( error ) {
         yield put( {

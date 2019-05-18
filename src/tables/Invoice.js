@@ -17,4 +17,10 @@ export default [
         type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.RANGE_NUMBER,
     },
+    {
+        label: "Project",
+        key: "project.name",
+        type: CELL_TYPES.TEXT,
+        filter: FILTER_TYPES.SEARCH,
+    },
 ];
