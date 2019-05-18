@@ -8,7 +8,7 @@ export default [
         filter: FILTER_TYPES.SEARCH,
         link: {
             to: "/pfd/__KEY__",
-            key: "path",
+            key: "id",
         },
     },
     {
