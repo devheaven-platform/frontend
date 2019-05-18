@@ -19,7 +19,7 @@ export default [
     },
     {
         label: "Project",
-        key: "project.name",
+        key: "project",
         type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.SEARCH,
     },

@@ -16,9 +16,9 @@ function* load() {
             call( axios.get, "/projects/" ),
             call( axios.get, "/invoices/" ),
         ] );
-        invoices.data.map( invoice => ( { project: call( axios.get, `/projects/${ invoice.project }` ) } ) );
-        console.log( invoices.data );
-        yield put( { type: types.LOAD_SUCCESS, payload: { projects: projects.data, invoices: invoices.data } } );
+        const invoiceProjects = yield all( invoices.data.map( invoice => call( axios.get, `/projects/${ invoice.project }` ) ) );
+        const newinvoices = invoices.data.map( ( invoice, index ) => ( { ...invoice, project: invoiceProjects[ index ].data.name } ) );
+        yield put( { type: types.LOAD_SUCCESS, payload: { projects: projects.data, invoices: newinvoices } } );
     } catch ( error ) {
         yield put( {
             type: errorTypes.APP_ERROR,

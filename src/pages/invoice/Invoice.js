@@ -56,7 +56,7 @@ class PageInvoices extends React.Component {
         }
 
         const items = projects.map( project => <option key={ project.id } value={ project.id }>{ project.name }</option> );
-
+        console.log( invoices );
         return (
             <Page>
                 <Page.Header title="Invoices" subtitle="View or create Invoices">
