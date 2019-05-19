@@ -10,7 +10,7 @@ import invoiceTable from "tables/Invoice";
 
 import { actions } from "./duck";
 
-class PageInvoices extends React.Component {
+class PageInvoice extends React.Component {
     static propTypes = {
         projects: PropTypes.arrayOf( PropTypes.shape() ),
         invoices: PropTypes.arrayOf( PropTypes.shape() ),
@@ -113,5 +113,5 @@ const mDTP = dispatch => ( {
     Archive: payload => dispatch( actions.archive( payload ) ),
 } );
 
-export default connect( mSTP, mDTP )( PageInvoices );
+export default connect( mSTP, mDTP )( PageInvoice );
 /* eslint-enable jsx-a11y/label-has-for, jsx-a11y/label-has-associated-control */
