@@ -6,10 +6,6 @@ export default [
         key: "name",
         type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.SEARCH,
-        link: {
-            to: "/api/invoices/pdf/__KEY__",
-            key: "id",
-        },
     },
     {
         label: "Total",
