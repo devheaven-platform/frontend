@@ -26,7 +26,7 @@ class PageInvoices extends React.Component {
     }
 
     state = {
-        selected: { name: "select a project", milestones: [ { label: "select a project", value: "1223123123213" } ] },
+        selected: null,
     }
 
     componentDidMount() {
@@ -70,13 +70,15 @@ class PageInvoices extends React.Component {
                                     { items }
                                 </select>
                             </div>
-                            <ModalForm
-                                title="Create"
-                                description="Create a new Invoice."
-                                fields={ createInvoiceForm( { project: selected } ) }
-                                errors={ errors }
-                                submit={ values => Create( { ...values, project: selected.id } ) }
-                            />
+                            { selected && (
+                                <ModalForm
+                                    title="Create"
+                                    description="Create a new Invoice."
+                                    fields={ createInvoiceForm( { project: selected } ) }
+                                    errors={ errors }
+                                    submit={ values => Create( { ...values, project: selected.id } ) }
+                                />
+                            )}
                         </React.Fragment>
                     ) }
                 </Page.Header>
