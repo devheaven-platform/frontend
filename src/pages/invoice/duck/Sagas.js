@@ -30,6 +30,10 @@ function* load() {
 function* create( { payload } ) {
     try {
         const { data } = yield call( axios.post, "/invoices/", payload );
+
+        const project = yield call( axios.get, `/projects/${ data.project }` );
+        data.project = project.name;
+        console.log( data );
         yield put( { type: types.CREATE_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {
