@@ -20,6 +20,22 @@ export default [
         filter: FILTER_TYPES.SEARCH,
     },
     {
+        label: "Archived",
+        key: "archived",
+        type: CELL_TYPES.BOOLEAN,
+        filter: FILTER_TYPES.SELECT,
+        options: [
+            {
+                value: true,
+                label: "Yes",
+            },
+            {
+                value: false,
+                label: "No",
+            },
+        ],
+    },
+    {
         key: "menu",
         type: CELL_TYPES.CONTEXT_MENU,
         icon: "ellipsis-v",
@@ -29,6 +45,12 @@ export default [
                 key: "download",
                 icon: "download",
             },
+            {
+                label: "Archive",
+                key: "archive",
+                icon: "archive",
+            },
         ],
     },
+
 ];

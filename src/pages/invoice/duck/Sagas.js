@@ -42,7 +42,20 @@ function* create( { payload } ) {
     }
 }
 
+function* archive( { payload } ) {
+    try {
+        const { data } = yield call( axios.patch, `/invoices/${ payload.id }`, { archived: true } );
+        yield put( { type: types.ARCHIVE_SUCCESS, payload: data } );
+    } catch ( error ) {
+        yield put( {
+            type: errorTypes.APP_ERROR,
+            payload: errorSelectors.errorPayload( error ),
+        } );
+    }
+}
+
 export default function* main() {
     yield takeLatest( types.LOAD, load );
     yield takeLatest( types.CREATE, create );
+    yield takeLatest( types.ARCHIVE, archive );
 }
