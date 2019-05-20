@@ -42,6 +42,12 @@ class PageInvoice extends React.Component {
         } );
     }
 
+    onContextMenuClick = ( action, invoice ) => {
+        if ( action === "download" ) {
+            window.open( `${ window.location.origin }/api/invoices/pdf/${ invoice.id }` );
+        }
+    }
+
     render() {
         const {
             projects,
