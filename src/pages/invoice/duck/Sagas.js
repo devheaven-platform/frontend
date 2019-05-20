@@ -45,6 +45,8 @@ function* create( { payload } ) {
 function* archive( { payload } ) {
     try {
         const { data } = yield call( axios.patch, `/invoices/${ payload.id }`, { archived: true } );
+        const project = yield call( axios.get, `/projects/${ data.project }` );
+        data.project = project.data.name;
         yield put( { type: types.ARCHIVE_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {
