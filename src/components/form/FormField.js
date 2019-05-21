@@ -11,7 +11,6 @@ import {
     FormFieldDate,
     FormFieldSelect,
     FormFieldCheckbox,
-    FormFieldTime,
 } from "./fields";
 
 const FormField = ( {
@@ -54,19 +53,9 @@ const FormField = ( {
                 />
             );
         case FIELD_TYPES.DATE:
+        case FIELD_TYPES.DATETIME:
             return (
                 <FormFieldDate
-                    label={ label }
-                    name={ name }
-                    type={ type }
-                    value={ value }
-                    error={ error }
-                    touched={ touched }
-                    onChange={ setValue }
-                />
-            ); case FIELD_TYPES.TIME:
-            return (
-                <FormFieldTime
                     label={ label }
                     name={ name }
                     type={ type }
