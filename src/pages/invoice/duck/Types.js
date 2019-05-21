@@ -6,4 +6,7 @@ export default types( "@invoices", [
     "CREATE",
     "CREATE_SUCCESS",
     "CREATE_ERROR",
+    "ARCHIVE",
+    "ARCHIVE_SUCCESS",
+    "ARCHIVE_ERROR",
 ] );
