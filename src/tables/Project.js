@@ -28,7 +28,6 @@ export default [
         name: "invoiceMargin",
         type: CELL_TYPES.NUMBER,
         filter: FILTER_TYPES.SEARCH,
-
     },
     {
         label: "Invoicing Type",
