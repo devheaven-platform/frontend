@@ -2,7 +2,9 @@ import { CELL_TYPES, FILTER_TYPES } from "./Types";
 
 export default [
     {
-        label: "Name",
+        label: "
+      
+      ",
         key: "name",
         type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.SEARCH,
@@ -36,11 +38,13 @@ export default [
         filter: FILTER_TYPES.NUMBER,
     },
     {
+        label: "Identifier value",
+        key: "pricePerPoint",
+        type: CELL_TYPES.NUMBER,
+    },
+    {
         label: "Invoicing Type",
-        key: "identifier",
-        type: CELL_TYPES.TEXT,
-        filter: FILTER_TYPES.SELECT,
-        options: [
+        key: "identifier
             {
                 value: "HOURS",
                 label: "Hours",

@@ -53,6 +53,7 @@ const FormField = ( {
                 />
             );
         case FIELD_TYPES.DATE:
+        case FIELD_TYPES.DATETIME:
             return (
                 <FormFieldDate
                     label={ label }
