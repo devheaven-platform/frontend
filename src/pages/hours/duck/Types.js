@@ -6,6 +6,6 @@ export default types( "@hours", [
     "CREATE",
     "CREATE_SUCCESS",
     "CREATE_ERROR",
-    "DELETE",
-    "DELETE_SUCCESS",
+    "REMOVE",
+    "REMOVE_SUCCESS",
 ] );

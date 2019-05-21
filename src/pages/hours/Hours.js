@@ -75,7 +75,7 @@ const mSTP = ( { app: { user }, hours: { errors, hours } } ) => ( { user, errors
 const mDTP = dispatch => ( {
     Load: payload => dispatch( actions.load( payload ) ),
     Create: payload => dispatch( actions.create( payload ) ),
-    Delete: payload => dispatch( actions.deleteWorkPeriod( payload ) ),
+    Delete: payload => dispatch( actions.remove( payload ) ),
 } );
 
 export default connect( mSTP, mDTP )( Hours );

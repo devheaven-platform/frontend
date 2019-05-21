@@ -1,5 +1,4 @@
 import {
-    all,
     call,
     put,
     takeLatest,
@@ -34,10 +33,10 @@ function* create( { payload } ) {
     }
 }
 
-function* deleteWorkPeriod( { payload } ) {
+function* remove( { payload } ) {
     try {
         yield call( axios.delete, `/hours/${ payload.id }` );
-        yield put( { type: types.DELETE_SUCCESS, payload } );
+        yield put( { type: types.REMOVE_SUCCESS, payload } );
     } catch ( error ) {
         yield put( {
             type: errorTypes.APP_ERROR,
@@ -48,5 +47,5 @@ function* deleteWorkPeriod( { payload } ) {
 export default function* main() {
     yield takeLatest( types.LOAD, load );
     yield takeLatest( types.CREATE, create );
-    yield takeLatest( types.DELETE, deleteWorkPeriod );
+    yield takeLatest( types.REMOVE, remove );
 }
