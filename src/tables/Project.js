@@ -25,19 +25,14 @@ export default [
     },
     {
         label: "Profit Margin",
-        name: "invoiceMargin",
+        key: "invoiceMargin",
         type: CELL_TYPES.NUMBER,
-        filter: FILTER_TYPES.SEARCH,
-    },
-    {
-        label: "Identifier value",
-        name: "pricePerPoint",
-        type: CELL_TYPES.NUMBER,
+        filter: FILTER_TYPES.RANGE_NUMBER,
     },
     {
         label: "Invoicing Type",
         key: "identifier",
-        type: CELL_TYPES.BOOLEAN,
+        type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.SELECT,
         options: [
             {
@@ -53,6 +48,12 @@ export default [
                 label: "Money",
             },
         ],
+    },
+    {
+        label: "Identifier value",
+        key: "pricePerPoint",
+        type: CELL_TYPES.NUMBER,
+        filter: FILTER_TYPES.RANGE_NUMBER,
     },
     {
         label: "Archived",
