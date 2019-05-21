@@ -49,6 +49,10 @@ class PageProjects extends React.Component {
             return <PageLoading />;
         }
 
+        if ( projects != null ) {
+            console.log( projects );
+        }
+
         return (
             <Page>
                 <Page.Header title="Projects" subtitle="View, create or archive projects">
