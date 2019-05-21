@@ -18,16 +18,41 @@ export default [
         filter: FILTER_TYPES.SEARCH,
     },
     {
-        label: "Budget",
-        key: "budget",
-        type: CELL_TYPES.TEXT,
-        filter: FILTER_TYPES.RANGE_NUMBER,
-    },
-    {
         label: "Start Date",
         key: "start",
         type: CELL_TYPES.DATE,
         filter: FILTER_TYPES.RANGE_DATE,
+    },
+    {
+        label: "Profit Margin",
+        name: "invoiceMargin",
+        type: CELL_TYPES.NUMBER,
+        filter: FILTER_TYPES.SEARCH,
+    },
+    {
+        label: "Identifier value",
+        name: "pricePerPoint",
+        type: CELL_TYPES.NUMBER,
+    },
+    {
+        label: "Invoicing Type",
+        key: "identifier",
+        type: CELL_TYPES.BOOLEAN,
+        filter: FILTER_TYPES.SELECT,
+        options: [
+            {
+                value: "HOURS",
+                label: "Hours",
+            },
+            {
+                value: "STORY_POINTS",
+                label: "Story Points",
+            },
+            {
+                value: "MONEY",
+                label: "Money",
+            },
+        ],
     },
     {
         label: "Archived",

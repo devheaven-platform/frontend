@@ -28,12 +28,6 @@ export default config => [
         validations: [ minLength( 2 ), maxLength( 250 ) ],
     },
     {
-        label: "Budget",
-        name: "budget",
-        type: FIELD_TYPES.NUMBER,
-        validations: [ isNumeric, minValue( 0 ) ],
-    },
-    {
         label: "Identifier",
         name: "identifier",
         type: FIELD_TYPES.SELECT,
@@ -54,13 +48,13 @@ export default config => [
         validations: [ isRequired ],
     },
     {
-        label: "Price per point",
+        label: "Identifier Value",
         name: "pricePerPoint",
         type: FIELD_TYPES.NUMBER,
         validations: [ isNumeric, minValue( 0 ), isRequired ],
     },
     {
-        label: "Margin",
+        label: "Profit Margin",
         name: "invoiceMargin",
         type: FIELD_TYPES.NUMBER,
         validations: [ isNumeric, minValue( 0 ), isRequired ],
