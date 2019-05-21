@@ -27,8 +27,7 @@ export default [
         label: "Profit Margin",
         key: "invoiceMargin",
         type: CELL_TYPES.NUMBER,
-        filter: FILTER_TYPES.NUMBER,
-
+        filter: FILTER_TYPES.RANGE_NUMBER,
     },
     {
         label: "Invoicing Type",
@@ -54,6 +53,7 @@ export default [
         label: "Identifier value",
         key: "pricePerPoint",
         type: CELL_TYPES.NUMBER,
+        filter: FILTER_TYPES.RANGE_NUMBER,
     },
     {
         label: "Archived",
