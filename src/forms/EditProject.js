@@ -51,7 +51,7 @@ export default ( config, defaults ) => [
         validations: [ isRequired ],
     },
     {
-        label: "Invoice Margin",
+        label: "Profit Margin",
         name: "invoiceMargin",
         type: FIELD_TYPES.NUMBER,
         default: defaults.budget,
