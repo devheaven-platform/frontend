@@ -30,7 +30,7 @@ export default [
         filter: FILTER_TYPES.SEARCH,
     },
     {
-        label: "Price per Point ",
+        label: "Identifier value",
         name: "pricePerPoint",
         type: CELL_TYPES.NUMBER,
     },
