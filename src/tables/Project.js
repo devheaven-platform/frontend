@@ -30,6 +30,11 @@ export default [
         filter: FILTER_TYPES.SEARCH,
     },
     {
+        label: "Price per Point ",
+        name: "pricePerPoint",
+        type: CELL_TYPES.NUMBER,
+    },
+    {
         label: "Invoicing Type",
         key: "identifier",
         type: CELL_TYPES.BOOLEAN,
