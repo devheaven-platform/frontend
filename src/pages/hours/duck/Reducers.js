@@ -14,7 +14,7 @@ const hours = ( state = defaultState.hours, { type, payload } ) => {
     if ( type === types.CREATE_SUCCESS ) {
         return [ payload, ...state ];
     }
-    if ( type === types.DELETE_SUCCESS ) {
+    if ( type === types.REMOVE_SUCCESS ) {
         return state.filter( h => h.id !== payload.id );
     }
     return state;
