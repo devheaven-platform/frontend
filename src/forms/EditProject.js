@@ -58,7 +58,7 @@ export default ( config, defaults ) => [
         validations: [ isNumeric, minValue( 0 ) ],
     },
     {
-        label: "Price per Point ",
+        label: "Identifier value",
         name: "pricePerPoint",
         type: FIELD_TYPES.NUMBER,
         default: defaults.budget,
