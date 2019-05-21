@@ -2,6 +2,7 @@ import React from "react";
 import { Page, ModalForm, Table } from "components";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { PageLoading } from "pages";
 import createWorkPeriodForm from "forms/CreateWorkPeriod";
 import hoursTable from "tables/Hours";
 import { actions } from "./duck";
@@ -27,6 +28,10 @@ class Hours extends React.Component {
 
     render() {
         const { errors, hours } = this.props;
+        if ( hours === null ) {
+            return <PageLoading />;
+        }
+
         const workPeriods = hours.map( h => ( {
             id: h.id,
             context: h.context,
