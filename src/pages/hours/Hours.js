@@ -66,7 +66,12 @@ Hours.propTypes = {
     Load: PropTypes.func.isRequired,
     Delete: PropTypes.func.isRequired,
     errors: PropTypes.shape(),
-    hours: PropTypes.arrayOf( PropTypes.shape() ),
+    hours: PropTypes.arrayOf( PropTypes.shape( {
+        id: PropTypes.string.isRequired,
+        context: PropTypes.string.isRequired,
+        startDate: PropTypes.number.isRequired,
+        endDate: PropTypes.number.isRequired,
+    } ) ),
     user: PropTypes.string.isRequired,
 };
 

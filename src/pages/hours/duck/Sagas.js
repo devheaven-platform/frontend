@@ -11,7 +11,7 @@ import types from "./Types";
 
 function* load( action ) {
     try {
-        const { data } = yield call( axios.get, `/hours?employee=${ action.payload.employee }` );
+        const { data } = yield call( axios.get, `/hours/?employee=${ action.payload.employee }` );
         yield put( { type: types.LOAD_SUCCESS, payload: { hours: data } } );
     } catch ( error ) {
         yield put( {
