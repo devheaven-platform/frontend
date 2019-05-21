@@ -35,7 +35,7 @@ RestrictedRoute.propTypes = {
     roles: PropTypes.arrayOf( PropTypes.string ).isRequired,
     allowed: PropTypes.arrayOf( PropTypes.string ).isRequired,
     location: PropTypes.shape(),
-    component: PropTypes.func.isRequired,
+    component: PropTypes.oneOfType( [ PropTypes.object, PropTypes.func ] ).isRequired,
 };
 
 export default RestrictedRoute;

@@ -19,11 +19,12 @@ const FormFieldSelect = ( {
             <select
                 type={ type }
                 name={ name }
-                value={ value }
-                onChange={ e => onChange( e.currentTarget.value ) }
-                onBlur={ e => onChange( e.currentTarget.value ) }
+                value={ value || "-1" }
+                onChange={ e => onChange( e.currentTarget.value !== "-1" ? e.currentTarget.value : undefined ) }
+                onBlur={ e => onChange( e.currentTarget.value !== "-1" ? e.currentTarget.value : undefined ) }
                 className={ classNames( "input", { "is-danger": touched && error } ) }
             >
+                <option value="-1" disabled>Select a value</option>
                 { options.map( option => <option key={ option.value } value={ option.value }>{ option.label }</option> ) }
             </select>
         </div>
