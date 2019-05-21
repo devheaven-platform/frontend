@@ -6,16 +6,15 @@ import createWorkPeriodForm from "forms/CreateWorkPeriod";
 import hoursTable from "tables/Hours";
 import { actions } from "./duck";
 
-const mockID = "a9eac184-ed4b-4d16-9498-d1e66089e170";
 class Hours extends React.Component {
     componentDidMount() {
-        const { Load } = this.props;
-        Load( { employee: mockID } );
+        const { Load, user } = this.props;
+        Load( { employee: user } );
     }
 
     createWorkPeriod=( payload ) => {
-        const { Create } = this.props;
-        Create( { ...payload, employee: mockID } );
+        const { Create, user } = this.props;
+        Create( { ...payload, employee: user } );
     }
 
     onContextMenuClick = ( action, hour ) => {
@@ -63,6 +62,7 @@ Hours.propTypes = {
     Delete: PropTypes.func.isRequired,
     errors: PropTypes.shape(),
     hours: PropTypes.arrayOf( PropTypes.shape() ),
+    user: PropTypes.string.isRequired,
 };
 
 Hours.defaultProps = {
@@ -70,7 +70,7 @@ Hours.defaultProps = {
     errors: {},
 };
 
-const mSTP = ( { hours: { errors, hours } } ) => ( { errors, hours } );
+const mSTP = ( { app: { user }, hours: { errors, hours } } ) => ( { user, errors, hours } );
 
 const mDTP = dispatch => ( {
     Load: payload => dispatch( actions.load( payload ) ),
