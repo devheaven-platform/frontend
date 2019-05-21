@@ -2,9 +2,7 @@ import { CELL_TYPES, FILTER_TYPES } from "./Types";
 
 export default [
     {
-        label: "
-      
-      ",
+        label: "Name",
         key: "name",
         type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.SEARCH,
@@ -30,21 +28,14 @@ export default [
         key: "invoiceMargin",
         type: CELL_TYPES.NUMBER,
         filter: FILTER_TYPES.NUMBER,
-    },
-    {
-        label: "Identifier value",
-        key: "pricePerPoint",
-        type: CELL_TYPES.NUMBER,
-        filter: FILTER_TYPES.NUMBER,
-    },
-    {
-        label: "Identifier value",
-        key: "pricePerPoint",
-        type: CELL_TYPES.NUMBER,
+
     },
     {
         label: "Invoicing Type",
-        key: "identifier
+        key: "identifier",
+        type: CELL_TYPES.TEXT,
+        filter: FILTER_TYPES.SELECT,
+        options: [
             {
                 value: "HOURS",
                 label: "Hours",
@@ -58,6 +49,11 @@ export default [
                 label: "Money",
             },
         ],
+    },
+    {
+        label: "Identifier value",
+        key: "pricePerPoint",
+        type: CELL_TYPES.NUMBER,
     },
     {
         label: "Archived",
