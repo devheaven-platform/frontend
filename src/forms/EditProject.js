@@ -8,6 +8,7 @@ import {
     maxLength,
     minValue,
     isDate,
+    isRequired,
 } from "./Validators";
 
 export default ( config, defaults ) => [
@@ -30,8 +31,35 @@ export default ( config, defaults ) => [
         validations: [ minLength( 2 ), maxLength( 250 ) ],
     },
     {
-        label: "Budget",
-        name: "budget",
+        label: "Identifier",
+        name: "identifier",
+        type: FIELD_TYPES.SELECT,
+        options: [
+            {
+                value: "MONEY",
+                label: "Money",
+            },
+            {
+                value: "STORY_POINTS",
+                label: "Story Points",
+            },
+            {
+                value: "HOURS",
+                label: "Hours",
+            },
+        ],
+        validations: [ isRequired ],
+    },
+    {
+        label: "Profit Margin",
+        name: "invoiceMargin",
+        type: FIELD_TYPES.NUMBER,
+        default: defaults.budget,
+        validations: [ isNumeric, minValue( 0 ) ],
+    },
+    {
+        label: "Price per Point ",
+        name: "pricePerPoint",
         type: FIELD_TYPES.NUMBER,
         default: defaults.budget,
         validations: [ isNumeric, minValue( 0 ) ],
