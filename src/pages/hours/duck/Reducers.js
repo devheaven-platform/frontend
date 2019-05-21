@@ -27,12 +27,6 @@ const errors = ( state = defaultState.errors, { type, payload } ) => {
     if ( type === types.CREATE_ERROR ) {
         return payload;
     }
-    if ( type === types.DELETE ) {
-        return {};
-    }
-    if ( type === types.DELETE_ERROR ) {
-        return payload;
-    }
     return state;
 };
 

@@ -1,11 +1,9 @@
 import React from "react";
-import { Page, ModalForm } from "components";
-import classNames from "classnames";
+import { Page, ModalForm, Table } from "components";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import createWorkPeriodForm from "forms/CreateWorkPeriod";
-import { TablePlain } from "@dccs/react-table-plain";
-import moment from "moment";
+import hoursTable from "tables/Hours";
 import { actions } from "./duck";
 
 const mockID = "a9eac184-ed4b-4d16-9498-d1e66089e170";
@@ -20,13 +18,21 @@ class Hours extends React.Component {
         Create( { ...payload, employee: mockID } );
     }
 
+    onContextMenuClick = ( action, hour ) => {
+        const { Delete } = this.props;
+
+        if ( action === "delete" ) {
+            Delete( { id: hour.id } );
+        }
+    }
+
     render() {
-        const { errors, hours, Delete } = this.props;
+        const { errors, hours } = this.props;
         const workPeriods = hours.map( h => ( {
-            from: `${ moment( h.startDate ).format( "ddd M-Y, hA" ) }`,
-            till: `${ moment( h.endDate ).format( "ddd M-Y, hA" ) }`,
-            what: h.context,
-            actions: ( <button type="button" className="button is-secondary" onClick={ () => Delete( { id: h.id } ) }>Delete</button> ),
+            id: h.id,
+            context: h.context,
+            start: h.startDate,
+            end: h.endDate,
         } ) );
         return (
             <Page>
@@ -39,34 +45,10 @@ class Hours extends React.Component {
                             errors={ errors }
                             submit={ this.createWorkPeriod }
                         />
-                        <TablePlain
+                        <Table
+                            columns={ hoursTable }
                             data={ workPeriods }
-                            cellProps={ data => ( {
-                                style: {
-                                    padding: 6,
-                                },
-                            } ) }
-                            colDef={ [
-                                {
-                                    prop: "from",
-                                    header: "From",
-                                    sortable: true,
-                                },
-                                {
-                                    prop: "till",
-                                    header: "Till",
-                                    sortable: true,
-                                },
-                                {
-                                    prop: "what",
-                                    header: "What",
-                                    sortable: true,
-                                }, {
-                                    prop: "actions",
-                                    header: "",
-                                    sortable: false,
-                                },
-                            ] }
+                            onContextMenuClick={ this.onContextMenuClick }
                         />
                     </div>
                 </Page.Content>

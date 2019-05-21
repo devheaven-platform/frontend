@@ -41,7 +41,7 @@ function* deleteWorkPeriod( { payload } ) {
         yield put( { type: types.DELETE_SUCCESS, payload } );
     } catch ( error ) {
         yield put( {
-            type: errorSelectors.errorType( error, types.DELETE_ERROR, errorTypes.APP_ERROR ),
+            type: errorTypes.APP_ERROR,
             payload: errorSelectors.errorPayload( error ),
         } );
     }
