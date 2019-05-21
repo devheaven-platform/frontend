@@ -17,6 +17,7 @@ class PageInvoice extends React.Component {
         errors: PropTypes.shape(),
         Load: PropTypes.func.isRequired,
         Create: PropTypes.func.isRequired,
+        Archive: PropTypes.func.isRequired,
     }
 
     static defaultProps = {
@@ -43,8 +44,12 @@ class PageInvoice extends React.Component {
     }
 
     onContextMenuClick = ( action, invoice ) => {
+        const { Archive } = this.props;
         if ( action === "download" ) {
             window.open( `${ window.location.origin }/api/invoices/pdf/${ invoice.id }` );
+        }
+        if ( action === "archive" ) {
+            Archive( invoice );
         }
     }
 
