@@ -24,7 +24,6 @@ function* load( action ) {
 function* create( { payload } ) {
     try {
         const { data } = yield call( axios.post, "/hours/", payload );
-        console.log( data );
         yield put( { type: types.CREATE_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {
