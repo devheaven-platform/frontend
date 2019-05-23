@@ -38,9 +38,11 @@ class PageInvoice extends React.Component {
     onChange = ( event ) => {
         const { projects } = this.props;
         const id = event.currentTarget.value;
-        this.setState( {
-            selected: projects.find( p => p.id === id ),
-        } );
+        if ( id !== "-1" ) {
+            this.setState( {
+                selected: projects.find( p => p.id === id ),
+            } );
+        }
     }
 
     onContextMenuClick = ( action, invoice ) => {
@@ -77,7 +79,8 @@ class PageInvoice extends React.Component {
                                 <div className="field-label is-normal">
                                     <label htmlFor="project" className="label">Project</label>
                                 </div>
-                                <select name="project" className="input" onChange={ this.onChange }>
+                                <select name="project" className="input" onChange={ this.onChange } defaultValue="-1">
+                                    <option value="-1" disabled>Select a value</option>
                                     { items }
                                 </select>
                             </div>
