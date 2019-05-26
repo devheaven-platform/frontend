@@ -51,14 +51,16 @@ class Hours extends React.Component {
             const startDate = new Date( h.startDate );
             const endDate = new Date( h.endDate );
             const date = moment( startDate );
-            const beginTime = moment( startDate ).format( "HH:mm" );
-            const endTime = moment( endDate ).format( "HH:mm" );
+            const beginTime = moment( startDate );
+            const endTime = moment( endDate );
+            const workedHours = endTime.diff( beginTime, "hours", true );
             return ( {
                 id: h.id,
                 context: h.context,
                 date,
-                beginTime,
-                endTime,
+                beginTime: beginTime.format( "HH:mm" ),
+                endTime: endTime.format( "HH:mm" ),
+                hours: workedHours,
             } );
         } );
 
@@ -112,6 +114,9 @@ class Hours extends React.Component {
                             errors={ errors }
                             submit={ this.createWorkPeriod }
                         />
+                    </div>
+                    <div className="columns">
+
                         <Table
                             columns={ hoursTable }
                             data={ workPeriods }

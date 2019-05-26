@@ -26,6 +26,12 @@ export default [
         filter: FILTER_TYPES.SEARCH,
     },
     {
+        label: "Hours",
+        key: "hours",
+        type: CELL_TYPES.TEXT,
+        filter: FILTER_TYPES.SEARCH,
+    },
+    {
         key: "menu",
         type: CELL_TYPES.CONTEXT_MENU,
         icon: "ellipsis-v",
