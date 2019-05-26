@@ -4,7 +4,7 @@ import moment from "moment";
 
 const TableCellDate = ( { value } ) => (
     <td>
-        { moment( value ).format( "DD-MM-YYYY" ) }
+        { moment( value ).format( "MM-DD-YYYY" ) }
     </td>
 );
 
