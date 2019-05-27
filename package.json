@@ -17,6 +17,7 @@
     "react": "^16.8.4",
     "react-beautiful-dnd": "^11.0.2",
     "react-dom": "^16.8.4",
+    "react-google-charts": "^3.0.13",
     "react-notifications": "^1.4.3",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",

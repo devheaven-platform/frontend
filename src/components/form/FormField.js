@@ -65,6 +65,19 @@ const FormField = ( {
                     onChange={ setValue }
                 />
             );
+        case FIELD_TYPES.TIME:
+            return (
+                <FormFieldInput
+                    label={ label }
+                    name={ name }
+                    pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
+                    type={ type }
+                    value={ value }
+                    error={ error }
+                    touched={ touched }
+                    onChange={ setValue }
+                />
+            );
         case FIELD_TYPES.SELECT:
             return (
                 <FormFieldSelect

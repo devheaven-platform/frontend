@@ -2,22 +2,34 @@ import { CELL_TYPES, FILTER_TYPES } from "./Types";
 
 export default [
     {
-        label: "Context",
+        label: "Description",
         key: "context",
         type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.SEARCH,
     },
     {
-        label: "Start Date",
-        key: "start",
+        label: "Date",
+        key: "date",
         type: CELL_TYPES.DATE,
         filter: FILTER_TYPES.RANGE_DATE,
     },
     {
-        label: "End Date",
-        key: "end",
-        type: CELL_TYPES.DATE,
-        filter: FILTER_TYPES.RANGE_DATE,
+        label: "Begin time",
+        key: "beginTime",
+        type: CELL_TYPES.TIME,
+        filter: FILTER_TYPES.SEARCH,
+    },
+    {
+        label: "End time",
+        key: "endTime",
+        type: CELL_TYPES.TIME,
+        filter: FILTER_TYPES.SEARCH,
+    },
+    {
+        label: "Hours",
+        key: "hours",
+        type: CELL_TYPES.TEXT,
+        filter: FILTER_TYPES.SEARCH,
     },
     {
         key: "menu",

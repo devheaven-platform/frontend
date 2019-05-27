@@ -21,7 +21,7 @@ const isAlphanumeric = ( values, value ) => ( _isEmpty( value ) || _matchRegex( 
     : "Can only contain numbers and letters."
 );
 
-const isEmail = ( values, value ) => ( _isEmpty( value ) || _matchRegex( value, "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$" )
+const isEmail = ( values, value ) => ( _isEmpty( value ) || _matchRegex( value, "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$" )
     ? true
     : "Must be a valid email."
 );
@@ -56,6 +56,8 @@ const maxValue = max => ( values, value ) => ( _isEmpty( value ) || value <= max
     : `Must be ${ max } or less.`
 );
 
+const isTime = ( values, value ) => ( _isEmpty( value ) || !_matchRegex( value, "^(0?[1-9]|1[0-2]):[0-5][0-9]\\d$" ) ? true : "Must be a valid time" );
+
 export {
     isRequired,
     isNumeric,
@@ -63,6 +65,7 @@ export {
     isEmail,
     isPassword,
     isDate,
+    isTime,
     minLength,
     maxLength,
     minValue,

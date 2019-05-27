@@ -1,5 +1,6 @@
 export default {
     TEXT: "text",
+    TIME: "text",
     DATE: "date",
     DATETIME: "datetime-local",
     NUMBER: "number",
