@@ -16,13 +16,13 @@ export default [
     {
         label: "Begin time",
         key: "beginTime",
-        type: CELL_TYPES.TIME,
+        type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.SEARCH,
     },
     {
         label: "End time",
         key: "endTime",
-        type: CELL_TYPES.TIME,
+        type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.SEARCH,
     },
     {

@@ -9,9 +9,9 @@ import errorSelectors from "components/error/duck/Selectors";
 import errorTypes from "components/error/duck/Types";
 import types from "./Types";
 
-function* load( action ) {
+function* load( { payload } ) {
     try {
-        const query = `employee=${ action.payload.employee }`;
+        const query = `employee=${ payload }`;
         const { data } = yield call( axios.get, `/hours/?${ query }` );
         yield put( { type: types.LOAD_SUCCESS, payload: { hours: data } } );
     } catch ( error ) {

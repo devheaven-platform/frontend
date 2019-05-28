@@ -8,7 +8,7 @@ import {
     isTime,
 } from "./Validators";
 
-export default config => [
+export default [
     {
         label: "Description",
         name: "context",
