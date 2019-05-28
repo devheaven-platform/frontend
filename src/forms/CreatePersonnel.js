@@ -1,6 +1,7 @@
 import FIELD_TYPES from "./Types";
 import {
     isRequired,
+    isPassword,
     isAlphanumeric,
     minLength,
     maxLength,
@@ -10,7 +11,7 @@ import {
 
 export default [
     {
-        label: "First name",
+        label: "Firstname",
         name: "firstname",
         type: FIELD_TYPES.TEXT,
         validations: [
@@ -21,7 +22,7 @@ export default [
         ],
     },
     {
-        label: "Last name",
+        label: "Lastname",
         name: "lastname",
         type: FIELD_TYPES.TEXT,
         validations: [
@@ -37,9 +38,9 @@ export default [
         type: FIELD_TYPES.PASSWORD,
         validations: [
             isRequired,
-            isAlphanumeric,
-            minLength( 2 ),
-            maxLength( 20 ),
+            isPassword,
+            minLength( 6 ),
+            maxLength( 40 ),
         ],
     },
     {
@@ -60,5 +61,29 @@ export default [
             minLength( 2 ),
             maxLength( 25 ),
         ],
+    },
+    {
+        label: "Roles",
+        name: "roles",
+        type: FIELD_TYPES.MUTLISELECT,
+        options: [
+            {
+                value: "ROLE_USER",
+                label: "User",
+            },
+            {
+                value: "ROLE_DEVELOPER",
+                label: "Developer",
+            },
+            {
+                value: "ROLE_HR",
+                label: "HR",
+            },
+            {
+                value: "ROLE_MANAGER",
+                label: "Manager",
+            },
+        ],
+        validations: [ isRequired ],
     },
 ];

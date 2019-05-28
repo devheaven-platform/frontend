@@ -11,6 +11,7 @@ import {
     FormFieldDate,
     FormFieldSelect,
     FormFieldCheckbox,
+    FormFieldMutliSelect,
 } from "./fields";
 
 const FormField = ( {
@@ -53,7 +54,6 @@ const FormField = ( {
                 />
             );
         case FIELD_TYPES.DATE:
-        case FIELD_TYPES.DATETIME:
             return (
                 <FormFieldDate
                     label={ label }
@@ -83,7 +83,18 @@ const FormField = ( {
                 <FormFieldSelect
                     label={ label }
                     name={ name }
-                    type={ type }
+                    options={ options }
+                    value={ value }
+                    error={ error }
+                    touched={ touched }
+                    onChange={ setValue }
+                />
+            );
+        case FIELD_TYPES.MUTLISELECT:
+            return (
+                <FormFieldMutliSelect
+                    label={ label }
+                    name={ name }
                     options={ options }
                     value={ value }
                     error={ error }

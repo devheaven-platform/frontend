@@ -79,10 +79,12 @@ class PageInvoice extends React.Component {
                                 <div className="field-label is-normal">
                                     <label htmlFor="project" className="label">Project</label>
                                 </div>
-                                <select name="project" className="input" onChange={ this.onChange } defaultValue="-1">
-                                    <option value="-1" disabled>Select a value</option>
-                                    { items }
-                                </select>
+                                <div className="select">
+                                    <select name="project" className="input" onChange={ this.onChange } defaultValue="-1">
+                                        <option value="-1" disabled>Select a value</option>
+                                        { items }
+                                    </select>
+                                </div>
                             </div>
                             { selected && (
                                 <ModalForm

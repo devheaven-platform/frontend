@@ -24,7 +24,6 @@ function* load() {
 
 function* create( { payload } ) {
     try {
-        payload.roles = [ "ROLE_USER" ];
         payload.emails = [ "email@mail.com" ];
 
         console.log( payload );

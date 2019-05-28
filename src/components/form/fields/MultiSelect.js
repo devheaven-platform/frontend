@@ -3,7 +3,7 @@ import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 
-const FormFieldSelect = ( {
+const FormFieldMutliSelect = ( {
     label,
     name,
     value,
@@ -14,15 +14,15 @@ const FormFieldSelect = ( {
 } ) => (
     <div className="field">
         <label htmlFor={ name } className="label">{ label }</label>
-        <div className="select">
+        <div className="select is-multiple">
             <select
                 name={ name }
-                value={ value || "-1" }
-                onChange={ e => onChange( e.currentTarget.value !== "-1" ? e.currentTarget.value : undefined ) }
-                onBlur={ e => onChange( e.currentTarget.value !== "-1" ? e.currentTarget.value : undefined ) }
+                value={ value }
+                multiple
+                onChange={ e => onChange( Array.from( e.currentTarget.selectedOptions ).map( o => o.value ) ) }
+                onBlur={ e => onChange( Array.from( e.currentTarget.selectedOptions ).map( o => o.value ) ) }
                 className={ classNames( "input", { "is-danger": touched && error } ) }
             >
-                <option value="-1" disabled>Select a value</option>
                 { options.map( option => <option key={ option.value } value={ option.value }>{ option.label }</option> ) }
             </select>
         </div>
@@ -32,13 +32,13 @@ const FormFieldSelect = ( {
     </div>
 );
 
-FormFieldSelect.propTypes = {
+FormFieldMutliSelect.propTypes = {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType( [
+    value: PropTypes.arrayOf( PropTypes.oneOfType( [
         PropTypes.string,
         PropTypes.number,
-    ] ),
+    ] ) ),
     options: PropTypes.arrayOf( PropTypes.shape( {
         value: PropTypes.oneOfType( [
             PropTypes.string,
@@ -54,11 +54,11 @@ FormFieldSelect.propTypes = {
     onChange: PropTypes.func.isRequired,
 };
 
-FormFieldSelect.defaultProps = {
-    value: "",
+FormFieldMutliSelect.defaultProps = {
+    value: [],
     error: null,
     touched: false,
 };
 
-export default FormFieldSelect;
+export default FormFieldMutliSelect;
 /* eslint-enable jsx-a11y/label-has-for */
