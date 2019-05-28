@@ -65,10 +65,11 @@ export default [
     },
     {
         label: "Phone number",
-        name: "number",
+        name: "phoneNumber",
         type: FIELD_TYPES.TEXT,
         validations: [
             isPhoneNumber,
+            isRequired,
         ],
     },
     {
