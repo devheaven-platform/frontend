@@ -25,7 +25,7 @@ const getToken = () => {
  */
 const setToken = ( token, timestamp ) => {
     localStorage.setItem( TOKEN_KEY, token );
-    localStorage.setItem( TIMESTAMP_KEY, timestamp );
+    localStorage.setItem( TIMESTAMP_KEY, new Date( timestamp * 1000 ).getTime() );
 };
 
 /**
