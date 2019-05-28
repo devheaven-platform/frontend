@@ -13,6 +13,7 @@ import {
     PageError,
     PageHours,
     PageInvoice,
+    PagePersonnel,
 } from "../pages";
 import RestrictedRoute from "./RestrictedRoute";
 
@@ -27,6 +28,7 @@ const Router = ( { isAuthenticated, roles, children } ) => (
                 <RestrictedRoute exact path="/boards/:id" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageBoard } />
                 <RestrictedRoute exact path="/hours" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageHours } />
                 <RestrictedRoute exact path="/invoices" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageInvoice } />
+                <RestrictedRoute exact path="/personnel" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PagePersonnel } />
                 <Route exact path="/login" component={ PageLogin } />
                 <Route
                     path="*"

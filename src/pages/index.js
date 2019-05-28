@@ -7,3 +7,4 @@ export { default as PageLoading } from "./loading/Loading";
 export { default as PageHours } from "./hours/Hours";
 export { default as PageProjects } from "./projects/Projects";
 export { default as PageProject } from "./projects/project/Project";
+export { default as PagePersonnel } from "./personnel/Personnel";
