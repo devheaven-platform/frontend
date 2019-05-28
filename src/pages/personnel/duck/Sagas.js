@@ -7,7 +7,6 @@ import axios from "axios";
 
 import errorSelectors from "components/error/duck/Selectors";
 import errorTypes from "components/error/duck/Types";
-import stub from "./__Stub__";
 import types from "./Types";
 
 function* load() {
@@ -25,8 +24,6 @@ function* load() {
 function* create( { payload } ) {
     try {
         payload.emails = [ "email@mail.com" ];
-
-        console.log( payload );
         const { data } = yield call( axios.post, "/personnel/", payload );
         yield put( { type: types.CREATE_SUCCESS, payload: data } );
     } catch ( error ) {

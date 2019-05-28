@@ -7,6 +7,7 @@ import {
     maxLength,
     isNumeric,
     minValue,
+    isPhoneNumber,
 } from "./Validators";
 
 export default [
@@ -60,6 +61,14 @@ export default [
             isAlphanumeric,
             minLength( 2 ),
             maxLength( 25 ),
+        ],
+    },
+    {
+        label: "Phone number",
+        name: "number",
+        type: FIELD_TYPES.TEXT,
+        validations: [
+            isPhoneNumber,
         ],
     },
     {

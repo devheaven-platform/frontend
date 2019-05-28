@@ -31,6 +31,11 @@ const isPassword = ( values, value ) => ( _isEmpty( value ) || _matchRegex( valu
     : "Must at least contain 1 capital letter, 1 lowercase letter and 1 number."
 );
 
+const isPhoneNumber = ( values, value ) => ( _isEmpty( value ) || _matchRegex( value, "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$" )
+    ? true
+    : "Must be a valid phone number."
+);
+
 const isDate = ( values, value ) => ( _isEmpty( value ) || moment( value ).isValid()
     ? true
     : "Must be a valid date."
@@ -70,4 +75,5 @@ export {
     maxLength,
     minValue,
     maxValue,
+    isPhoneNumber,
 };
