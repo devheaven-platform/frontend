@@ -15,8 +15,8 @@ const personnel = ( state = defaultState.personnel, { type, payload } ) => {
     if ( type === types.CREATE_SUCCESS ) {
         return [ ...state, payload ];
     }
-    if ( type === types.ARCHIVE_SUCCESS ) {
-        return state.map( p => ( p.id === payload.id ? payload : p ) );
+    if ( type === types.REMOVE_SUCCESS ) {
+        return state.filter( item => item !== payload );
     }
     return state;
 };

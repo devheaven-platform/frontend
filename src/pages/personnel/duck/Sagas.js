@@ -12,7 +12,7 @@ import types from "./Types";
 
 function* load() {
     try {
-        const { data } = yield call( stub.get, "/personnel/" );
+        const { data } = yield call( axios.get, "/personnel/" );
         yield put( { type: types.LOAD_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {
@@ -22,10 +22,26 @@ function* load() {
     }
 }
 
-function* create() {
+function* create( { payload } ) {
     try {
-        const { data } = yield call( stub.put, "/personnel/" );
+        payload.roles = [ "ROLE_USER" ];
+        payload.emails = [ "email@mail.com" ];
+
+        console.log( payload );
+        const { data } = yield call( axios.post, "/personnel/", payload );
         yield put( { type: types.CREATE_SUCCESS, payload: data } );
+    } catch ( error ) {
+        yield put( {
+            type: errorTypes.APP_ERROR,
+            payload: errorSelectors.errorPayload( error ),
+        } );
+    }
+}
+
+function* remove( { payload } ) {
+    try {
+        yield call( axios.delete, `/personnel/${ payload.id }` );
+        yield put( { type: types.REMOVE_SUCCESS, payload } );
     } catch ( error ) {
         yield put( {
             type: errorTypes.APP_ERROR,
@@ -37,4 +53,5 @@ function* create() {
 export default function* main() {
     yield takeLatest( types.LOAD, load );
     yield takeLatest( types.CREATE, create );
+    yield takeLatest( types.REMOVE, remove );
 }

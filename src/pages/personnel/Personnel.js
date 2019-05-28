@@ -13,7 +13,7 @@ class PagePersonnel extends React.Component {
         Load: PropTypes.func.isRequired,
         errors: PropTypes.shape(),
         Create: PropTypes.func.isRequired,
-        Archive: PropTypes.func.isRequired,
+        Remove: PropTypes.func.isRequired,
     }
 
     static defaultProps = {
@@ -27,11 +27,11 @@ class PagePersonnel extends React.Component {
     }
 
     onContextMenuClick = ( action, person ) => {
-        // const { Archive } = this.props;
+        const { Remove } = this.props;
 
-        // if ( action === "archive" ) {
-        //     Archive( project );
-        // }
+        if ( action === "remove" ) {
+            Remove( person );
+        }
     }
 
     render() {
@@ -40,7 +40,6 @@ class PagePersonnel extends React.Component {
             Create,
             errors,
         } = this.props;
-        console.log( personnel );
         return (
             <Page>
                 <Page.Header title="Personnel" subtitle="View, create or archive a personnel member">
@@ -74,7 +73,7 @@ const mSTP = ( { personnel: { personnel, errors } } ) => ( { personnel, errors }
 const mDTP = dispatch => ( {
     Load: () => dispatch( actions.load() ),
     Create: payload => dispatch( actions.create( payload ) ),
-    Archive: payload => dispatch( actions.archive( payload ) ),
+    Remove: payload => dispatch( actions.remove( payload ) ),
 } );
 
 export default connect( mSTP, mDTP )( PagePersonnel );

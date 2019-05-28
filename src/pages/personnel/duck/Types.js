@@ -6,6 +6,6 @@ export default types( "@personnel", [
     "CREATE",
     "CREATE_SUCCESS",
     "CREATE_ERROR",
-    "ARCHIVE",
-    "ARCHIVE_SUCCESS",
+    "REMOVE",
+    "REMOVE_SUCCESS",
 ] );
