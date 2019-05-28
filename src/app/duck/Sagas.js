@@ -8,7 +8,6 @@ import axios from "axios";
 
 import errorSelectors from "components/error/duck/Selectors";
 import errorTypes from "components/error/duck/Types";
-import stub from "./__Stub__";
 import types from "./Types";
 
 function* init() {
@@ -22,7 +21,7 @@ function* init() {
                 call( axios.get, `${ health }/project-management/health/` ),
                 call( axios.get, `${ health }/invoice/health/` ),
                 call( axios.get, `${ health }/hour/health/` ),
-                // call( axios.get, `${ health }/auth/health/` ),
+                call( axios.get, `${ health }/auth/health/` ),
                 call( axios.get, `${ health }/personnel/health/` ),
             ] );
 
@@ -37,7 +36,7 @@ function* init() {
 
 function* login( { payload } ) {
     try {
-        const { data } = yield call( stub.post, "/auth/login/", payload );
+        const { data } = yield call( axios.post, "/auth/login/", payload );
         yield put( { type: types.LOGIN_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {
