@@ -21,6 +21,9 @@ function* init() {
                 call( axios.get, `${ health }/task-management/health/` ),
                 call( axios.get, `${ health }/project-management/health/` ),
                 call( axios.get, `${ health }/invoice/health/` ),
+                call( axios.get, `${ health }/hour/health/` ),
+                // call( axios.get, `${ health }/auth/health/` ),
+                call( axios.get, `${ health }/personnel/health/` ),
             ] );
 
             yield put( { type: types.VALIDATE_CONNECTION_SUCCESS } );
