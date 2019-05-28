@@ -20,6 +20,12 @@ export default [
         filter: FILTER_TYPES.RANGE_NUMBER,
     },
     {
+        label: "Phonenumber",
+        key: "phoneNumber",
+        type: CELL_TYPES.TEXT,
+        filter: FILTER_TYPES.SEARCH,
+    },
+    {
         label: "Address",
         key: "address",
         type: CELL_TYPES.TEXT,
