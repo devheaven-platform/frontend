@@ -6,6 +6,19 @@ const _isEmpty = value => !( value !== null && value !== undefined ) || value ==
 // eslint-disable-next-line
 const _matchRegex = ( value, regex ) => new RegExp( regex ).test( value )
 
+const useList = validation => ( values, value ) => {
+    if ( value !== undefined ) {
+        // eslint-disable-next-line
+        for ( const v of value ) {
+            const result = validation( values, v );
+            if ( result !== true ) {
+                return `All the values ${ result.toLowerCase() }`;
+            }
+        }
+    }
+    return true;
+};
+
 const isRequired = ( values, value ) => ( value !== undefined && value !== null && value !== ""
     ? true
     : "Required."
@@ -64,6 +77,7 @@ const maxValue = max => ( values, value ) => ( _isEmpty( value ) || value <= max
 const isTime = ( values, value ) => ( _isEmpty( value ) || !_matchRegex( value, "^(0?[1-9]|1[0-2]):[0-5][0-9]\\d$" ) ? true : "Must be a valid time" );
 
 export {
+    useList,
     isRequired,
     isNumeric,
     isAlphanumeric,

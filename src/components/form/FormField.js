@@ -5,11 +5,12 @@ import PropTypes from "prop-types";
 
 import FIELD_TYPES from "forms/Types";
 import {
+    FormFieldDate,
+    FormFieldList,
     FormFieldInput,
     FormFieldNumber,
-    FormFieldTextArea,
-    FormFieldDate,
     FormFieldSelect,
+    FormFieldTextArea,
     FormFieldCheckbox,
     FormFieldMutliSelect,
 } from "./fields";
@@ -78,21 +79,20 @@ const FormField = ( {
                     onChange={ setValue }
                 />
             );
-        case FIELD_TYPES.SELECT:
+        case FIELD_TYPES.LIST:
             return (
-                <FormFieldSelect
+                <FormFieldList
                     label={ label }
                     name={ name }
-                    options={ options }
                     value={ value }
                     error={ error }
                     touched={ touched }
                     onChange={ setValue }
                 />
             );
-        case FIELD_TYPES.MUTLISELECT:
+        case FIELD_TYPES.SELECT:
             return (
-                <FormFieldMutliSelect
+                <FormFieldSelect
                     label={ label }
                     name={ name }
                     options={ options }
@@ -108,6 +108,18 @@ const FormField = ( {
                     label={ label }
                     name={ name }
                     type={ type }
+                    value={ value }
+                    error={ error }
+                    touched={ touched }
+                    onChange={ setValue }
+                />
+            );
+        case FIELD_TYPES.MUTLISELECT:
+            return (
+                <FormFieldMutliSelect
+                    label={ label }
+                    name={ name }
+                    options={ options }
                     value={ value }
                     error={ error }
                     touched={ touched }

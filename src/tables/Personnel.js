@@ -20,7 +20,7 @@ export default [
         filter: FILTER_TYPES.RANGE_NUMBER,
     },
     {
-        label: "Phonenumber",
+        label: "Phone Number",
         key: "phoneNumber",
         type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.SEARCH,
