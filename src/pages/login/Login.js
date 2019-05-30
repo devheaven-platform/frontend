@@ -1,4 +1,6 @@
 import React from "react";
+import { NotificationManager } from "react-notifications";
+import { GoogleLogin } from "react-google-login";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import queryString from "query-string";
@@ -15,6 +17,7 @@ class PageLogin extends React.Component {
         isAuthenticated: PropTypes.bool.isRequired,
         errors: PropTypes.shape(),
         Login: PropTypes.func.isRequired,
+        LoginGoogle: PropTypes.func.isRequired,
         Logout: PropTypes.func.isRequired,
         history: PropTypes.shape().isRequired,
         location: PropTypes.shape().isRequired,
@@ -40,6 +43,7 @@ class PageLogin extends React.Component {
             errors,
             location,
             Login,
+            LoginGoogle,
         } = this.props;
 
         if ( isAuthenticated ) {
@@ -60,7 +64,15 @@ class PageLogin extends React.Component {
                             errors={ errors }
                             submit={ Login }
                             hasSubmitButton
-                            hasResetButton
+                            submitButtonText="Login"
+                        />
+                        <div className="is-divider" data-content="OR" />
+                        <GoogleLogin
+                            clientId="739408487246-hknfi4iqvob2n2r7lrt0pj8acrnuuqfr.apps.googleusercontent.com"
+                            buttonText="Login with Google"
+                            onSuccess={ LoginGoogle }
+                            onFailure={ () => NotificationManager.error( "An error has occurred while logging in", "Error", 3000 ) }
+                            cookiePolicy="single_host_origin"
                         />
                     </div>
                 </Page.Content>
@@ -80,6 +92,7 @@ const mSTP = ( {
 
 const mDTP = dispatch => ( {
     Login: values => dispatch( actions.login( values ) ),
+    LoginGoogle: values => dispatch( actions.loginGoogle( values ) ),
     Logout: () => dispatch( actions.logout() ),
 } );
 
