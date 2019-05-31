@@ -51,6 +51,9 @@ class PageLogin extends React.Component {
             return <Redirect to={ search.redirect || "/" } />;
         }
 
+        const isDev = process.env.NODE_ENV === "development";
+        const clientId = process.env[ `REACT_APP_GOOGLE_ID_${ process.env.REACT_APP_ENV_NAME }` ];
+
         return (
             <Page background="light">
                 <Page.Content isCentered>
@@ -66,11 +69,11 @@ class PageLogin extends React.Component {
                             hasSubmitButton
                             submitButtonText="Login"
                         />
-                        { process.env.NODE_ENV !== "development" && (
+                        { !isDev && (
                             <React.Fragment>
                                 <div className="is-divider" data-content="OR" />
                                 <GoogleLogin
-                                    clientId="739408487246-hknfi4iqvob2n2r7lrt0pj8acrnuuqfr.apps.googleusercontent.com"
+                                    clientId={ clientId }
                                     buttonText="Login with Google"
                                     onSuccess={ LoginGoogle }
                                     onFailure={ () => NotificationManager.error( "An error has occurred while logging in", "Error", 3000 ) }
