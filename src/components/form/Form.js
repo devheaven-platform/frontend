@@ -13,6 +13,8 @@ const Form = ( {
     setIsChanged,
     hasSubmitButton,
     hasResetButton,
+    submitButtonText,
+    resetButtonText,
 } ) => {
     const items = Object.entries( errors ).map( item => <p key={ item[ 0 ] }>{ item[ 1 ] }</p> );
 
@@ -37,8 +39,8 @@ const Form = ( {
                     <FormField { ...field } key={ field.name } value={ field.default } validations={ validations } />
                 );
             } ) }
-            { hasSubmitButton && <button type="submit" className="button is-primary has-margin-right-2 has-margin-top-2">Submit</button> }
-            { hasResetButton && <button type="reset" className="button is-secondary has-margin-top-2">Reset</button> }
+            { hasSubmitButton && <button type="submit" className="button is-primary has-margin-right-2 has-margin-top-2">{ submitButtonText }</button> }
+            { hasResetButton && <button type="reset" className="button is-secondary has-margin-top-2">{ resetButtonText }</button> }
         </Formsy>
     );
 };
@@ -50,6 +52,8 @@ Form.propTypes = {
     setIsChanged: PropTypes.func,
     hasSubmitButton: PropTypes.bool,
     hasResetButton: PropTypes.bool,
+    submitButtonText: PropTypes.string,
+    resetButtonText: PropTypes.string,
 };
 
 Form.defaultProps = {
@@ -57,6 +61,8 @@ Form.defaultProps = {
     errors: {},
     hasSubmitButton: false,
     hasResetButton: false,
+    submitButtonText: "Submit",
+    resetButtonText: "Reset",
 };
 
 export default Form;

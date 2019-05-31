@@ -39,7 +39,7 @@ export default [
             {
                 label: "Delete",
                 key: "delete",
-                icon: "delete",
+                icon: "trash",
             },
         ],
     },

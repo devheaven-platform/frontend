@@ -46,7 +46,23 @@ function* login( { payload } ) {
     }
 }
 
+function* loginGoogle( { payload } ) {
+    try {
+        const { data } = yield call( axios.post, "/auth/google/", {
+            email: payload.profileObj.email,
+            token: payload.tokenId,
+        } );
+        yield put( { type: types.LOGIN_SUCCESS, payload: data } );
+    } catch ( error ) {
+        yield put( {
+            type: errorSelectors.errorType( error, types.LOGIN_ERROR, errorTypes.APP_ERROR ),
+            payload: errorSelectors.errorPayload( error ),
+        } );
+    }
+}
+
 export default function* main() {
     yield takeEvery( types.INIT, init );
     yield takeEvery( types.LOGIN, login );
+    yield takeEvery( types.LOGIN_GOOGLE, loginGoogle );
 }
