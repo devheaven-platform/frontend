@@ -66,14 +66,18 @@ class PageLogin extends React.Component {
                             hasSubmitButton
                             submitButtonText="Login"
                         />
-                        <div className="is-divider" data-content="OR" />
-                        <GoogleLogin
-                            clientId="739408487246-hknfi4iqvob2n2r7lrt0pj8acrnuuqfr.apps.googleusercontent.com"
-                            buttonText="Login with Google"
-                            onSuccess={ LoginGoogle }
-                            onFailure={ () => NotificationManager.error( "An error has occurred while logging in", "Error", 3000 ) }
-                            cookiePolicy="single_host_origin"
-                        />
+                        { process.env.NODE_ENV !== "development" && (
+                            <React.Fragment>
+                                <div className="is-divider" data-content="OR" />
+                                <GoogleLogin
+                                    clientId="739408487246-hknfi4iqvob2n2r7lrt0pj8acrnuuqfr.apps.googleusercontent.com"
+                                    buttonText="Login with Google"
+                                    onSuccess={ LoginGoogle }
+                                    onFailure={ () => NotificationManager.error( "An error has occurred while logging in", "Error", 3000 ) }
+                                    cookiePolicy="single_host_origin"
+                                />
+                            </React.Fragment>
+                        ) }
                     </div>
                 </Page.Content>
             </Page>
