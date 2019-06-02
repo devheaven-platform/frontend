@@ -31,6 +31,7 @@ class PagePerson extends React.Component {
             errors,
             Edit,
         } = this.props;
+        console.log( person );
         return (
             <Page>
                 <Page.Header title={ `${ person.firstname } ${ person.lastname }` } subtitle={ person.phoneNumber }>
@@ -43,6 +44,23 @@ class PagePerson extends React.Component {
                     />
                 </Page.Header>
                 <Page.Content>
+                    <p>
+                        address:
+                        {person.address}
+                    </p>
+                    <p>
+                        salary:
+                        {person.salary}
+                    </p>
+                    <p>
+                       roles:
+                        {" "}
+                        {person.roles}
+                    </p>
+                    <p>
+                        emails:
+                        {person.emails}
+                    </p>
                 </Page.Content>
                 <Page.Footer>
                     <p>

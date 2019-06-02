@@ -11,14 +11,11 @@ const defaultState = {
 
 const person = ( state = defaultState.person, { type, payload } ) => {
     if ( type === types.LOAD_SUCCESS ) {
-        // call to get roles
-        payload.roles = selectors.roles( payload.roles );
-        payload.emails = selectors.emails( payload.emails );
+        // add lines to use selectors for emails and roles
         return payload;
     }
     if ( type === types.EDIT_SUCCESS ) {
-        payload.roles = selectors.roles( payload.roles );
-        payload.emails = selectors.emails( payload.emails );
+        // add lines to use selectors for emails and roles
         return payload;
     }
     return state;
