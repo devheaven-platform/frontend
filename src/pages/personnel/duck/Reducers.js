@@ -2,8 +2,6 @@ import { combineReducers } from "redux";
 
 import types from "./Types";
 
-import selectors from "./Selectors";
-
 const defaultState = {
     personnel: [],
     clients: [],
