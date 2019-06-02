@@ -1,5 +1,7 @@
 import FIELD_TYPES from "./Types";
 import {
+    useList,
+    isEmail,
     isRequired,
     isPassword,
     isAlphanumeric,
@@ -58,7 +60,6 @@ export default [
         name: "address",
         type: FIELD_TYPES.TEXT,
         validations: [
-            isAlphanumeric,
             minLength( 2 ),
             maxLength( 25 ),
         ],
@@ -95,5 +96,11 @@ export default [
             },
         ],
         validations: [ isRequired ],
+    },
+    {
+        label: "Emails",
+        name: "emails",
+        type: FIELD_TYPES.LIST,
+        validations: [ isRequired, useList( isRequired ), useList( isEmail ) ],
     },
 ];

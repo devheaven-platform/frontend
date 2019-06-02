@@ -23,7 +23,6 @@ function* load() {
 
 function* create( { payload } ) {
     try {
-        payload.emails = [ "email@mail.com" ];
         const { data } = yield call( axios.post, "/personnel/", payload );
         yield put( { type: types.CREATE_SUCCESS, payload: data } );
     } catch ( error ) {

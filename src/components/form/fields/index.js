@@ -1,4 +1,5 @@
 export { default as FormFieldDate } from "./Date";
+export { default as FormFieldList } from "./List";
 export { default as FormFieldInput } from "./Input";
 export { default as FormFieldNumber } from "./Number";
 export { default as FormFieldSelect } from "./Select";
