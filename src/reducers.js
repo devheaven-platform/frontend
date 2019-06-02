@@ -9,6 +9,7 @@ import { reducers as error } from "./components/error/duck";
 import { reducers as hours } from "./pages/hours/duck";
 import { reducers as invoices } from "./pages/invoice/duck";
 import { reducers as personnel } from "./pages/personnel/duck";
+import { reducers as person } from "./pages/personnel/person/duck";
 
 const reducers = {
     // Combined reducers
@@ -20,6 +21,7 @@ const reducers = {
     error,
     hours,
     personnel,
+    person,
 };
 
 export default combineReducers( reducers );
