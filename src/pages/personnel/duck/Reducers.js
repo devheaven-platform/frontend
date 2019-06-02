@@ -2,6 +2,8 @@ import { combineReducers } from "redux";
 
 import types from "./Types";
 
+import selectors from "./Selectors";
+
 const defaultState = {
     personnel: [],
     clients: [],
@@ -10,6 +12,7 @@ const defaultState = {
 
 const personnel = ( state = defaultState.personnel, { type, payload } ) => {
     if ( type === types.LOAD_SUCCESS ) {
+        // call to get roles
         return payload;
     }
     if ( type === types.CREATE_SUCCESS ) {
