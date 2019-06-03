@@ -24,7 +24,10 @@ function* load() {
 function* create( { payload } ) {
     try {
         const contact = {
-            firstname: payload.contactFirstname, lastname: payload.contactLastname, email: payload.contactEmail, phoneNumber: payload.contactPhonenumber,
+            firstname: payload.contactFirstname,
+            lastname: payload.contactLastname,
+            email: payload.contactEmail,
+            phoneNumber: payload.contactPhonenumber,
         };
 
         payload = { ...payload, contact };

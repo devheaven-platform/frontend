@@ -32,7 +32,6 @@ class PagePerson extends React.Component {
             errors,
             Edit,
         } = this.props;
-        
         if ( person === null ) {
             return <PageLoading />;
         }
