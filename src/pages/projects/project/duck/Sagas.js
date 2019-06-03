@@ -21,7 +21,7 @@ function* load( { payload } ) {
         ] );
         const members = yield all( project.data.members.map( userId => call( stub.get, `/users/${ userId }` ) ) );
         const boards = yield all( project.data.boards.map( boardId => call( axios.get, `/boards/${ boardId }` ) ) );
-        const { data: client } = yield call( stub.get, `/clients/${ project.data.client }` );
+        const { data: client } = yield call( axios.get, `/clients/${ project.data.client }` );
         const { data: owner } = yield call( stub.get, `/users/${ project.data.owner }` );
 
         yield put( {
@@ -45,11 +45,23 @@ function* load( { payload } ) {
     }
 }
 
+function* loadClients() {
+    try {
+        const { data } = yield call( axios.get, "/clients/" );
+        yield put( { type: types.LOADCLIENTS_SUCCESS, payload: data } );
+    } catch ( error ) {
+        yield put( {
+            type: errorTypes.APP_ERROR,
+            payload: errorSelectors.errorPayload( error ),
+        } );
+    }
+}
+
 function* editProject( { payload } ) {
     try {
         const id = yield select( selectors.projectId );
         const { data: project } = yield call( axios.patch, `/projects/${ id }`, payload );
-        const { data: client } = yield call( stub.get, `/clients/${ project.client }` );
+        const { data: client } = yield call( axios.get, `/clients/${ project.client }` );
         const { data: owner } = yield call( stub.get, `/users/${ project.owner }` );
 
         yield put( { type: types.EDIT_PROJECT_SUCCESS, payload: { ...project, client, owner } } );
@@ -65,7 +77,7 @@ function* archiveProject() {
     try {
         const id = yield select( selectors.projectId );
         const { data: project } = yield call( axios.patch, `/projects/${ id }`, { archived: true } );
-        const { data: client } = yield call( stub.get, `/clients/${ project.client }` );
+        const { data: client } = yield call( axios.get, `/clients/${ project.client }` );
         const { data: owner } = yield call( stub.get, `/users/${ project.owner }` );
 
         yield put( { type: types.ARCHIVE_PROJECT_SUCCESS, payload: { ...project, client, owner } } );
@@ -170,4 +182,5 @@ export default function* main() {
     yield takeLatest( types.REMOVE_MILESTONE, removeMilestone );
     yield takeLatest( types.CREATE_BOARD, createBoard );
     yield takeLatest( types.ARCHIVE_BOARD, archiveBoard );
+    yield takeLatest( types.LOADCLIENTS, loadClients );
 }
