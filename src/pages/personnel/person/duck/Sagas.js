@@ -27,7 +27,6 @@ function* edit( { payload } ) {
     const id = yield select( selectors.employeeId );
     try {
         const { data } = yield call( axios.patch, `/personnel/${ id }`, payload );
-        console.log( data );
         yield put( { type: types.EDIT_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {
