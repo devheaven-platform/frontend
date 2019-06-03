@@ -72,7 +72,6 @@ export default [
         type: FIELD_TYPES.TEXT,
         validations: [
             isRequired,
-            isAlphanumeric,
             minLength( 2 ),
             maxLength( 250 ),
         ],

@@ -84,7 +84,6 @@ export default defaults => [
         default: defaults.logo,
         validations: [
             isRequired,
-            isAlphanumeric,
             minLength( 2 ),
             maxLength( 20 ),
         ],
