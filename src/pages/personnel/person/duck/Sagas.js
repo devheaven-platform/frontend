@@ -31,7 +31,7 @@ function* edit( { payload } ) {
         yield put( { type: types.EDIT_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {
-            type: errorTypes.APP_ERROR,
+            type: errorSelectors.errorType( error, types.EDIT_ERROR, errorTypes.APP_ERROR ),
             payload: errorSelectors.errorPayload( error ),
         } );
     }

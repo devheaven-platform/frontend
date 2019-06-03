@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import personnelTable from "tables/Personnel";
 import createPersonnelForm from "forms/CreatePersonnel";
 import { Page, ModalForm, Table } from "components";
+import { PageLoading } from "pages";
 import { actions } from "./duck";
 
 class PagePersonnel extends React.Component {
@@ -40,6 +41,13 @@ class PagePersonnel extends React.Component {
             Create,
             errors,
         } = this.props;
+
+        if ( personnel === null ) {
+            return (
+                <PageLoading />
+            );
+        }
+
         return (
             <Page>
                 <Page.Header title="Personnel" subtitle="View, create or archive a personnel member">

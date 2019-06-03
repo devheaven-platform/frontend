@@ -5,4 +5,5 @@ export default types( "@person", [
     "LOAD_SUCCESS",
     "EDIT",
     "EDIT_SUCCESS",
+    "EDIT_ERORR",
 ] );

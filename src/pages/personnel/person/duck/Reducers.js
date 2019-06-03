@@ -3,7 +3,7 @@ import { combineReducers } from "redux";
 import types from "./Types";
 
 const defaultState = {
-    person: {},
+    person: null,
     errors: {},
 };
 

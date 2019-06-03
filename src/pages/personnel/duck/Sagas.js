@@ -27,7 +27,7 @@ function* create( { payload } ) {
         yield put( { type: types.CREATE_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {
-            type: errorTypes.APP_ERROR,
+            type: errorSelectors.errorType( error, types.CREATE_ERROR, errorTypes.APP_ERROR ),
             payload: errorSelectors.errorPayload( error ),
         } );
     }
