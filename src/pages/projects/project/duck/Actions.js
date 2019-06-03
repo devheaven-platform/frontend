@@ -2,7 +2,7 @@ import types from "./Types";
 
 const load = args => ( { type: types.LOAD, payload: args } );
 
-const loadClients = payload => ( { type: types.LOADCLIENTS, payload } );
+const loadClients = payload => ( { type: types.LOAD_CLIENTS, payload } );
 
 const editProject = payload => ( { type: types.EDIT_PROJECT, payload } );
 

@@ -48,7 +48,7 @@ function* load( { payload } ) {
 function* loadClients() {
     try {
         const { data } = yield call( axios.get, "/clients/" );
-        yield put( { type: types.LOADCLIENTS_SUCCESS, payload: data } );
+        yield put( { type: types.LOAD_CLIENTS_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {
             type: errorTypes.APP_ERROR,
@@ -182,5 +182,5 @@ export default function* main() {
     yield takeLatest( types.REMOVE_MILESTONE, removeMilestone );
     yield takeLatest( types.CREATE_BOARD, createBoard );
     yield takeLatest( types.ARCHIVE_BOARD, archiveBoard );
-    yield takeLatest( types.LOADCLIENTS, loadClients );
+    yield takeLatest( types.LOAD_CLIENTS, loadClients );
 }
