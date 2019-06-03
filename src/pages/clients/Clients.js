@@ -2,15 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import personnelTable from "tables/Personnel";
-import createPersonnelForm from "forms/CreatePersonnel";
+import clientsTable from "tables/Clients";
+import createClientForm from "forms/CreateClient";
 import { Page, ModalForm, Table } from "components";
 import { PageLoading } from "pages";
 import { actions } from "./duck";
 
 class PageClients extends React.Component {
     static propTypes = {
-        personnel: PropTypes.arrayOf( PropTypes.shape() ),
+        clients: PropTypes.arrayOf( PropTypes.shape() ),
         Load: PropTypes.func.isRequired,
         errors: PropTypes.shape(),
         Create: PropTypes.func.isRequired,
@@ -18,7 +18,7 @@ class PageClients extends React.Component {
     }
 
     static defaultProps = {
-        personnel: null,
+        clients: null,
         errors: [],
     }
 
@@ -27,22 +27,22 @@ class PageClients extends React.Component {
         Load();
     }
 
-    onContextMenuClick = ( action, person ) => {
+    onContextMenuClick = ( action, client ) => {
         const { Remove } = this.props;
 
         if ( action === "remove" ) {
-            Remove( person );
+            Remove( client );
         }
     }
 
     render() {
         const {
-            personnel,
+            clients,
             Create,
             errors,
         } = this.props;
 
-        if ( personnel === null ) {
+        if ( clients === null ) {
             return (
                 <PageLoading />
             );
@@ -50,19 +50,19 @@ class PageClients extends React.Component {
 
         return (
             <Page>
-                <Page.Header title="Personnel" subtitle="View, create or archive a personnel member">
+                <Page.Header title="Clients" subtitle="View, create or archive a client">
                     <ModalForm
                         title="Create"
-                        description="Create a new personnel member."
-                        fields={ createPersonnelForm }
+                        description="Create a new client."
+                        fields={ createClientForm }
                         errors={ errors }
                         submit={ Create }
                     />
                 </Page.Header>
                 <Page.Content>
                     <Table
-                        columns={ personnelTable }
-                        data={ personnel }
+                        columns={ clientsTable }
+                        data={ clients }
                         onContextMenuClick={ this.onContextMenuClick }
                     />
                 </Page.Content>
@@ -76,7 +76,7 @@ class PageClients extends React.Component {
     }
 }
 
-const mSTP = ( { personnel: { personnel, errors } } ) => ( { personnel, errors } );
+const mSTP = ( { clients: { clients, errors } } ) => ( { clients, errors } );
 
 const mDTP = dispatch => ( {
     Load: () => dispatch( actions.load() ),

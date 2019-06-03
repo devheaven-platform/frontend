@@ -11,7 +11,7 @@ import types from "./Types";
 
 function* load() {
     try {
-        const { data } = yield call( axios.get, "/personnel/" );
+        const { data } = yield call( axios.get, "/clients/" );
         yield put( { type: types.LOAD_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {
@@ -23,7 +23,11 @@ function* load() {
 
 function* create( { payload } ) {
     try {
-        const { data } = yield call( axios.post, "/personnel/", payload );
+        const contact = {
+            firtname: "simon", lastname: "van someren", email: "simon@mail.com", phoneNumber: "0611832063",
+        };
+        payload.contact = contact;
+        const { data } = yield call( axios.post, "/clients/", payload );
         yield put( { type: types.CREATE_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {
@@ -35,7 +39,7 @@ function* create( { payload } ) {
 
 function* remove( { payload } ) {
     try {
-        yield call( axios.delete, `/personnel/${ payload.id }` );
+        yield call( axios.delete, `/clients/${ payload.id }` );
         yield put( { type: types.REMOVE_SUCCESS, payload } );
     } catch ( error ) {
         yield put( {

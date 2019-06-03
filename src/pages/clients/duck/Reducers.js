@@ -3,11 +3,11 @@ import { combineReducers } from "redux";
 import types from "./Types";
 
 const defaultState = {
-    personnel: null,
+    clients: null,
     errors: {},
 };
 
-const personnel = ( state = defaultState.personnel, { type, payload } ) => {
+const clients = ( state = defaultState.clients, { type, payload } ) => {
     if ( type === types.LOAD_SUCCESS ) {
         return payload;
     }
@@ -31,6 +31,6 @@ const errors = ( state = defaultState.errors, { type, payload } ) => {
 };
 
 export default combineReducers( {
-    personnel,
+    clients,
     errors,
 } );
