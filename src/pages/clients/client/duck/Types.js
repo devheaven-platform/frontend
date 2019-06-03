@@ -1,6 +1,6 @@
 import types from "redux-types";
 
-export default types( "@person", [
+export default types( "@client", [
     "LOAD",
     "LOAD_SUCCESS",
     "EDIT",

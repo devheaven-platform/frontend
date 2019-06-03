@@ -3,11 +3,11 @@ import { combineReducers } from "redux";
 import types from "./Types";
 
 const defaultState = {
-    person: null,
+    client: null,
     errors: {},
 };
 
-const person = ( state = defaultState.person, { type, payload } ) => {
+const client = ( state = defaultState.client, { type, payload } ) => {
     if ( type === types.LOAD_SUCCESS ) {
         // add lines to use selectors for emails and roles
         return payload;
@@ -30,6 +30,6 @@ const errors = ( state = defaultState.errors, { type, payload } ) => {
 };
 
 export default combineReducers( {
-    person,
+    client,
     errors,
 } );

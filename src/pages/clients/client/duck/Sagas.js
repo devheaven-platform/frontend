@@ -13,7 +13,7 @@ import selectors from "./Selectors";
 
 function* load( { payload } ) {
     try {
-        const { data } = yield call( axios.get, `/personnel/${ payload }` );
+        const { data } = yield call( axios.get, `/clients/${ payload }` );
         yield put( { type: types.LOAD_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {
@@ -24,9 +24,9 @@ function* load( { payload } ) {
 }
 
 function* edit( { payload } ) {
-    const id = yield select( selectors.employeeId );
+    const id = yield select( selectors.clientId );
     try {
-        const { data } = yield call( axios.patch, `/personnel/${ id }`, payload );
+        const { data } = yield call( axios.patch, `/clients/${ id }`, payload );
         yield put( { type: types.EDIT_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {
