@@ -10,6 +10,8 @@ import { reducers as hours } from "./pages/hours/duck";
 import { reducers as invoices } from "./pages/invoice/duck";
 import { reducers as personnel } from "./pages/personnel/duck";
 import { reducers as person } from "./pages/personnel/person/duck";
+import { reducers as clients } from "./pages/clients/duck";
+import { reducers as client } from "./pages/clients/client/duck";
 
 const reducers = {
     // Combined reducers
@@ -22,6 +24,8 @@ const reducers = {
     hours,
     personnel,
     person,
+    clients,
+    client,
 };
 
 export default combineReducers( reducers );

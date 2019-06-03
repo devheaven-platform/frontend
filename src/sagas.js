@@ -10,6 +10,8 @@ import { sagas as error } from "./components/error/duck";
 import { sagas as hours } from "./pages/hours/duck";
 import { sagas as personnel } from "./pages/personnel/duck";
 import { sagas as person } from "./pages/personnel/person/duck";
+import { sagas as clients } from "./pages/clients/duck";
+import { sagas as client } from "./pages/clients/client/duck";
 
 const sagas = [
     // Combined sagas
@@ -22,6 +24,8 @@ const sagas = [
     hours(),
     personnel(),
     person(),
+    clients(),
+    client(),
 ];
 
 export default function* root() { yield all( sagas ); }
