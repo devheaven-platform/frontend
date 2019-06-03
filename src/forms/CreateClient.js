@@ -4,7 +4,6 @@ import {
     isAlphanumeric,
     minLength,
     maxLength,
-    isDate,
 } from "./Validators";
 
 export default [
