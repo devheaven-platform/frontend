@@ -72,6 +72,13 @@ export default ( config, defaults ) => [
         validations: [ isDate ],
     },
     {
+        label: "Client",
+        name: "client",
+        type: FIELD_TYPES.SELECT,
+        options: config.clients,
+        validations: [ isRequired ],
+    },
+    {
         label: "Owner",
         name: "owner",
         type: FIELD_TYPES.SELECT,

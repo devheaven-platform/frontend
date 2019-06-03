@@ -10,6 +10,7 @@ const defaultState = {
     milestones: null,
     boards: null,
     users: null,
+    clients: null,
     errors: {},
 };
 
@@ -87,6 +88,13 @@ const users = ( state = defaultState.users, { type, payload } ) => {
     return state;
 };
 
+const clients = ( state = defaultState.clients, { type, payload } ) => {
+    if ( type === types.LOAD_CLIENTS_SUCCESS ) {
+        return selectors.clients( payload );
+    }
+    return state;
+};
+
 const errors = ( state = defaultState.errors, { type, payload } ) => {
     if ( [
         types.EDIT_PROJECT,
@@ -112,4 +120,5 @@ export default combineReducers( {
     boards,
     users,
     errors,
+    clients,
 } );
