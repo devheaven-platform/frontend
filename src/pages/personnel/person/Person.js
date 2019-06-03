@@ -17,7 +17,7 @@ class PagePerson extends React.Component {
     }
 
     static defaultProps = {
-        person: {},
+        person: null,
         errors: [],
     }
 

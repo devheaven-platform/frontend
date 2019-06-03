@@ -20,10 +20,10 @@ const person = ( state = defaultState.person, { type, payload } ) => {
 };
 
 const errors = ( state = defaultState.errors, { type, payload } ) => {
-    if ( type === types.CREATE ) {
+    if ( type === types.EDIT ) {
         return {};
     }
-    if ( type === types.CREATE_ERROR ) {
+    if ( type === types.EDIT_ERROR ) {
         return payload;
     }
     return state;
