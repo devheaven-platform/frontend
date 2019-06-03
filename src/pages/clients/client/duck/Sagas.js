@@ -25,6 +25,12 @@ function* load( { payload } ) {
 
 function* edit( { payload } ) {
     const id = yield select( selectors.clientId );
+
+    const contact = {
+        firstname: payload.contactFirstname, lastname: payload.contactLastname, email: payload.contactEmail, phoneNumber: payload.contactPhonenumber,
+    };
+
+    payload = { ...payload, contact };
     try {
         const { data } = yield call( axios.patch, `/clients/${ id }`, payload );
         yield put( { type: types.EDIT_SUCCESS, payload: data } );
