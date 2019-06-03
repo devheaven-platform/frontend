@@ -5,12 +5,14 @@ import PropTypes from "prop-types";
 
 import FIELD_TYPES from "forms/Types";
 import {
+    FormFieldDate,
+    FormFieldList,
     FormFieldInput,
     FormFieldNumber,
-    FormFieldTextArea,
-    FormFieldDate,
     FormFieldSelect,
+    FormFieldTextArea,
     FormFieldCheckbox,
+    FormFieldMutliSelect,
 } from "./fields";
 
 const FormField = ( {
@@ -53,7 +55,6 @@ const FormField = ( {
                 />
             );
         case FIELD_TYPES.DATE:
-        case FIELD_TYPES.DATETIME:
             return (
                 <FormFieldDate
                     label={ label }
@@ -78,12 +79,22 @@ const FormField = ( {
                     onChange={ setValue }
                 />
             );
+        case FIELD_TYPES.LIST:
+            return (
+                <FormFieldList
+                    label={ label }
+                    name={ name }
+                    value={ value }
+                    error={ error }
+                    touched={ touched }
+                    onChange={ setValue }
+                />
+            );
         case FIELD_TYPES.SELECT:
             return (
                 <FormFieldSelect
                     label={ label }
                     name={ name }
-                    type={ type }
                     options={ options }
                     value={ value }
                     error={ error }
@@ -97,6 +108,18 @@ const FormField = ( {
                     label={ label }
                     name={ name }
                     type={ type }
+                    value={ value }
+                    error={ error }
+                    touched={ touched }
+                    onChange={ setValue }
+                />
+            );
+        case FIELD_TYPES.MUTLISELECT:
+            return (
+                <FormFieldMutliSelect
+                    label={ label }
+                    name={ name }
+                    options={ options }
                     value={ value }
                     error={ error }
                     touched={ touched }
