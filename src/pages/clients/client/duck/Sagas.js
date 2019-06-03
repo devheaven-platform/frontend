@@ -25,7 +25,6 @@ function* load( { payload } ) {
 
 function* edit( { payload } ) {
     const id = yield select( selectors.clientId );
-
     const contact = {
         firstname: payload.contactFirstname, lastname: payload.contactLastname, email: payload.contactEmail, phoneNumber: payload.contactPhonenumber,
     };

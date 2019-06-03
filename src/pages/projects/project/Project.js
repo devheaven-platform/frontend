@@ -24,6 +24,8 @@ class PageProject extends React.Component {
         milestones: PropTypes.arrayOf( PropTypes.shape() ),
         boards: PropTypes.arrayOf( PropTypes.shape() ),
         users: PropTypes.arrayOf( PropTypes.shape() ),
+        clients: PropTypes.arrayOf( PropTypes.shape() ),
+        LoadClients: PropTypes.func.isRequired,
         errors: PropTypes.shape(),
         match: PropTypes.shape().isRequired,
         Load: PropTypes.func.isRequired,
@@ -43,12 +45,14 @@ class PageProject extends React.Component {
         milestones: null,
         boards: null,
         users: null,
+        clients: null,
         errors: {},
     }
 
     componentDidMount() {
-        const { Load, match } = this.props;
+        const { Load, LoadClients, match } = this.props;
         Load( match.params.id );
+        LoadClients();
     }
 
     onContextMenuClick = ( action, board ) => {
@@ -65,6 +69,7 @@ class PageProject extends React.Component {
             milestones,
             boards,
             users,
+            clients,
             errors,
             EditProject,
             ArchiveProject,
@@ -75,7 +80,7 @@ class PageProject extends React.Component {
             CreateBoard,
         } = this.props;
 
-        if ( project === null || members === null || milestones === null || boards === null || users === null ) {
+        if ( project === null || members === null || milestones === null || boards === null || users === null || clients === null ) {
             return <PageLoading />;
         }
 
@@ -85,7 +90,7 @@ class PageProject extends React.Component {
                     <ModalForm
                         title="Edit"
                         description="Edit this project."
-                        fields={ editProjectForm( { users }, project ) }
+                        fields={ editProjectForm( { users, clients }, project ) }
                         errors={ errors }
                         submit={ EditProject }
                     />
@@ -166,6 +171,7 @@ const mSTP = ( {
         boards,
         users,
         errors,
+        clients,
     },
 } ) => ( {
     project,
@@ -174,10 +180,12 @@ const mSTP = ( {
     boards,
     users,
     errors,
+    clients,
 } );
 
 const mDTP = dispatch => ( {
     Load: args => dispatch( actions.load( args ) ),
+    LoadClients: payload => dispatch( actions.loadClients( payload ) ),
     EditProject: payload => dispatch( actions.editProject( payload ) ),
     ArchiveProject: payload => dispatch( actions.archiveProject( payload ) ),
     AddMember: payload => dispatch( actions.addMember( payload ) ),

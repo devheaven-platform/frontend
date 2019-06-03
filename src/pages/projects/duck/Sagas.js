@@ -8,14 +8,13 @@ import axios from "axios";
 
 import errorSelectors from "components/error/duck/Selectors";
 import errorTypes from "components/error/duck/Types";
-import stub from "./__Stub__";
 import types from "./Types";
 
 function* load() {
     try {
         const [ projects, clients ] = yield all( [
             call( axios.get, "/projects/" ),
-            call( stub.get, "/clients/" ),
+            call( axios.get, "/clients/" ),
         ] );
         yield put( { type: types.LOAD_SUCCESS, payload: { projects: projects.data, clients: clients.data } } );
     } catch ( error ) {

@@ -2,6 +2,8 @@ import types from "./Types";
 
 const load = args => ( { type: types.LOAD, payload: args } );
 
+const loadClients = payload => ( { type: types.LOAD_CLIENTS, payload } );
+
 const editProject = payload => ( { type: types.EDIT_PROJECT, payload } );
 
 const archiveProject = payload => ( { type: types.ARCHIVE_PROJECT, payload } );
@@ -28,4 +30,5 @@ export default {
     removeMilestone,
     createBoard,
     archiveBoard,
+    loadClients,
 };
