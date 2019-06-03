@@ -89,7 +89,7 @@ const users = ( state = defaultState.users, { type, payload } ) => {
 };
 
 const clients = ( state = defaultState.clients, { type, payload } ) => {
-    if ( type === types.LOAD_CLIENTS_SUCCESS ) {
+    if ( type === types.LOADCLIENTS_SUCCESS ) {
         return selectors.clients( payload );
     }
     return state;

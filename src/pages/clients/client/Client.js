@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { Page, ModalForm } from "components";
-import editPersonnel from "forms/EditPersonnel";
+import editClient from "forms/EditClient";
 import { PageLoading } from "pages";
 import { actions } from "./duck";
 
-class PagePerson extends React.Component {
+class PageClient extends React.Component {
     static propTypes = {
-        person: PropTypes.shape(),
+        client: PropTypes.shape(),
         Load: PropTypes.func.isRequired,
         errors: PropTypes.shape(),
         match: PropTypes.shape().isRequired,
@@ -17,7 +17,7 @@ class PagePerson extends React.Component {
     }
 
     static defaultProps = {
-        person: null,
+        client: null,
         errors: [],
     }
 
@@ -28,41 +28,33 @@ class PagePerson extends React.Component {
 
     render() {
         const {
-            person,
+            client,
             errors,
             Edit,
         } = this.props;
-        if ( person === null ) {
+
+        if ( client === null ) {
             return <PageLoading />;
         }
         return (
             <Page>
-                <Page.Header title={ `${ person.firstname } ${ person.lastname }` } subtitle={ person.phoneNumber }>
+                <Page.Header title={ `${ client.name }` } subtitle={ client.description }>
                     <ModalForm
                         title="Edit"
-                        description="Edit this employee."
-                        fields={ editPersonnel( person ) }
+                        description="Edit this client."
+                        fields={ editClient( client ) }
                         errors={ errors }
                         submit={ Edit }
                     />
                 </Page.Header>
                 <Page.Content>
                     <p>
-                        address:
-                        {person.address}
+                        Contact:
+                        { `${ client.contact.firstname } ${ client.contact.lastname } `}
                     </p>
                     <p>
-                        salary:
-                        {person.salary}
-                    </p>
-                    <p>
-                       roles:
-                        {" "}
-                        {person.roles}
-                    </p>
-                    <p>
-                        emails:
-                        {person.emails}
+                        logo:
+                        {client.logo}
                     </p>
                 </Page.Content>
                 <Page.Footer>
@@ -75,11 +67,11 @@ class PagePerson extends React.Component {
     }
 }
 
-const mSTP = ( { person: { person, errors } } ) => ( { person, errors } );
+const mSTP = ( { client: { client, errors } } ) => ( { client, errors } );
 
 const mDTP = dispatch => ( {
     Load: args => dispatch( actions.load( args ) ),
     Edit: payload => dispatch( actions.edit( payload ) ),
 } );
 
-export default connect( mSTP, mDTP )( PagePerson );
+export default connect( mSTP, mDTP )( PageClient );
