@@ -23,6 +23,6 @@ export default types( "@project", [
     "CREATE_BOARD_ERROR",
     "ARCHIVE_BOARD",
     "ARCHIVE_BOARD_SUCCESS",
-    "LOAD_CLIENTS",
-    "LOAD_CLIENTS_SUCCESS",
+    "LOADCLIENTS",
+    "LOADCLIENTS_SUCCESS",
 ] );
