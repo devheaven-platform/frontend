@@ -27,7 +27,7 @@ function* create( { payload } ) {
             firstname: "simon", lastname: "van someren", email: "simon@mail.com", phoneNumber: "0611832063",
         };
 
-        payload = { ...payload, contact: contact };
+        payload = { ...payload, contact };
         const { data } = yield call( axios.post, "/clients/", payload );
         yield put( { type: types.CREATE_SUCCESS, payload: data } );
     } catch ( error ) {

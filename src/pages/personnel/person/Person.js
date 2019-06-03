@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 
 import { Page, ModalForm } from "components";
 import editPersonnel from "forms/EditPersonnel";
-import { PageLoading } from "pages";
 import { actions } from "./duck";
 
 class PagePerson extends React.Component {
@@ -17,7 +16,7 @@ class PagePerson extends React.Component {
     }
 
     static defaultProps = {
-        person: null,
+        person: {},
         errors: [],
     }
 
@@ -32,10 +31,6 @@ class PagePerson extends React.Component {
             errors,
             Edit,
         } = this.props;
-
-        if ( person === null ) {
-            return <PageLoading />;
-        }
         return (
             <Page>
                 <Page.Header title={ `${ person.firstname } ${ person.lastname }` } subtitle={ person.phoneNumber }>

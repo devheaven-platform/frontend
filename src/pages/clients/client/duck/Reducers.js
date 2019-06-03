@@ -9,11 +9,9 @@ const defaultState = {
 
 const client = ( state = defaultState.client, { type, payload } ) => {
     if ( type === types.LOAD_SUCCESS ) {
-        // add lines to use selectors for emails and roles
         return payload;
     }
     if ( type === types.EDIT_SUCCESS ) {
-        // add lines to use selectors for emails and roles
         return payload;
     }
     return state;

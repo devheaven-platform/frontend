@@ -41,7 +41,7 @@ class PageClient extends React.Component {
                 <Page.Header title={ `${ client.name }` } subtitle={ client.description }>
                     <ModalForm
                         title="Edit"
-                        description="Edit this employee."
+                        description="Edit this client."
                         fields={ editClient( client ) }
                         errors={ errors }
                         submit={ Edit }
