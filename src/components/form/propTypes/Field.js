@@ -8,6 +8,10 @@ const Field = PropTypes.shape( {
         PropTypes.string,
         PropTypes.number,
         PropTypes.bool,
+        PropTypes.arrayOf( PropTypes.oneOfType( [
+            PropTypes.string,
+            PropTypes.number,
+        ] ) ),
     ] ),
     options: PropTypes.arrayOf( PropTypes.shape( {
         value: PropTypes.oneOfType( [

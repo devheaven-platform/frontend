@@ -49,20 +49,20 @@ class PagePerson extends React.Component {
                 <Page.Content>
                     <p>
                         address:
-                        {person.address}
+                        { person.address }
                     </p>
                     <p>
                         salary:
-                        {person.salary}
+                        { person.salary }
                     </p>
                     <p>
                        roles:
-                        {" "}
-                        {person.roles}
+                        { " " }
+                        { person.roles.join( ", " ) }
                     </p>
                     <p>
                         emails:
-                        {person.emails}
+                        { person.emails.join( ", " ) }
                     </p>
                 </Page.Content>
                 <Page.Footer>

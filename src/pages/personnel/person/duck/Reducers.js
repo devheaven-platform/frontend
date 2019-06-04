@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 
 import types from "./Types";
+import Selectors from "./Selectors";
 
 const defaultState = {
     person: null,
@@ -9,12 +10,10 @@ const defaultState = {
 
 const person = ( state = defaultState.person, { type, payload } ) => {
     if ( type === types.LOAD_SUCCESS ) {
-        // add lines to use selectors for emails and roles
-        return payload;
+        return { ...payload, roles: Selectors.roles( payload.roles ), emails: Selectors.emails( payload.emails ) };
     }
     if ( type === types.EDIT_SUCCESS ) {
-        // add lines to use selectors for emails and roles
-        return payload;
+        return { ...payload, roles: Selectors.roles( payload.roles ), emails: Selectors.emails( payload.emails ) };
     }
     return state;
 };
