@@ -13,7 +13,7 @@ import selectors from "./Selectors";
 
 function* load( { payload } ) {
     try {
-        const { data } = yield call( axios.get, `/personnel/${ payload }`, { headers: { authorization: `bearer ${ localStorage.getItem( "token" ) }` } } );
+        const { data } = yield call( axios.get, `/personnel/${ payload }` );
         yield put( { type: types.LOAD_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {
