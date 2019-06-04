@@ -85,7 +85,7 @@ export default defaults => [
         validations: [
             isRequired,
             minLength( 2 ),
-            maxLength( 20 ),
+            maxLength( 250 ),
         ],
     },
 ];
