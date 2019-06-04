@@ -30,7 +30,7 @@ export default defaults => [
             isRequired,
             isAlphanumeric,
             minLength( 2 ),
-            maxLength( 20 ),
+            maxLength( 250 ),
         ],
     },
     {
