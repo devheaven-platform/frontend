@@ -11,7 +11,7 @@ import types from "./Types";
 
 function* load() {
     try {
-        const { data } = yield call( axios.get, "/personnel/", { headers: { authorization: `bearer ${ localStorage.getItem( "token" ) }` } } );
+        const { data } = yield call( axios.get, "/personnel/" );
         yield put( { type: types.LOAD_SUCCESS, payload: data } );
     } catch ( error ) {
         yield put( {
