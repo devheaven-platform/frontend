@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 
 import types from "./Types";
+import Selectors from "./Selectors";
 
 const defaultState = {
     personnel: null,
@@ -9,10 +10,13 @@ const defaultState = {
 
 const personnel = ( state = defaultState.personnel, { type, payload } ) => {
     if ( type === types.LOAD_SUCCESS ) {
-        return payload;
+        return payload.map( person => ( {
+            ...person,
+            roles: Selectors.roles( person.roles ),
+        } ) );
     }
     if ( type === types.CREATE_SUCCESS ) {
-        return [ ...state, payload ];
+        return [ ...state, { ...payload, roles: Selectors.roles( payload.roles ) } ];
     }
     if ( type === types.REMOVE_SUCCESS ) {
         return state.filter( item => item !== payload );

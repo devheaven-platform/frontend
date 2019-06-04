@@ -1,6 +1,6 @@
-const roles = items => items.map( ( role => role.role ).join( ", " ) );
+const roles = items => items.map( r => r.role.toLowerCase().replace( "role_", "" ) ).join( ", " );
 
-const emails = items => items.map( ( email => email.email ).join( ", " ) );
+const emails = items => items.map( e => e.email.toLowerCase() ).join( ", " );
 
 const employeeId = ( { person } ) => person.person.id;
 
