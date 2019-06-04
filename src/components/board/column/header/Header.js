@@ -8,6 +8,7 @@ const BoardColumnHeader = ( {
     name,
     errors,
     editColumn,
+    columnType,
     removeColumn,
 } ) => (
     <div className="board-column-header">
@@ -31,17 +32,20 @@ const BoardColumnHeader = ( {
                 errors={ errors }
                 submit={ editColumn }
             />
-            <button type="button" className="button has-margin-left-2 is-danger is-small" onClick={ removeColumn }>
-                <span className="icon is-small">
-                    <i className="fas fa-trash" />
-                </span>
-            </button>
+            { columnType === "CUSTOM" && (
+                <button type="button" className="button has-margin-left-2 is-danger is-small" onClick={ removeColumn }>
+                    <span className="icon is-small">
+                        <i className="fas fa-trash" />
+                    </span>
+                </button>
+            ) }
         </div>
     </div>
 );
 
 BoardColumnHeader.propTypes = {
     name: PropTypes.string.isRequired,
+    columnType: PropTypes.string.isRequired,
     errors: PropTypes.shape(),
     editColumn: PropTypes.func.isRequired,
     removeColumn: PropTypes.func.isRequired,
