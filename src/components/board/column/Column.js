@@ -29,6 +29,7 @@ const BoardColumn = ( {
             >
                 <BoardColumnHeader
                     name={ column.name }
+                    columnType={ column.columnType }
                     errors={ errors }
                     editColumn={ editColumn }
                     removeColumn={ removeColumn }
