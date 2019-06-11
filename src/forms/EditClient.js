@@ -34,7 +34,7 @@ export default defaults => [
         ],
     },
     {
-        label: "Contact first name",
+        label: "Contact Firstname",
         name: "contactFirstname",
         type: FIELD_TYPES.TEXT,
         default: defaults.contact.firstname,
@@ -46,7 +46,7 @@ export default defaults => [
         ],
     },
     {
-        label: "Contact last name",
+        label: "Contact Lastname",
         name: "contactLastname",
         type: FIELD_TYPES.TEXT,
         default: defaults.contact.lastname,
@@ -58,7 +58,7 @@ export default defaults => [
         ],
     },
     {
-        label: "Contact email",
+        label: "Contact Email",
         name: "contactEmail",
         type: FIELD_TYPES.TEXT,
         default: defaults.contact.email,
@@ -68,7 +68,7 @@ export default defaults => [
         ],
     },
     {
-        label: "Contact phone number",
+        label: "Contact Phone Number",
         name: "contactPhonenumber",
         type: FIELD_TYPES.TEXT,
         default: defaults.contact.phoneNumber,

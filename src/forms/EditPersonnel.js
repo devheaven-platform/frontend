@@ -70,7 +70,7 @@ export default defaults => [
         ],
     },
     {
-        label: "Phone number",
+        label: "Phone Number",
         name: "phoneNumber",
         type: FIELD_TYPES.TEXT,
         default: defaults.phoneNumber,

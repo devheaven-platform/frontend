@@ -2,7 +2,7 @@ import { CELL_TYPES, FILTER_TYPES } from "./Types";
 
 export default [
     {
-        label: "First name",
+        label: "Firstname",
         key: "firstname",
         type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.SEARCH,

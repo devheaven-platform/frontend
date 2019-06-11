@@ -65,7 +65,7 @@ export default [
         ],
     },
     {
-        label: "Phone number",
+        label: "Phone Number",
         name: "phoneNumber",
         type: FIELD_TYPES.TEXT,
         validations: [
