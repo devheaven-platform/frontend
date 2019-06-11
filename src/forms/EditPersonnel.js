@@ -40,7 +40,7 @@ export default defaults => [
     {
         label: "Password",
         name: "password",
-        type: FIELD_TYPES.TEXT,
+        type: FIELD_TYPES.PASSWORD,
         default: defaults.password,
         validations: [
             isRequired,
