@@ -32,7 +32,7 @@ export default [
     {
         label: "Invoicing Type",
         key: "identifier",
-        type: CELL_TYPES.TEXT,
+        type: CELL_TYPES.ICON,
         filter: FILTER_TYPES.SELECT,
         options: [
             {

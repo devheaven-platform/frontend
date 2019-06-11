@@ -61,7 +61,7 @@ export default [
         type: FIELD_TYPES.TEXT,
         validations: [
             minLength( 2 ),
-            maxLength( 25 ),
+            maxLength( 80 ),
         ],
     },
     {
