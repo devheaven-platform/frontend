@@ -23,6 +23,26 @@ FormFieldListItem.propTypes = {
 };
 
 class FormFieldList extends React.Component {
+    static propTypes = {
+        label: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        help: PropTypes.string,
+        value: PropTypes.arrayOf( PropTypes.oneOfType( [
+            PropTypes.string,
+            PropTypes.number,
+        ] ) ),
+        error: PropTypes.string,
+        touched: PropTypes.bool,
+        onChange: PropTypes.func.isRequired,
+    };
+
+    static defaultProps = {
+        value: [],
+        help: null,
+        error: null,
+        touched: false,
+    };
+
     state = {
         input: "",
     }
@@ -46,6 +66,7 @@ class FormFieldList extends React.Component {
             label,
             name,
             value,
+            help,
             error,
             touched,
         } = this.props;
@@ -68,6 +89,7 @@ class FormFieldList extends React.Component {
                     <p className="control">
                         <button type="button" className="button is-primary" onClick={ this.onAdd }>Add</button>
                     </p>
+                    <p className="help">{ help }</p>
                     { ( touched && error ) && (
                         <p className="help is-danger">{ error }</p>
                     ) }
@@ -80,24 +102,6 @@ class FormFieldList extends React.Component {
         );
     }
 }
-
-FormFieldList.propTypes = {
-    label: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    value: PropTypes.arrayOf( PropTypes.oneOfType( [
-        PropTypes.string,
-        PropTypes.number,
-    ] ) ),
-    error: PropTypes.string,
-    touched: PropTypes.bool,
-    onChange: PropTypes.func.isRequired,
-};
-
-FormFieldList.defaultProps = {
-    value: [],
-    error: null,
-    touched: false,
-};
 
 export default FormFieldList;
 /* eslint-enable jsx-a11y/label-has-for */

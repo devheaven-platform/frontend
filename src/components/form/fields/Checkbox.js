@@ -7,6 +7,7 @@ const FormFieldCheckbox = ( {
     label,
     name,
     type,
+    help,
     value,
     error,
     touched,
@@ -25,6 +26,7 @@ const FormFieldCheckbox = ( {
                 />
                 { ` ${ label }` }
             </label>
+            <p className="help">{ help }</p>
         </div>
 
         { ( touched && error ) && (
@@ -37,6 +39,7 @@ FormFieldCheckbox.propTypes = {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
+    help: PropTypes.string,
     value: PropTypes.bool,
     error: PropTypes.string,
     touched: PropTypes.bool,
@@ -45,6 +48,7 @@ FormFieldCheckbox.propTypes = {
 
 FormFieldCheckbox.defaultProps = {
     value: false,
+    help: null,
     error: null,
     touched: false,
 };

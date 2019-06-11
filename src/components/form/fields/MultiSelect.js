@@ -6,6 +6,7 @@ class FormFieldMultiSelect extends React.Component {
     static propTypes = {
         label: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
+        help: PropTypes.string,
         values: PropTypes.arrayOf( PropTypes.oneOfType( [
             PropTypes.string,
             PropTypes.number,
@@ -27,6 +28,7 @@ class FormFieldMultiSelect extends React.Component {
 
     static defaultProps = {
         values: [],
+        help: null,
         error: null,
         touched: false,
     };
@@ -42,6 +44,7 @@ class FormFieldMultiSelect extends React.Component {
         const {
             label,
             name,
+            help,
             options,
             error,
             touched,
@@ -64,6 +67,7 @@ class FormFieldMultiSelect extends React.Component {
                         { ` ${ option.label }` }
                     </label>
                 ) ) }
+                <p className="help">{ help }</p>
                 { ( touched && error ) && (
                     <p className="help is-danger">{ error }</p>
                 ) }

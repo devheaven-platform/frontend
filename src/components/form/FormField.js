@@ -19,6 +19,7 @@ const FormField = ( {
     label,
     name,
     type,
+    help,
     options,
     getValue,
     setValue,
@@ -36,6 +37,7 @@ const FormField = ( {
                     label={ label }
                     name={ name }
                     type={ type }
+                    help={ help }
                     value={ value }
                     error={ error }
                     touched={ touched }
@@ -48,6 +50,7 @@ const FormField = ( {
                     label={ label }
                     name={ name }
                     type={ type }
+                    help={ help }
                     value={ value }
                     error={ error }
                     touched={ touched }
@@ -60,6 +63,7 @@ const FormField = ( {
                     label={ label }
                     name={ name }
                     type={ type }
+                    help={ help }
                     value={ value }
                     error={ error }
                     touched={ touched }
@@ -73,6 +77,7 @@ const FormField = ( {
                     name={ name }
                     pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
                     type={ type }
+                    help={ help }
                     value={ value }
                     error={ error }
                     touched={ touched }
@@ -84,6 +89,7 @@ const FormField = ( {
                 <FormFieldList
                     label={ label }
                     name={ name }
+                    help={ help }
                     value={ value }
                     error={ error }
                     touched={ touched }
@@ -95,6 +101,7 @@ const FormField = ( {
                 <FormFieldSelect
                     label={ label }
                     name={ name }
+                    help={ help }
                     options={ options }
                     value={ value }
                     error={ error }
@@ -108,6 +115,7 @@ const FormField = ( {
                     label={ label }
                     name={ name }
                     type={ type }
+                    help={ help }
                     value={ value }
                     error={ error }
                     touched={ touched }
@@ -119,6 +127,7 @@ const FormField = ( {
                 <FormFieldMultiSelect
                     label={ label }
                     name={ name }
+                    help={ help }
                     options={ options }
                     values={ value }
                     error={ error }
@@ -132,6 +141,7 @@ const FormField = ( {
                     label={ label }
                     name={ name }
                     type={ type }
+                    help={ help }
                     value={ value }
                     error={ error }
                     touched={ touched }
@@ -145,6 +155,7 @@ FormField.propTypes = {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
+    help: PropTypes.string,
     options: PropTypes.arrayOf( PropTypes.shape( {
         value: PropTypes.oneOfType( [
             PropTypes.string,
@@ -162,6 +173,7 @@ FormField.propTypes = {
 };
 
 FormField.defaultProps = {
+    help: null,
     options: [],
 };
 

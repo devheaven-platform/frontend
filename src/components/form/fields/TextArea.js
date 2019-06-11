@@ -7,6 +7,7 @@ const FormFieldTextArea = ( {
     label,
     name,
     type,
+    help,
     value,
     error,
     touched,
@@ -24,6 +25,7 @@ const FormFieldTextArea = ( {
                 className={ classNames( "textarea", { "is-danger": touched && error } ) }
             />
         </div>
+        <p className="help">{ help }</p>
         { ( touched && error ) && (
             <p className="help is-danger">{ error }</p>
         ) }
@@ -34,6 +36,7 @@ FormFieldTextArea.propTypes = {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
+    help: PropTypes.string,
     value: PropTypes.oneOfType( [
         PropTypes.string,
         PropTypes.number,
@@ -45,6 +48,7 @@ FormFieldTextArea.propTypes = {
 
 FormFieldTextArea.defaultProps = {
     value: "",
+    help: null,
     error: null,
     touched: false,
 };

@@ -4,6 +4,7 @@ const Field = PropTypes.shape( {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
+    help: PropTypes.string,
     default: PropTypes.oneOfType( [
         PropTypes.string,
         PropTypes.number,

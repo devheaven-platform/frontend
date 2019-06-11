@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 const FormFieldSelect = ( {
     label,
     name,
+    help,
     value,
     options,
     error,
@@ -26,6 +27,7 @@ const FormFieldSelect = ( {
                 { options.map( option => <option key={ option.value } value={ option.value }>{ option.label }</option> ) }
             </select>
         </div>
+        <p className="help">{ help }</p>
         { ( touched && error ) && (
             <p className="help is-danger">{ error }</p>
         ) }
@@ -35,6 +37,7 @@ const FormFieldSelect = ( {
 FormFieldSelect.propTypes = {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    help: PropTypes.string,
     value: PropTypes.oneOfType( [
         PropTypes.string,
         PropTypes.number,
@@ -56,6 +59,7 @@ FormFieldSelect.propTypes = {
 
 FormFieldSelect.defaultProps = {
     value: "",
+    help: null,
     error: null,
     touched: false,
 };
