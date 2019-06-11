@@ -20,7 +20,7 @@ export default ( config, defaults ) => [
         validations: [
             isAlphanumeric,
             minLength( 2 ),
-            maxLength( 25 ),
+            maxLength( 50 ),
         ],
     },
     {
@@ -34,6 +34,7 @@ export default ( config, defaults ) => [
         label: "Identifier",
         name: "identifier",
         type: FIELD_TYPES.SELECT,
+        default: defaults.identifier,
         options: [
             {
                 value: "MONEY",
@@ -54,14 +55,14 @@ export default ( config, defaults ) => [
         label: "Profit Margin",
         name: "invoiceMargin",
         type: FIELD_TYPES.NUMBER,
-        default: defaults.budget,
+        default: defaults.invoiceMargin,
         validations: [ isNumeric, minValue( 0 ) ],
     },
     {
         label: "Identifier value",
         name: "pricePerPoint",
         type: FIELD_TYPES.NUMBER,
-        default: defaults.budget,
+        default: defaults.pricePerPoint,
         validations: [ isNumeric, minValue( 0 ) ],
     },
     {
@@ -76,6 +77,7 @@ export default ( config, defaults ) => [
         name: "client",
         type: FIELD_TYPES.SELECT,
         options: config.clients,
+        default: defaults.client,
         validations: [ isRequired ],
     },
     {
