@@ -9,6 +9,7 @@ import {
     TableCellDate,
     TableCellContextMenu,
     TableCellList,
+    TableCellIcon,
 } from "./cells";
 
 const TableCell = ( {
@@ -25,6 +26,11 @@ const TableCell = ( {
                 <TableCellText
                     value={ value }
                     link={ link }
+                />
+            ); case CELL_TYPES.ICON:
+            return (
+                <TableCellIcon
+                    value={ value }
                 />
             );
         case CELL_TYPES.LIST:
