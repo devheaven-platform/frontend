@@ -3,7 +3,6 @@ const CELL_TYPES = {
     DATE: "date",
     TIME: "time",
     BOOLEAN: "boolean",
-    LIST: "list",
     CONTEXT_MENU: "CONTEXT_MENU",
 };
 

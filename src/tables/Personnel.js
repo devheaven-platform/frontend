@@ -20,7 +20,7 @@ export default [
     {
         label: "Roles",
         key: "roles",
-        type: CELL_TYPES.LIST,
+        type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.SEARCH,
     },
     {

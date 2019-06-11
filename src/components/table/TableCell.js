@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -8,7 +7,6 @@ import {
     TableCellBoolean,
     TableCellDate,
     TableCellContextMenu,
-    TableCellList,
     TableCellIcon,
 } from "./cells";
 
@@ -30,12 +28,6 @@ const TableCell = ( {
             ); case CELL_TYPES.ICON:
             return (
                 <TableCellIcon
-                    value={ value }
-                />
-            );
-        case CELL_TYPES.LIST:
-            return (
-                <TableCellList
                     value={ value }
                 />
             );
