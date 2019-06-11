@@ -40,7 +40,7 @@ export default defaults => [
     {
         label: "Password",
         name: "password",
-        type: FIELD_TYPES.TEXT,
+        type: FIELD_TYPES.PASSWORD,
         default: defaults.password,
         validations: [
             isRequired,
@@ -82,7 +82,7 @@ export default defaults => [
     {
         label: "Roles",
         name: "roles",
-        type: FIELD_TYPES.MUTLISELECT,
+        type: FIELD_TYPES.MULTISELECT,
         default: defaults.roles,
         options: [
             {

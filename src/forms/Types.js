@@ -8,5 +8,5 @@ export default {
     TEXTAREA: "textarea",
     PASSWORD: "password",
     CHECKBOX: "checkbox",
-    MUTLISELECT: "mutli_select",
+    MULTISELECT: "multi_select",
 };
