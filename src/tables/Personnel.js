@@ -7,7 +7,7 @@ export default [
         type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.SEARCH,
         link: {
-            to: "/personnel/__KEY__",
+            to: "/employees/__KEY__",
             key: "id",
         },
     },

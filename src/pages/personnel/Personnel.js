@@ -49,10 +49,10 @@ class PagePersonnel extends React.Component {
         }
         return (
             <Page>
-                <Page.Header title="Personnel" subtitle="View, create or archive a personnel member">
+                <Page.Header title="Employee" subtitle="View, create or archive an employee">
                     <ModalForm
                         title="Create"
-                        description="Create a new personnel member."
+                        description="Create a new employee."
                         fields={ createPersonnelForm }
                         errors={ errors }
                         submit={ Create }

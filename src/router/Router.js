@@ -31,8 +31,8 @@ const Router = ( { isAuthenticated, roles, children } ) => (
                 <RestrictedRoute exact path="/boards/:id" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageBoard } />
                 <RestrictedRoute exact path="/hours" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageHours } />
                 <RestrictedRoute exact path="/invoices" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageInvoice } />
-                <RestrictedRoute exact path="/personnel" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PagePersonnel } />
-                <RestrictedRoute exact path="/personnel/:id" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PagePerson } />
+                <RestrictedRoute exact path="/employees" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PagePersonnel } />
+                <RestrictedRoute exact path="/employees/:id" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PagePerson } />
                 <RestrictedRoute exact path="/clients" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageClients } />
                 <RestrictedRoute exact path="/clients/:id" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageClient } />
                 <Route exact path="/login" component={ PageLogin } />
