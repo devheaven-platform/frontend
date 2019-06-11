@@ -1,4 +1,5 @@
 $spacings: 0 0.25 0.5 1 1.5 3;
+$sizes: 0 25 50 75 100;
 $types: top bottom left right;
 
 @each $spacing in $spacings {
@@ -20,5 +21,15 @@ $types: top bottom left right;
         .has-padding-#{$idx} {
             padding: $spacing * 1rem !important;
         }
+    }
+}
+
+@each $size in $sizes {
+    .has-width-#{$size} {
+        width: $size * 1%;
+    }
+
+    .has-height-#{$size} {
+        height: $size * 1%;
     }
 }
