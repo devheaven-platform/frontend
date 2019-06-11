@@ -66,7 +66,7 @@ export default defaults => [
         default: defaults.address,
         validations: [
             minLength( 2 ),
-            maxLength( 25 ),
+            maxLength( 80 ),
         ],
     },
     {

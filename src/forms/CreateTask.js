@@ -15,7 +15,7 @@ export default [
             isRequired,
             isAlphanumeric,
             minLength( 2 ),
-            maxLength( 25 ),
+            maxLength( 20 ),
         ],
     },
     {
