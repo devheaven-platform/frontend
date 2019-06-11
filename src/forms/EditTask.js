@@ -17,7 +17,7 @@ export default defaults => [
         validations: [
             isAlphanumeric,
             minLength( 2 ),
-            maxLength( 25 ),
+            maxLength( 20 ),
         ],
     },
     {

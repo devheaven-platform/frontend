@@ -10,19 +10,19 @@ import axios from "axios";
 import errorSelectors from "components/error/duck/Selectors";
 import errorTypes from "components/error/duck/Types";
 import selectors from "./Selectors";
-import stub from "./__Stub__";
 import types from "./Types";
 
 function* load( { payload } ) {
     try {
         const [ project, users ] = yield all( [
             call( axios.get, `/projects/${ payload }` ),
-            call( stub.get, "/users/" ),
+            call( axios.get, "/personnel/" ),
         ] );
-        const members = yield all( project.data.members.map( userId => call( stub.get, `/users/${ userId }` ) ) );
+
+        const members = yield all( project.data.members.map( userId => call( axios.get, `/personnel/${ userId }` ) ) );
         const boards = yield all( project.data.boards.map( boardId => call( axios.get, `/boards/${ boardId }` ) ) );
         const { data: client } = yield call( axios.get, `/clients/${ project.data.client }` );
-        const { data: owner } = yield call( stub.get, `/users/${ project.data.owner }` );
+        const { data: owner } = yield call( axios.get, `/personnel/${ project.data.owner }` );
 
         yield put( {
             type: types.LOAD_SUCCESS,
@@ -62,7 +62,7 @@ function* editProject( { payload } ) {
         const id = yield select( selectors.projectId );
         const { data: project } = yield call( axios.patch, `/projects/${ id }`, payload );
         const { data: client } = yield call( axios.get, `/clients/${ project.client }` );
-        const { data: owner } = yield call( stub.get, `/users/${ project.owner }` );
+        const { data: owner } = yield call( axios.get, `/personnel/${ project.owner }` );
 
         yield put( { type: types.EDIT_PROJECT_SUCCESS, payload: { ...project, client, owner } } );
     } catch ( error ) {
@@ -78,7 +78,7 @@ function* archiveProject() {
         const id = yield select( selectors.projectId );
         const { data: project } = yield call( axios.patch, `/projects/${ id }`, { archived: true } );
         const { data: client } = yield call( axios.get, `/clients/${ project.client }` );
-        const { data: owner } = yield call( stub.get, `/users/${ project.owner }` );
+        const { data: owner } = yield call( axios.get, `/personnel/${ project.owner }` );
 
         yield put( { type: types.ARCHIVE_PROJECT_SUCCESS, payload: { ...project, client, owner } } );
     } catch ( error ) {
@@ -93,7 +93,7 @@ function* addMember( { payload } ) {
     try {
         const id = yield select( selectors.projectId );
         yield call( axios.patch, `/projects/${ id }/members/${ payload.user }` );
-        const { data: member } = yield call( stub.get, `/users/${ payload.user }` );
+        const { data: member } = yield call( axios.get, `/personnel/${ payload.user }` );
 
         yield put( { type: types.ADD_MEMBER_SUCCESS, payload: member } );
     } catch ( error ) {

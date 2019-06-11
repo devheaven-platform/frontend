@@ -16,7 +16,7 @@ export default [
         validations: [
             isRequired,
             minLength( 5 ),
-            maxLength( 25 ),
+            maxLength( 30 ),
         ],
     },
     {
