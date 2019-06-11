@@ -113,7 +113,9 @@ class PageProject extends React.Component {
                             client={ project.client }
                             owner={ project.owner }
                             start={ project.start }
-                            budget={ project.budget }
+                            pricePerPoint={ project.pricePerPoint }
+                            identifier={ project.identifier }
+                            invoiceMargin={ project.invoiceMargin }
                         />
                     </div>
                     <hr />
