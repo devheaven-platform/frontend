@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -7,6 +8,7 @@ import {
     TableCellBoolean,
     TableCellDate,
     TableCellContextMenu,
+    TableCellList,
 } from "./cells";
 
 const TableCell = ( {
@@ -23,6 +25,12 @@ const TableCell = ( {
                 <TableCellText
                     value={ value }
                     link={ link }
+                />
+            );
+        case CELL_TYPES.LIST:
+            return (
+                <TableCellList
+                    value={ value }
                 />
             );
         case CELL_TYPES.BOOLEAN:
