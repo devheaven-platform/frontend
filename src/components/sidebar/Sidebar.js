@@ -21,7 +21,7 @@ const Sidebar = ( { hasToggle } ) => {
                 <SidebarItem to="/email" icon="envelope" label="Email" />
                 <SidebarItemList icon="building" label="HR">
                     <SidebarItem to="/hours" icon="clock" label="Hours" />
-                    <SidebarItem to="/personnel" icon="user-friends" label="Personnel" />
+                    <SidebarItem to="/employees" icon="user-friends" label="Employees" />
                 </SidebarItemList>
                 { hasToggle && <SidebarToggler isCollapsed={ isCollapsed } onClick={ () => setIsCollapsed( !isCollapsed ) } /> }
             </ul>
