@@ -82,7 +82,7 @@ export default defaults => [
     {
         label: "Roles",
         name: "roles",
-        type: FIELD_TYPES.MUTLISELECT,
+        type: FIELD_TYPES.MULTISELECT,
         default: defaults.roles,
         options: [
             {

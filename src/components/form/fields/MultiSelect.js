@@ -2,7 +2,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-class FormFieldMutliSelect extends React.Component {
+class FormFieldMultiSelect extends React.Component {
     static propTypes = {
         label: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
@@ -59,7 +59,7 @@ class FormFieldMutliSelect extends React.Component {
                             key={ option.value }
                             value={ option.value }
                             onChange={ e => this.onCheckboxChange( e.currentTarget.value ) }
-                            // onBlur={ e => this.onCheckboxChange( e.currentTarget.value ) }
+                            onBlur={ e => this.onCheckboxChange( e.currentTarget.value ) }
                         />
                         { ` ${ option.label }` }
                     </label>
@@ -72,5 +72,5 @@ class FormFieldMutliSelect extends React.Component {
     }
 }
 
-export default FormFieldMutliSelect;
+export default FormFieldMultiSelect;
 /* eslint-enable jsx-a11y/label-has-for */

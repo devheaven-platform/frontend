@@ -76,7 +76,7 @@ export default [
     {
         label: "Roles",
         name: "roles",
-        type: FIELD_TYPES.MUTLISELECT,
+        type: FIELD_TYPES.MULTISELECT,
         options: [
             {
                 value: "ROLE_USER",

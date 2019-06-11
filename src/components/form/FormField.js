@@ -12,7 +12,7 @@ import {
     FormFieldSelect,
     FormFieldTextArea,
     FormFieldCheckbox,
-    FormFieldMutliSelect,
+    FormFieldMultiSelect,
 } from "./fields";
 
 const FormField = ( {
@@ -114,9 +114,9 @@ const FormField = ( {
                     onChange={ setValue }
                 />
             );
-        case FIELD_TYPES.MUTLISELECT:
+        case FIELD_TYPES.MULTISELECT:
             return (
-                <FormFieldMutliSelect
+                <FormFieldMultiSelect
                     label={ label }
                     name={ name }
                     options={ options }
