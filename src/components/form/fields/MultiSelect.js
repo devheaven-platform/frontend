@@ -45,10 +45,7 @@ class FormFieldMultiSelect extends React.Component {
             options,
             error,
             touched,
-<<<<<<< HEAD
             values,
-=======
->>>>>>> master
         } = this.props;
         return (
             <div className="field">
@@ -62,10 +59,7 @@ class FormFieldMultiSelect extends React.Component {
                             type="checkbox"
                             key={ option.value }
                             value={ option.value }
-<<<<<<< HEAD
                             checked={ values.includes( option.value ) }
-=======
->>>>>>> master
                             onChange={ e => this.onCheckboxChange( e.currentTarget.value ) }
                             onBlur={ e => this.onCheckboxChange( e.currentTarget.value ) }
                         />
