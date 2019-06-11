@@ -1,48 +1,57 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const TableCellIcon = ( { value } ) => (
-    <td>
-        {
-            TableCellIcon.renderIcon( value )}
-    </td>
-);
-TableCellIcon.renderIcon = ( type ) => {
-    switch ( type ) {
-        case "MONEY":
-            return (
-                <div>
-                    <span className="icon has-text-success">
-                        <i className="fas fa-dollar-sign" />
-                    </span>
-                    {" "}
-                Money
-                </div>
-            );
-        case "HOURS":
-            return (
-                <div>
-                    <span className="icon has-text-info">
-                        <i className="fas fa-clock" />
+class TableCellIcon extends React.Component {
+    static propTypes = {
+        value: PropTypes.string.isRequired,
+    };
 
-                    </span>
-                    {" "}
-Hours
+    renderIcon() {
+        const { value } = this.props;
+        switch ( value ) {
+            case "MONEY":
+                return (
+                    <div>
+                        <span className="icon">
+                            <i className="fas fa-dollar-sign" />
+                        </span>
+                        {" "}
+                        Money
+                    </div>
+                );
+            case "HOURS":
+                return (
+                    <div>
+                        <span className="icon">
+                            <i className="fas fa-clock" />
 
-                </div>
-            ); case "STORY_POINTS":
-            return (
-                <div>
-
-Story Points
-                </div>
-            );
-        default:
-            return type;
+                        </span>
+                        {" "}
+                        Hours
+                    </div>
+                );
+            case "STORY_POINTS":
+                return (
+                    <div>
+                        <span className="icon">
+                            <i className="fas fa-plus-circle" />
+                        </span>
+                        {" "}
+                        Story Points
+                    </div>
+                );
+            default:
+                return value;
+        }
     }
-};
-TableCellIcon.propTypes = {
-    value: PropTypes.string.isRequired,
-};
+
+    render() {
+        return (
+            <td>
+                { this.renderIcon() }
+            </td>
+        );
+    }
+}
 
 export default TableCellIcon;
