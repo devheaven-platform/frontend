@@ -2,8 +2,9 @@ const CELL_TYPES = {
     TEXT: "text",
     DATE: "date",
     TIME: "time",
-    BOOLEAN: "boolean",
+    ICON: "icon",
     LIST: "list",
+    BOOLEAN: "boolean",
     CONTEXT_MENU: "CONTEXT_MENU",
 };
 
