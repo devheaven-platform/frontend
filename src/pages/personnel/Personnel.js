@@ -47,7 +47,6 @@ class PagePersonnel extends React.Component {
                 <PageLoading />
             );
         }
-
         return (
             <Page>
                 <Page.Header title="Personnel" subtitle="View, create or archive a personnel member">
