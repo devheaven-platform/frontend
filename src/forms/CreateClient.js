@@ -17,7 +17,7 @@ export default [
             isRequired,
             isAlphanumeric,
             minLength( 2 ),
-            maxLength( 25 ),
+            maxLength( 40 ),
         ],
     },
     {
@@ -34,7 +34,7 @@ export default [
             isRequired,
             isAlphanumeric,
             minLength( 2 ),
-            maxLength( 25 ),
+            maxLength( 20 ),
         ],
     },
     {
@@ -45,7 +45,7 @@ export default [
             isRequired,
             isAlphanumeric,
             minLength( 2 ),
-            maxLength( 25 ),
+            maxLength( 20 ),
         ],
     },
     {
