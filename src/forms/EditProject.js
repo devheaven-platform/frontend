@@ -55,6 +55,7 @@ export default ( config, defaults ) => [
         label: "Invoicing Value (€)",
         name: "pricePerPoint",
         type: FIELD_TYPES.NUMBER,
+        help: "Price per unit defined by the invoicing type.",
         default: defaults.pricePerPoint,
         validations: [ isNumeric, minValue( 0 ) ],
     },
