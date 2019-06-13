@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 const PageHeader = ( { title, subtitle, children } ) => (
     <div className="page-header">
         <div className="page-header-left">
-            <h1 className="title">{title}</h1>
-            { subtitle && <h2 className="subtitle">{ subtitle }</h2> }
+            <div>
+                <h1 className="title">{title}</h1>
+                { subtitle && <h2 className="subtitle">{ subtitle }</h2> }
+            </div>
         </div>
         <div className="page-header-right">
             { children }

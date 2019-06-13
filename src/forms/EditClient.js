@@ -24,7 +24,7 @@ export default defaults => [
     {
         label: "Description",
         name: "description",
-        type: FIELD_TYPES.TEXT_AREA,
+        type: FIELD_TYPES.TEXTAREA,
         default: defaults.description,
         validations: [
             isRequired,

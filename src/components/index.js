@@ -1,7 +1,10 @@
 export { default as ProjectMilestones } from "./project/milestones/Milestones";
+export { default as ClientLocation } from "./client/location/Location";
 export { default as ProjectDetails } from "./project/details/Details";
 export { default as ProjectMembers } from "./project/members/Members";
+export { default as ClientContact } from "./client/contact/Contact";
 export { default as ModalConfirm } from "./modal/confirm/Confirm";
+export { default as ClientHeader } from "./client/header/Header";
 export { default as ErrorHandler } from "./error/ErrorHandler";
 export { default as DropDown } from "./dropdown/DropDown";
 export { default as ModalForm } from "./modal/form/Form";

@@ -2,7 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { Page, ModalForm } from "components";
+import {
+    Page,
+    ClientHeader,
+    ClientContact,
+    ClientLocation,
+    ModalForm,
+} from "components";
 import editClient from "forms/EditClient";
 import { PageLoading } from "pages";
 import { actions } from "./duck";
@@ -38,7 +44,7 @@ class PageClient extends React.Component {
         }
         return (
             <Page>
-                <Page.Header title={ `${ client.name }` } subtitle={ client.description }>
+                <ClientHeader client={ client }>
                     <ModalForm
                         title="Edit"
                         description="Edit this client."
@@ -46,16 +52,12 @@ class PageClient extends React.Component {
                         errors={ errors }
                         submit={ Edit }
                     />
-                </Page.Header>
+                </ClientHeader>
                 <Page.Content>
-                    <p>
-                        Contact:
-                        { `${ client.contact.firstname } ${ client.contact.lastname } `}
-                    </p>
-                    <p>
-                        logo:
-                        {client.logo}
-                    </p>
+                    <div className="columns">
+                        <ClientContact contact={ client.contact } />
+                        <ClientLocation location={ client.location } />
+                    </div>
                 </Page.Content>
                 <Page.Footer>
                     <p>
