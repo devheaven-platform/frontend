@@ -14,13 +14,13 @@ export default [
         filter: FILTER_TYPES.RANGE_DATE,
     },
     {
-        label: "Begin time",
+        label: "Begin Time",
         key: "beginTime",
         type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.SEARCH,
     },
     {
-        label: "End time",
+        label: "End Time",
         key: "endTime",
         type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.SEARCH,

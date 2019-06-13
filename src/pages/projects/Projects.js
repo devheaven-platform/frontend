@@ -48,7 +48,6 @@ class PageProjects extends React.Component {
         if ( projects === null || clients === null ) {
             return <PageLoading />;
         }
-        const projectItems = projects.map( p => ( { ...p, invoiceMargin: `${ p.invoiceMargin }%` } ) );
         return (
             <Page>
                 <Page.Header title="Projects" subtitle="View, create or archive projects">
@@ -63,7 +62,7 @@ class PageProjects extends React.Component {
                 <Page.Content>
                     <Table
                         columns={ projectTable }
-                        data={ projectItems }
+                        data={ projects }
                         onContextMenuClick={ this.onContextMenuClick }
                     />
                 </Page.Content>

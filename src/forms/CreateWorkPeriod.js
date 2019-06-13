@@ -27,12 +27,12 @@ export default [
         validations: [ isDate ],
     },
     {
-        label: "Begin time",
+        label: "Begin Time",
         name: "startTime",
         type: FIELD_TYPES.TIME,
         validations: [ isTime ],
     }, {
-        label: "End time",
+        label: "End Time",
         name: "endTime",
         type: FIELD_TYPES.TIME,
         validations: [ isTime ],

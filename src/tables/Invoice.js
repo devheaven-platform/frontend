@@ -8,7 +8,7 @@ export default [
         filter: FILTER_TYPES.SEARCH,
     },
     {
-        label: "Total",
+        label: "Total (€)",
         key: "total",
         type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.RANGE_NUMBER,

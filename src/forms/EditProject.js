@@ -31,7 +31,7 @@ export default ( config, defaults ) => [
         validations: [ minLength( 2 ), maxLength( 250 ) ],
     },
     {
-        label: "Identifier",
+        label: "Invoicing Type",
         name: "identifier",
         type: FIELD_TYPES.SELECT,
         default: defaults.identifier,
@@ -52,17 +52,18 @@ export default ( config, defaults ) => [
         validations: [ isRequired ],
     },
     {
-        label: "Profit Margin",
-        name: "invoiceMargin",
+        label: "Invoicing Value (€)",
+        name: "pricePerPoint",
         type: FIELD_TYPES.NUMBER,
-        default: defaults.invoiceMargin,
+        help: "Price per unit defined by the invoicing type.",
+        default: defaults.pricePerPoint,
         validations: [ isNumeric, minValue( 0 ) ],
     },
     {
-        label: "Identifier value",
-        name: "pricePerPoint",
+        label: "Profit Margin (%)",
+        name: "invoiceMargin",
         type: FIELD_TYPES.NUMBER,
-        default: defaults.pricePerPoint,
+        default: defaults.invoiceMargin,
         validations: [ isNumeric, minValue( 0 ) ],
     },
     {

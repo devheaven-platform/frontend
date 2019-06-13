@@ -27,7 +27,7 @@ export default [
         validations: [ isRequired, minLength( 2 ), maxLength( 250 ) ],
     },
     {
-        label: "Contact first name",
+        label: "Contact Firstname",
         name: "contactFirstname",
         type: FIELD_TYPES.TEXT,
         validations: [
@@ -38,7 +38,7 @@ export default [
         ],
     },
     {
-        label: "Contact last name",
+        label: "Contact Lastname",
         name: "contactLastname",
         type: FIELD_TYPES.TEXT,
         validations: [
@@ -49,7 +49,7 @@ export default [
         ],
     },
     {
-        label: "Contact email",
+        label: "Contact Email",
         name: "contactEmail",
         type: FIELD_TYPES.TEXT,
         validations: [
@@ -58,7 +58,7 @@ export default [
         ],
     },
     {
-        label: "Contact phone number",
+        label: "Contact Phone Number",
         name: "contactPhonenumber",
         type: FIELD_TYPES.TEXT,
         validations: [

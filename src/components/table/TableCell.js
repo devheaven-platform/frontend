@@ -27,7 +27,8 @@ const TableCell = ( {
                     value={ value }
                     link={ link }
                 />
-            ); case CELL_TYPES.ICON:
+            );
+        case CELL_TYPES.ICON:
             return (
                 <TableCellIcon
                     value={ value }

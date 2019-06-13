@@ -24,7 +24,7 @@ export default [
         filter: FILTER_TYPES.RANGE_DATE,
     },
     {
-        label: "Profit Margin",
+        label: "Profit Margin (%)",
         key: "invoiceMargin",
         type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.RANGE_NUMBER,
@@ -50,7 +50,7 @@ export default [
         ],
     },
     {
-        label: "Identifier value",
+        label: "Invoicing Value (€)",
         key: "pricePerPoint",
         type: CELL_TYPES.TEXT,
         filter: FILTER_TYPES.RANGE_NUMBER,
