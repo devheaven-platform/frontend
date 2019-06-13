@@ -37,7 +37,7 @@ class PagePerson extends React.Component {
         }
         return (
             <Page>
-                <Page.Header title={ `${ person.firstname } ${ person.lastname }` } subtitle={ person.phoneNumber }>
+                <Page.Header title={ `${ person.firstname } ${ person.lastname }` }>
                     <ModalForm
                         title="Edit"
                         description="Edit this employee."
@@ -47,23 +47,38 @@ class PagePerson extends React.Component {
                     />
                 </Page.Header>
                 <Page.Content>
-                    <p>
-                        address:
-                        { person.address }
-                    </p>
-                    <p>
-                        salary:
-                        { person.salary }
-                    </p>
-                    <p>
-                       roles:
-                        { " " }
-                        { person.roles.join( ", " ) }
-                    </p>
-                    <p>
-                        emails:
-                        { person.emails.join( ", " ) }
-                    </p>
+                    <div className="columns">
+                        <div className="column">
+                            <div className="has-margin-bottom-3">
+                                <p><b>Address</b></p>
+                                <p>{ person.address }</p>
+                            </div>
+                            <div className="has-margin-bottom-3">
+                                <p><b>Phone Number</b></p>
+                                <p>{ person.phoneNumber }</p>
+                            </div>
+                            <div className="has-margin-bottom-3">
+                                <p><b>Salary</b></p>
+                                <p>{ person.salary }</p>
+                            </div>
+                        </div>
+                        <div className="column">
+                            <div className="has-margin-bottom-3">
+                                <p><b>Emails</b></p>
+                                <div>{ person.emails.map( e => <p key={ e }>{ e }</p> ) }</div>
+                            </div>
+                            <div className="has-margin-bottom-3">
+                                <p><b>Roles</b></p>
+                                <div className="tags">
+                                    { person.roles.map( r => (
+                                        <span key={ r } className="tag is-info  ">
+                                            { r.replace( "ROLE_", "" ).toLowerCase() }
+                                        </span>
+                                    ) ) }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </Page.Content>
                 <Page.Footer>
                     <p>
