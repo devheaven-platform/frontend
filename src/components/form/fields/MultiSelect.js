@@ -64,7 +64,6 @@ class FormFieldMultiSelect extends React.Component {
                             value={ option.value }
                             checked={ values.includes( option.value ) }
                             onChange={ e => this.onCheckboxChange( e.currentTarget.value ) }
-                            onBlur={ e => this.onCheckboxChange( e.currentTarget.value ) }
                         />
                         { ` ${ option.label }` }
                     </label>
