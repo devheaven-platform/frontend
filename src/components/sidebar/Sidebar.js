@@ -13,7 +13,6 @@ const Sidebar = ( { hasToggle } ) => {
     return (
         <nav className={ classNames( "sidebar", { collapsed: isCollapsed } ) }>
             <ul className="sidebar-content">
-                <SidebarItem to="/" icon="home" label="Home" />
                 <SidebarItem to="/projects" icon="boxes" label="Projects" />
                 <SidebarItem to="/invoices" icon="file-invoice-dollar" label="Invoices" />
                 <SidebarItem to="/clients" icon="users" label="Clients" />
