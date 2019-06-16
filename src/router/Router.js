@@ -1,11 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import {
+    BrowserRouter,
+    Switch,
+    Route,
+    Redirect,
+} from "react-router-dom";
 
 import ROLES from "./Roles";
 
 import {
-    PageHome,
     PageProjects,
     PageProject,
     PageBoard,
@@ -25,7 +29,7 @@ const Router = ( { isAuthenticated, roles, children } ) => (
         <React.Fragment>
             { children }
             <Switch>
-                <RestrictedRoute exact path="/" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageHome } />
+                <RestrictedRoute exact path="/" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ () => <Redirect to="/projects" /> } />
                 <RestrictedRoute exact path="/projects" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageProjects } />
                 <RestrictedRoute exact path="/projects/:id" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageProject } />
                 <RestrictedRoute exact path="/boards/:id" isAuthenticated={ isAuthenticated } roles={ roles } allowed={ [ ROLES.USER ] } component={ PageBoard } />

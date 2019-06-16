@@ -1,4 +1,3 @@
-export { default as PageHome } from "./home/Home";
 export { default as PageBoard } from "./board/Board";
 export { default as PageLogin } from "./login/Login";
 export { default as PageError } from "./error/Error";
