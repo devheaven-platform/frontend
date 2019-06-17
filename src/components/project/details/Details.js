@@ -37,13 +37,13 @@ const ProjectDetails = ( {
             <div className="has-margin-bottom-3">
                 <p><b>Profit Margin (%)</b></p>
                 <p>
-                    { pricePerPoint }
+                    { invoiceMargin }
                 </p>
             </div>
             <div>
                 <p><b>Invoicing Value (€)</b></p>
                 <p>
-                    { invoiceMargin }
+                    { pricePerPoint }
                 </p>
             </div>
         </div>
